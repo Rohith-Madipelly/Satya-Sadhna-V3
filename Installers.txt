@@ -1,0 +1,172 @@
+npm i react-redux
+npm i @reduxjs/toolkit
+
+npx expo install react-native-gesture-handler
+
+
+npm install @react-navigation/native
+npx expo install react-native-screens react-native-safe-area-context
+npm install @react-navigation/native-stack
+npm install @react-navigation/elements
+npm install @react-navigation/bottom-tabs
+
+
+
+
+npm i react-native-error-boundary
+npx expo install @react-native-community/netinfo
+
+
+npx expo install expo-splash-screen
+
+
+npx expo install expo-font
+npx expo install @expo/vector-icons
+npx expo install @react-native-async-storage/async-storage
+
+
+npx expo install react-native-svg
+
+
+npx expo install lottie-react-native
+
+
+
+npm i react-native-shimmer-placeholder
+
+
+npm install react-native-screens@latest
+
+
+
+
+
+
+
+
+
+
+
+
+npx expo install expo-linking
+
+
+
+npx expo install expo-image-picker
+
+npx expo install @shopify/flash-list
+
+
+
+npm i formik
+npm i yup
+
+npx expo install expo-notifications expo-device expo-constants
+
+
+
+npx expo install expo-updates
+
+
+
+
+npm i react-native-select-dropdown
+npm i react-native-loading-spinner-overlay
+
+npm i react-native-toast-notifications
+
+
+
+npx expo install expo-document-picker
+npx expo install expo-checkbox
+
+
+npm install --save react-native-calendars
+
+
+npx expo install @react-native-community/datetimepicker
+
+
+
+
+
+npm list --depth=0
+
+
+npm install moment
+
+npx expo install react-native-reanimated
+
+
+npm i react-native-reanimated-carousel
+
+npm i axios
+
+
+
+npx expo install expo-sharing
+
+npx expo install react-native-webview
+
+
+
+
+
+
+git init
+git commit -m "Initial Push 17 Jan 2025"
+git branch -M main
+git remote add origin https://github.com/analogueapps/myflatinfo-user-app.git
+git push -u origin main
+
+
+
+git remote add origin https://github.com/analogueapps/myflatinfo-user-app.git
+git branch -M main
+git push -u origin main
+
+
+
+
+
+  // "lottie-react-native": "7.2.2",
+
+
+  npx expo install expo-linear-gradient
+
+
+npx expo install expo-intent-launcher
+
+npx expo install expo-file-system
+
+  npx expo install expo-print
+
+
+  npm install number-to-words
+
+npx expo install react-native-view-shot
+
+
+
+
+npm install @tanstack/react-query@^5.75.2 \
+@tanstack/react-query-persist-client@^5.75.2 \
+@tanstack/query-async-storage-persister@^5.75.0 \
+@react-native-async-storage/async-storage@^2.1.2 \
+@react-native-community/netinfo@11.4.1
+
+
+npm i react-native-walkthrough-tooltip
+
+in next build
+npx expo install expo-system-ui
+
+
+npm i react-native-keyboard-aware-scroll-view
+
+
+npm install setimmediate
+
+
+
+npm i react-native-track-player

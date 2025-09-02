@@ -1,0 +1,32 @@
+export const sampleTracks = [
+  {
+    id: '1',
+    url: 'https://www.satyasadhna.com/upload/audios/1756118293353.mp3',
+    title: 'SoundHelix Song 1',
+    artist: 'T. Schürger',
+    album: 'SoundHelix',
+    genre: 'Electronic',
+    duration: 346,
+    artwork: 'https://picsum.photos/400/400?random=1',
+  },
+  {
+    id: '2',
+    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
+    title: 'SoundHelix Song 2',
+    artist: 'T. Schürger',
+    album: 'SoundHelix',
+    genre: 'Electronic',
+    duration: 304,
+    artwork: 'https://picsum.photos/400/400?random=2',
+  },
+  {
+    id: '3',
+    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
+    title: 'SoundHelix Song 3',
+    artist: 'T. Schürger',
+    album: 'SoundHelix',
+    genre: 'Electronic',
+    duration: 263,
+    artwork: 'https://picsum.photos/400/400?random=3',
+  },
+];
