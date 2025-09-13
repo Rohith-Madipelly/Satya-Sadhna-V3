@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Satya_Sadhna_App",
-    "slug": "Satya_Sadhna_App",
+    "name": "Satya Sadhna",
+    "slug": "Satya_Sadhna",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -14,7 +14,10 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.testerpackage.Satya-Sadhna-App"
+      "bundleIdentifier": "com.testerpackage.Satya-Sadhna-App",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "softwareKeyboardLayoutMode": "pan",
@@ -44,6 +47,11 @@
     ],
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c84e3350-376a-4faf-bf1b-836fdd641281"
+      }
     }
   }
 }
