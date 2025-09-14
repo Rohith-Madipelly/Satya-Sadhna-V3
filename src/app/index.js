@@ -1,132 +1,127 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import React, { useCallback, useEffect, useState } from 'react'
 import CustomFallback from './OtherScreens/CustomFallback'
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import ErrorBoundary from 'react-native-error-boundary';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import ErrorBoundary from 'react-native-error-boundary'
+import * as SplashScreen from 'expo-splash-screen' // Added missing import
+import { useFonts } from 'expo-font'
+import { useDispatch, useSelector } from 'react-redux'
 
 // Auth Screens Imports
-import Login from './AuthScreens/Login';
-import BottomTabScreen from './MainScreens/BottomTabScreen';
-import { useDispatch, useSelector } from 'react-redux';
-import AsyncStorage_Calls from '../utills/AsyncStorage_Calls';
-import { setToken } from '../redux/actions/AuthActions';
-import { useFonts } from 'expo-font';
-import TracksAudios from './MainScreens/Music/TracksAudios';
-import TracksListByCategory from './MainScreens/Music/TracksListByCategory';
-import AudioScreen from './MainScreens/Music/AudioScreen';
-import DeveloperScreenTest1 from './DeveloperScreen/DeveloperScreenTest1';
+import Login from './AuthScreens/Login'
+import BottomTabScreen from './MainScreens/BottomTabScreen'
 
+// Music Screens
+import TracksAudios from './MainScreens/Music/TracksAudios'
+import TracksListByCategory from './MainScreens/Music/TracksListByCategory'
+import AudioScreen from './MainScreens/Music/AudioScreen'
 
+// Utils
+import AsyncStorage_Calls from '../utills/AsyncStorage_Calls'
+import { setToken } from '../redux/actions/AuthActions'
+import CourseRegistration1 from './MainScreens/FormPages/CourseRegistration1'
+import CourseRegistration2 from './MainScreens/FormPages/CourseRegistration2'
+import CourseRegistration3 from './MainScreens/FormPages/CourseRegistration3'
+import DeveloperScreenTest1 from './DeveloperScreen/DeveloperScreenTest1'
 
+const Stack = createNativeStackNavigator()
 
 const RootStack = () => {
     const [userStates, setUserStates] = useState();
 
-    const Stack = createNativeStackNavigator();
-    const dispatch = useDispatch();
-
-    const [appIsReady, setAppIsReady] = useState(false);
-
-    const loginSelector = useSelector((state) => state.login.isLogin);
-    console.log(">>>>>>>>>>>>>>>>>isLogin", loginSelector)
-
-
-
-
-
-
-    console.log("loginSelector", loginSelector)
-
-
-
-    // Gets token from asyncStorage Verify 
-    const verifyToken = async () => {
-        AsyncStorage_Calls.getAsyncValue('Token', (error, token) => {
-            if (error) {
-                console.error('Error getting token:', error);
-            } else {
-                if (token != null) {
-                    console.log("tokrn", token)
-                    dispatch(setToken(token));
-                } else {
-                }
-            }
-            setAppIsReady(true);
-        });
-    }
+    const dispatch = useDispatch()
+    const isLoggedIn = useSelector((state) => state.login.isLogin)
+    const [appIsReady, setAppIsReady] = useState(false)
 
     useEffect(() => {
-        setUserStates(loginSelector)
-    }, [loginSelector])
+        setUserStates(isLoggedIn)
+    }, [isLoggedIn])
 
 
 
 
+    // App initialization
     useEffect(() => {
         async function prepare() {
             try {
-                await verifyToken();
+                // Prevent splash screen from auto-hiding
+                await SplashScreen.preventAutoHideAsync()
 
-                await new Promise(resolve => setTimeout(resolve, 2000));
-            } catch (e) {
-                console.warn(e);
+                // Verify token
+                await verifyToken()
+
+                // Optional: Add a minimum loading time for better UX
+                await new Promise(resolve => setTimeout(resolve, 1000))
+            } catch (error) {
+                console.warn('Error during app preparation:', error)
             } finally {
-                setAppIsReady(true);
+                setAppIsReady(true)
             }
         }
-        prepare();
-    }, []);
+
+        prepare()
+    }, [])
 
 
-    // const [fontsLoaded] = useFonts({
-    //     'Gabarito-VariableFont': require('../assets/Fonts/Gabarito-VariableFont_wght.ttf'),
-    //     'Outfit': require('../assets/Fonts/Outfit-VariableFont_wght.ttf'),
-    //     'VIVALDII': require('../assets/Fonts/VIVALDII 2.ttf'),
-    // });
-
-
-
-    // const onLayoutRootView = useCallback(async () => {
-    //     if (appIsReady && fontsLoaded) {
-    //         // This tells the splash screen to hide immediately! If we call this after
-    //         // `setAppIsReady`, then we may see a blank screen while the app is
-    //         // loading its initial state and rendering its first pixels. So instead,
-    //         // we hide the splash screen once we know the root view has already
-    //         // performed layout.
-
-    //         //   await SplashScreen.hideAsync();
-    //     }
-    // }, [appIsReady, fontsLoaded]);
-
-    // if (!appIsReady || !fontsLoaded) {
-    //     return null;
-    // }
-
-
-    const customHeaderOptions = ({ navigation }) => ({
-        // headerShadowVisible: false,
+    // Custom header options
+    const customHeaderOptions = () => ({
         headerStyle: {
             backgroundColor: 'white',
             borderBottomWidth: 4,
         },
-
         headerTintColor: '#030370',
         headerTitleAlign: 'center',
         headerTitleStyle: {
             fontFamily: 'Gabarito-VariableFont',
             fontSize: 20,
             fontWeight: '600',
-            // fontWeight: 'bold',
-            flex: 1, // ✅ Helps title take more space
-            textAlign: 'center', // ✅ Center text in that space
+            flex: 1,
+            textAlign: 'center',
         },
         headerBackTitleVisible: false,
-    });
+    })
+
+    // Load custom fonts
+    const [fontsLoaded] = useFonts({
+        // 'VIVALDII': require('../assets/Fonts/VIVALDII_2.ttf'),
+        'Gabarito-VariableFont': require('../assets/Fonts/Gabarito-VariableFont_wght.ttf'),
+        'Outfit': require('../assets/Fonts/Outfit-VariableFont_wght.ttf'),
+    })
+
+    // Verify token from AsyncStorage
+    const verifyToken = async () => {
+        return new Promise((resolve) => {
+            AsyncStorage_Calls.getAsyncValue('Token', (error, token) => {
+                if (error) {
+                    console.error('Error getting token:', error)
+                } else if (token) {
+                    console.log("Retrieved token:", token)
+                    dispatch(setToken(token))
+                }
+                resolve()
+            })
+        })
+    }
+
+    // Handle layout and hide splash screen
+    const onLayoutRootView = useCallback(async () => {
+        if (appIsReady && fontsLoaded) {
+            try {
+                await SplashScreen.hideAsync()
+            } catch (error) {
+                console.warn('Error hiding splash screen:', error)
+            }
+        }
+    }, [appIsReady, fontsLoaded])
+
+    // Show loading screen while app is not ready
+    if (!appIsReady || !fontsLoaded) {
+        return null
+    }
 
     return (
         <ErrorBoundary FallbackComponent={CustomFallback}>
             <Stack.Navigator
-
                 screenOptions={{
                     headerStyle: {
                         backgroundColor: 'white',
@@ -137,18 +132,44 @@ const RootStack = () => {
                     },
                     // headerShown: false,
                 }}
-
             >
                 {userStates ? <>
-                    <Stack.Group>
+                    {/* Authenticated user screens */}
+                    <Stack.Group onReady={onLayoutRootView}>
 
                         {/* <Stack.Screen name="Deb" component={DeveloperScreenTest1}/> */}
 
-                        {/* <Stack.Screen name="BottomTabScreen" component={BottomTabScreen}
+                        <Stack.Screen name="BottomTabScreen" component={BottomTabScreen}
                             options={{
                                 headerShown: false,
                             }}
-                        /> */}
+                        />
+
+                        {/* CourseRegistration1 */}
+                        <Stack.Screen name="FormScreen"
+                            component={CourseRegistration1}
+                            options={customHeaderOptions}
+                        />
+                        <Stack.Screen name="CourseRegistration2"
+                            component={CourseRegistration2}
+                            options={customHeaderOptions}
+                        />
+
+                        <Stack.Screen name="CourseRegistration3"
+                            component={CourseRegistration3}
+                            options={customHeaderOptions}
+                        />
+                        {/* <Stack.Screen name="CourseRegistration2"
+                    component={CourseRegistration2}
+                    options={customHeaderOptions}
+                  />
+  
+                  <Stack.Screen name="CourseRegistration4"
+                    component={CourseRegistration4}
+                    options={customHeaderOptions}
+                  /> */}
+
+
 
                         <Stack.Screen name="TracksAudios" component={TracksAudios}
                             options={customHeaderOptions} />
@@ -159,13 +180,14 @@ const RootStack = () => {
                         <Stack.Screen name="AudioScreen" component={AudioScreen}
                             options={{
                                 headerShown: false,
-                                        animation: 'fade_from_bottom', // 👈 Add this
+                                animation: 'fade_from_bottom', // 👈 Add this
                             }}
                         />
 
 
                     </Stack.Group>
                 </> : <>
+                    {/* Non-authenticated user screens */}
                     <Stack.Group>
                         <Stack.Screen name="Login" component={Login} options={{
                             headerShown: false,

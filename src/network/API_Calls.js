@@ -13,7 +13,6 @@ const getAPIBaseUrl = () => {
     throw new Error('Unsupported platform');
   }
 };
- 
 
 
 //Home Page api 
@@ -299,7 +298,6 @@ export const GetVideosDataAPI = async (token) => {
 
 //Form requesties
 export const GetFormReqs = async (token) => {
-
   return await axios.get(`${GUEST_URL}/user/courses`, {
     headers: {
       'Authorization': `Bearer ${token}`

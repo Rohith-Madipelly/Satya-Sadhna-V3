@@ -170,3 +170,9 @@ npm install setimmediate
 
 
 npm i react-native-track-player
+
+
+
+npx expo prebuild --clean --platform android
+
+./gradlew assembleRelease

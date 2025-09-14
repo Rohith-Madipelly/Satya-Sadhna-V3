@@ -7,7 +7,7 @@ function CustomStatusBar(props) {
     return isFocused ? <StatusBar {...props} /> : null;
   }
   
-  
+   
 export default CustomStatusBar  
  
 const styles = StyleSheet.create({})

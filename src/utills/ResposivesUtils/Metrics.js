@@ -28,7 +28,7 @@ function RFValue(fontSize, standardScreenHeight = 812) {
       : wid / (size / fontSize); 
   return Number(res);
 }
-
+ 
 const Metrics = {
   width: width < height ? width : height,
   height: height < width ? width : height,

@@ -1,5 +1,5 @@
 
-export const PRIMARY_COLOR="#283E71"
+export const PRIMARY_COLOR='#030370'||"#283E71"
 export const SECONDARY_COLOR="rgba(78, 78, 78, 1)"
 export const APP_SECONDARY_BACKGROUND_COLOR2="rgb(242, 242, 242)"
 
