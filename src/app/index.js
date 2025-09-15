@@ -23,6 +23,7 @@ import CourseRegistration1 from './MainScreens/FormPages/CourseRegistration1'
 import CourseRegistration2 from './MainScreens/FormPages/CourseRegistration2'
 import CourseRegistration3 from './MainScreens/FormPages/CourseRegistration3'
 import DeveloperScreenTest1 from './DeveloperScreen/DeveloperScreenTest1'
+import CourseRegistration4 from './MainScreens/FormPages/CourseRegistration4'
 
 const Stack = createNativeStackNavigator()
 
@@ -139,6 +140,9 @@ const RootStack = () => {
 
                         {/* <Stack.Screen name="Deb" component={DeveloperScreenTest1}/> */}
 
+
+
+
                         <Stack.Screen name="BottomTabScreen" component={BottomTabScreen}
                             options={{
                                 headerShown: false,
@@ -157,6 +161,10 @@ const RootStack = () => {
 
                         <Stack.Screen name="CourseRegistration3"
                             component={CourseRegistration3}
+                            options={customHeaderOptions}
+                        />
+                        <Stack.Screen name="CourseRegistration4"
+                            component={CourseRegistration4}
                             options={customHeaderOptions}
                         />
                         {/* <Stack.Screen name="CourseRegistration2"

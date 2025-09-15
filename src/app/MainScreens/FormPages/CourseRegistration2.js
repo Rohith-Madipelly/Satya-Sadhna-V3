@@ -130,7 +130,7 @@ const CourseRegistration2 = ({ route }) => {
             >
               <ImageBackground
                 style={styles.imageBackground}
-              // source={require('../../assets/Image/Home/Vector2.png')}
+              source={require('../../../assets/Image/Home/Vector2.png')}
               >
                 <Text style={styles.courseName}>
                   <Text style={styles.bold}>Course name: </Text>

@@ -109,8 +109,8 @@ npx expo install expo-sharing
 npx expo install react-native-webview
 
 
-
-
+npx expo install react-native-modal-datetime-picker @react-native-community/datetimepicker
+npm i date-fns
 
 
 git init

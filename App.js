@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import { store } from './src/redux/store';
 
 import { AudioProvider } from './src/contextAPI/AudioContext';
-import { useFonts } from 'expo-font';
 import Metrics from './src/utills/ResposivesUtils/Metrics';
 import { ToastProvider } from 'react-native-toast-notifications';
 

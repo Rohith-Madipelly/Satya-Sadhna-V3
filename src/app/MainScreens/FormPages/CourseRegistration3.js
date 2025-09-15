@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   Alert,
+  Button,
   FlatList,
-  ImageBackground,
+  // ImageBackground,
   Keyboard,
   Platform,
   RefreshControl,
@@ -20,13 +21,13 @@ import CustomStatusBar from '../../../components/UI/CustomStatusBar/CustomStatus
 import Metrics from '../../../utills/ResposivesUtils/Metrics';
 import { useSelector } from 'react-redux';
 import { FormDataApi, GetFormDataSumbited, GetFormReqs } from '../../../network/API_Calls';
-// import { ImageBackground } from 'expo-image';
+import { ImageBackground } from 'expo-image';
 import { useNavigation } from '@react-navigation/native';
 import { useFormik } from 'formik';
 
 import { FormData } from '../../../fomik/schema/FormData';
 
-import CustomDateInput2 from '../../../components/UI/Inputs/CustomDateInput2';
+import CustomDateInput from '../../../components/UI/Inputs/CustomDateInput';
 import { MaterialIcons } from '@expo/vector-icons';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -82,7 +83,6 @@ const CourseRegistration3 = ({ route }) => {
 
     onSubmit: values => {
       {
-        console.log("/////// Out of formik")
         submitHandler(values)
       }
     },
@@ -250,6 +250,8 @@ const CourseRegistration3 = ({ route }) => {
 
   }, [])
 
+  const dateInputRef = useRef(null);
+
 
   const submitHandler = async (user) => {
     console.log("Hello out formik")
@@ -314,59 +316,51 @@ const CourseRegistration3 = ({ route }) => {
       var DataPage = {
         courseId: courseId,
         category: category,
-        type: type || "na",
+        type: type || "",
         from: coursefrom,
         to: courseto,
         courseName: courseName,
         courseDuration: courseDuration,
         language: language,
-        // motherTongue: language,
-        // state: `${otherState ? otherState : state}`,
-        // date: TodaysDate,
+        motherTongue: language,
+        state: `${otherState ? otherState : state}`,
+        date: TodaysDate,
         firstName: firstName,
         lastName: lastName,
         gender: gender,
-        // age: age,
-        // education: education,
-        // address: address,
-        // guardianName: guardianName,
-        // martialStatus: martialStatus,
-        // mobileNumber: mobileNumber,
-        // eMail: eMail,
+        age: age,
+        education: education,
+        address: address,
+        guardianName: guardianName,
+        martialStatus: martialStatus,
+        mobileNumber: mobileNumber,
+        eMail: eMail,
 
-        // knownPerson,
+        knownPerson,
 
-        // familyPerson,
+        familyPerson,
 
-        // professionalDetails,
+        professionalDetails,
 
-        // physicalAilment,
+        physicalAilment,
 
-        // psyschologicalAilment,
+        psyschologicalAilment,
 
-        // docFitnessCertificate,
+        docFitnessCertificate,
 
-        // // regularMedicine: regularMedicine,
-        // referenceFrom, referenceFrom,
+        regularMedicine: regularMedicine,
+        referenceFrom, referenceFrom,
 
-        // brief: brief,
+        brief: brief,
 
-        // oldStudent
+        oldStudent
 
       }
-      setTimeout(() => {
-        console.log("dnvch")
-      }, 200);
 
       const res = await FormDataApi(DataPage, token)
-      // const res="d"
       if (res) {
         const Message = res.data.message
-        console.log("......................suff.......", Message)
-        // showAlertAndNavigate(Message, "Home",selectedCourseData)
-
         navigation.navigate("CourseRegistration4", { selectedCourseData: selectedCourseData || "", category: category || "" })
-
       }
 
     } catch (error) {
@@ -375,8 +369,6 @@ const CourseRegistration3 = ({ route }) => {
         Alert.alert("", `${error.response.data.message}`)
         if (error.response.status === 400) {
           console.log("Error With 400.")
-
-          // showAlertAndNavigate(error.response.data.message, "Home")
         }
         else if (error.response.status === 401) {
           seterrorFormAPI({ PasswordForm: `${error.response.data.message}` })
@@ -453,7 +445,7 @@ const CourseRegistration3 = ({ route }) => {
             >
               <ImageBackground
                 style={styles.imageBackground}
-              // source={require('../../../assets/image/Home/Vector2.png')}
+                source={require('../../../assets/Image/Home/Vector2.png')}
               >
                 <Text style={styles.courseName}>
                   <Text style={styles.bold}>Course name: </Text>
@@ -623,6 +615,7 @@ const CourseRegistration3 = ({ route }) => {
                 DropDownData={stateData}
                 inputRef={inputRefs.state}
                 onChange={(e, b, c) => {
+                  console.log("state", e.name)
                   handleChange("state")(e.name)
                   seterrorFormAPI();
                 }}
@@ -1322,47 +1315,37 @@ const CourseRegistration3 = ({ route }) => {
 
                   <View style={{ width: '85%', justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center' }}>
 
-
-
-
-
-
-
-
-
-
-                    <CustomDateInput2
+                    <CustomDateInput
+                      ref={inputRefs.dateFirstCourse}
                       boxWidth={'47%'}
-                      placeholder={''}
                       label={'First course date'}
+                      placeholder={'Select'}
                       name='First course date'
                       date='date'
-                      value={values.dateFirstCourse || new Date()}
+                      value={values.dateFirstCourse}
                       labelStyle={{ color: '#4C5664' }}
                       InputStyle={{ color: '#4C5664' }}
                       rightIcon={<MaterialIcons name="date-range" size={20} color="black" />}
-                      onChangeText={(e, b, c) => {
-                        console.log("hjgdvjycshvd", e)
+                      onChangeDate={(e, b, c) => {
                         handleChange("dateFirstCourse")(e);
                         handleChange("dateLastCourse")("");
                         seterrorFormAPI();
                       }}
-                      inputRef={inputRefs.dateFirstCourse}
                       onBlur={handleBlur("dateFirstCourse")}
                       validate={handleBlur("dateFirstCourse")}
                       outlined
                       backgroundColor={'white'}
-                      minimumDate={new Date(1900, 10, 20)}
-                      maximumDate={new Date()}
+
                       borderColor={`${(errors.dateFirstCourse && touched.dateFirstCourse) || (errorFormAPI && errorFormAPI.dateFirstCourseForm) ? borderColorErrorInput : borderColorInput}`}
                       errorMessage={`${(errors.dateFirstCourse && touched.dateFirstCourse) ? `${errors.dateFirstCourse}` : (errorFormAPI && errorFormAPI.dateFirstCourseForm) ? `${errorFormAPI.dateFirstCourseForm}` : ``}`}
+                      TextDisplay={'DD-MM-YYYY'}
+                      minimumDate={new Date(1900, 10, 20)}
+                      maximumDate={new Date()}
                     />
 
-
-
-                    <CustomDateInput2
+                    <CustomDateInput
                       boxWidth={'47%'}
-                      placeholder={''}
+                      placeholder={'Select'}
                       label={'Last course date'}
                       name='Last course date'
                       date='date'
@@ -1372,7 +1355,7 @@ const CourseRegistration3 = ({ route }) => {
                       rightIcon={<MaterialIcons name="date-range" size={20} color="black" />}
 
 
-                      onChangeText={(e) => {
+                      onChangeDate={(e, b, c) => {
                         console.log("values?.dateFirstCourse", values?.dateFirstCourse);
 
                         const dateFirstCourse = new Date(values?.dateFirstCourse);
@@ -1389,7 +1372,7 @@ const CourseRegistration3 = ({ route }) => {
                           // seterrorFormAPI({ dateLastCourseForm: "Date Error" });
                         } else {
                           console.log("Dates are valid.");
-                          // handleChange("dateLastCourse")(e);
+                          handleChange("dateLastCourse")(e);
                           seterrorFormAPI(); // clear error
                         }
                       }}
@@ -1399,12 +1382,11 @@ const CourseRegistration3 = ({ route }) => {
                       outlined
                       backgroundColor={'white'}
 
-
-
                       minimumDate={new Date(1900, 10, 20)}
                       maximumDate={new Date()}
                       borderColor={`${(errors.dateLastCourse && touched.dateLastCourse) || (errorFormAPI && errorFormAPI.dateLastCourseForm) ? "red" : "#ccc"}`}
                       errorMessage={`${(errors.dateLastCourse && touched.dateLastCourse) ? `${errors.dateLastCourse}` : (errorFormAPI && errorFormAPI.dateLastCourseForm) ? `${errorFormAPI.dateLastCourseForm}` : ``}`}
+                      TextDisplay={'DD-MM-YYYY'}
                     />
                   </View>
 
@@ -1604,11 +1586,13 @@ const CourseRegistration3 = ({ route }) => {
                   </>
 
                 </View>
-                {/* {errors && (
+
+
+                {errors && (
                   <Text style={{ color: 'red' }}>
                     {Object.values(errors).join('\n')}
                   </Text>
-                )} */}
+                )}
                 <TouchableOpacity style={{
                   backgroundColor: '#030370', width: '75%',
                   marginTop: 15,
@@ -1617,6 +1601,7 @@ const CourseRegistration3 = ({ route }) => {
                   justifyContent: 'center', alignItems: 'center'
                 }}
                   onPress={() => {
+                    // inputRefs.dateFirstCourse.current?.openPicker();
                     handleSubmit()
                     // ErrorChecker()
                   }}
