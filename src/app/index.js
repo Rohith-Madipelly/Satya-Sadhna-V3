@@ -207,25 +207,25 @@ const RootStack = () => {
                                 animation: 'fade_from_bottom', // 👈 Add this
                             }}
                         />
-  <Stack.Screen name="FullProfile" 
-  component={FullProfile}
-                    options={customHeaderOptions} />
-                     <Stack.Screen name="ProfilePassword" 
-  component={ProfilePassword}
-                    options={customHeaderOptions} />
-                    <Stack.Screen name="Registrationforcourse" 
-  component={Registrationforcourse}
-                    options={customHeaderOptions} />
-              <Stack.Screen name="About_SatyaSadhana" component={About_SatyaSadhana}
-                    options={customHeaderOptions}
-                  />
-                  <Stack.Screen name="About_Guruji" component={About_Guruji}
-                    options={customHeaderOptions}
-                  />
-                  <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy}
-                    options={customHeaderOptions} />
-                  <Stack.Screen name="DeleteAccountPolicy" component={DeleteAccountPolicy}
-                    options={customHeaderOptions} />
+                        <Stack.Screen name="FullProfile"
+                            component={FullProfile}
+                            options={customHeaderOptions} />
+                        <Stack.Screen name="ProfilePassword"
+                            component={ProfilePassword}
+                            options={customHeaderOptions} />
+                        <Stack.Screen name="Registrationforcourse"
+                            component={Registrationforcourse}
+                            options={customHeaderOptions} />
+                        <Stack.Screen name="About_SatyaSadhana" component={About_SatyaSadhana}
+                            options={customHeaderOptions}
+                        />
+                        <Stack.Screen name="About_Guruji" component={About_Guruji}
+                            options={customHeaderOptions}
+                        />
+                        <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy}
+                            options={customHeaderOptions} />
+                        <Stack.Screen name="DeleteAccountPolicy" component={DeleteAccountPolicy}
+                            options={customHeaderOptions} />
 
 
                     </Stack.Group>
