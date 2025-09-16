@@ -25,6 +25,11 @@ import CourseRegistration3 from './MainScreens/FormPages/CourseRegistration3'
 import DeveloperScreenTest1 from './DeveloperScreen/DeveloperScreenTest1'
 import CourseRegistration4 from './MainScreens/FormPages/CourseRegistration4'
 import Donation from './MainScreens/Donation'
+import Profile from './MainScreens/BottomTabScreen/Profile/Profile'
+import FullProfile from './MainScreens/BottomTabScreen/Profile/FullProfile'
+import MyFamilyMembers from './MainScreens/BottomTabScreen/Profile/MyFamilyMembers'
+import MyVehicles from './MainScreens/BottomTabScreen/Profile/MyVehicles'
+import ChangePassword from './MainScreens/BottomTabScreen/Profile/ChangePassword'
 
 const Stack = createNativeStackNavigator()
 
@@ -200,6 +205,27 @@ const RootStack = () => {
                                 animation: 'fade_from_bottom', // 👈 Add this
                             }}
                         />
+  <Stack.Screen name="FullProfile" 
+  component={FullProfile}
+                    options={customHeaderOptions} />
+                     <Stack.Screen name="ProfilePassword" 
+  component={MyFamilyMembers}
+                    options={customHeaderOptions} />
+                    <Stack.Screen name="Registration for course" 
+  component={MyVehicles}
+                    options={customHeaderOptions} />
+                     <Stack.Screen name="About_SatyaSadhana" 
+  component={ChangePassword}
+                    options={customHeaderOptions} />
+                    <Stack.Screen name="About_Guruji" 
+  component={ChangePassword}
+                    options={customHeaderOptions} />
+                    <Stack.Screen name="Privacy Policy" 
+  component={ChangePassword}
+                    options={customHeaderOptions} />
+                       <Stack.Screen name="DeleteAccountPolicy" 
+  component={ChangePassword}
+                    options={customHeaderOptions} />
 
 
                     </Stack.Group>

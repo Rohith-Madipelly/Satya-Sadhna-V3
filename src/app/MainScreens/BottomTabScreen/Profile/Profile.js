@@ -62,7 +62,7 @@ const Profile = () => {
   const AccountData = [
     {
       name: "Profile",
-      onPress: () => { navigation.navigate("MyProfile") },
+      onPress: () => { navigation.navigate("FullProfile") },
       IconImage: require("../../../../assets/Image/ProfileLogos/account-circle-outline.png")
       // isDisplay: true
     },
@@ -111,122 +111,112 @@ const Profile = () => {
       isDisplay: true
     },
   ]
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <CustomStatusBar barStyle="dark-content" backgroundColor="white" />
+ return (
+  <View style={{ flex: 1, backgroundColor: 'white' }}>
+    <CustomStatusBar barStyle="dark-content" backgroundColor="white" />
+    <LoaderComponents visible={spinnerbool} />
 
-      <LoaderComponents
-        visible={spinnerbool}
-      />
-
-      <ScrollView style={[{
-        flex: 1,
-        backgroundColor: "#FFF"
-      }]}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-          />
-        }
+    <ScrollView
+      style={{ flex: 1 }}
+      contentContainerStyle={{ padding: 16 }}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
+      {/* Profile Header */}
+      <TouchableOpacity
+        activeOpacity={0.6}
+        onPress={() => navigation.navigate("FullProfile")}
+        style={{ marginBottom: 20 }}
       >
-        <TouchableOpacity activeOpacity={0.6} onPress={() => { navigation.navigate("FullProfile") }}>
-
-          <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginBottom: 15 }}>
-
-            <View style={{ display: '', flexDirection: 'row', justifyContent: 'flex-start' }}>
-
-              <View>
-                <View style={styles.outerCircle}>
-                  <ImageBackground
-                    style={styles.innerCircle}
-                    source={require("../../../../assets/Image/profile.png")}
-                    onError={(error) => Alert.alert("Error in ", error)}
-
-                  >
-                    <Text style={styles.letter}>{StartingLetter?.toLocaleUpperCase()}</Text>
-                  </ImageBackground>
-                </View>
-              </View>
-
-              <View style={{ margin: 5, marginLeft: 14 }}>
-                <Text>{UserName}</Text>
-                <Text>Show profile</Text>
-              </View>
-
-
+        <View style={styles.profileRow}>
+          <View style={styles.profileLeft}>
+            <View style={styles.outerCircle}>
+              <ImageBackground
+                style={styles.innerCircle}
+                source={require("../../../../assets/Image/profile.png")}
+              >
+                <Text style={styles.letter}>{StartingLetter?.toUpperCase()}</Text>
+              </ImageBackground>
             </View>
-
-            <View style={{ marginTop: 10 }}>
-
-
+            <View style={{ marginLeft: 14 }}>
+              <Text style={styles.Heading_u3}>{UserName}</Text>
+              <Text style={{ color: '#666' }}>Show profile</Text>
             </View>
-
           </View>
-        </TouchableOpacity>
-
-        <View style={styles.container}>
-          <Text style={[styles.Heading_u2, { marginBottom: 28 }]}>Accounts</Text>
-          <View>
-            {AccountData.map((item, index) => {
-              return (
-                <View style={{ display: '', flexDirection: 'row',
-                 justifyContent: 'flex-start' }} key={index}>
-                  <View>
-                    <Image style={{ width: 24, height: 24, }}
-                      source={item.IconImage}
-                    />
-                  </View>
-                  <Text style={[styles.Heading_u3,
-                     { marginTop: 2 }]}>{item.name}</Text>
-                  <AntDesign name="right" size={15}
-                   color="black" />
-                </View>
-              )
-            })}
-             <Text style={[styles.Heading_u2,
-               { marginBottom: 28 }]}>More</Text>
-             {MoreData.map((item, index) => {
-              return (
-                <View style={{ display: '', 
-                flexDirection: 'row',
-                 justifyContent: 'flex-start' }} key={index}>
-                  <View>
-                    <Image style={{ width: 24, height: 24, }}
-                      source={item.IconImage}
-                    />
-                  </View>
-                  <Text style={[styles.Heading_u3, { marginTop: 2 }]}>{item.name}</Text>
-                  <AntDesign name="right" size={15} color="black" />
-                </View>
-              )
-            })}
-          </View>
+          <AntDesign name="right" size={18} color="black" />
         </View>
+      </TouchableOpacity>
 
-
-        <View style={{ marginRight: 10, marginVertical: 5 }}>
-          <Text style={{ color: '#001F2099', textAlign: 'center' }}>
-            Version 2.2.0</Text>
-          <TouchableOpacity style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }} onPress={() => {
-            CustomLinking(SERVICE_PROVIDER_WEBSITE)
-          }}>
-            <MaterialIcons name="copyright" size={15} />
-            <Text style={{
-              fontWeight: '600', textAlign: 'center', marginVertical: 10, marginLeft: 5, fontSize: 15
-            }}>
-              Analogue IT Solutions
-            </Text>
+      {/* Accounts Section */}
+      <View style={{ marginBottom: 28 }}>
+        <Text style={[styles.Heading_u2, { marginBottom: 20 }]}>Accounts</Text>
+        {AccountData.map((item, index) => (
+          <TouchableOpacity
+            key={index}
+            style={styles.listRow}
+            onPress={item.onPress}
+          >
+            <View style={styles.listLeft}>
+              <Image source={item.IconImage} style={styles.icon} />
+              <Text style={styles.Heading_u3}>{item.name}</Text>
+            </View>
+            <AntDesign name="right" size={16} color="black" />
           </TouchableOpacity>
-        </View>
+        ))}
+      </View>
 
-      </ScrollView>
-    </View>
-  )
+      {/* More Section */}
+      <View style={{ marginBottom: 28 }}>
+        <Text style={[styles.Heading_u2, { marginBottom: 20 }]}>More</Text>
+        {MoreData.map((item, index) => (
+          <TouchableOpacity
+            key={index}
+            style={styles.listRow}
+            onPress={item.onPress}
+          >
+            <View style={styles.listLeft}>
+              <Image source={item.IconImage} style={styles.icon} />
+              <Text style={styles.Heading_u3}>{item.name}</Text>
+            </View>
+            <AntDesign name="right" size={16} color="black" />
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      {/* Version Info */}
+      <View style={{ marginVertical: 10 }}>
+        <Text style={{ color: '#001F2099', textAlign: 'center' }}>
+          Version 2.2.0
+        </Text>
+        <TouchableOpacity
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'row',
+            marginTop: 8,
+          }}
+          onPress={() => {
+            CustomLinking(SERVICE_PROVIDER_WEBSITE);
+          }}
+        >
+          <MaterialIcons name="copyright" size={15} />
+          <Text
+            style={{
+              fontWeight: '600',
+              marginLeft: 5,
+              fontSize: 15,
+            }}
+          >
+            Analogue IT Solutions
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
+  </View>
+);
 }
-
-export default Profile
-
+export default Profile;
 const styles = StyleSheet.create({
   Heading_1: {
     color: '#0A0240',
@@ -264,7 +254,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 75,
-    overflow: 'hidden', // Ensure inner content doesn't overflow
+    overflow: 'hidden', 
   },
   innerCircle: {
     flex: 1,
@@ -273,7 +263,34 @@ const styles = StyleSheet.create({
   },
   letter: {
     fontSize: 24,
-    color: '#fff', // Change the text color as needed
+    color: '#fff',
   },
+  profileRow: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+},
+profileLeft: {
+  flexDirection: 'row',
+  alignItems: 'center',
+},
+listRow: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  paddingVertical: 12,
+  borderBottomWidth: 1,
+  borderBottomColor: '#eee',
+},
+listLeft: {
+  flexDirection: 'row',
+  alignItems: 'center',
+},
+icon: {
+  width: 24,
+  height: 24,
+  marginRight: 12,
+},
+
 
 });
