@@ -9,6 +9,7 @@ import { Image, ImageBackground } from 'expo-image';
 import { useDispatch, useSelector } from 'react-redux';
 import { UserGetProfileDetails } from '../../../../network/API_Calls';
 import { useNavigation } from '@react-navigation/native';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 const Profile = () => {
   let tokenn = useSelector((state) => state.login.token);
@@ -58,7 +59,7 @@ const Profile = () => {
   }, [])
 
 
-  const ProfileLinksx = [
+  const AccountData = [
     {
       name: "Profile",
       onPress: () => { navigation.navigate("MyProfile") },
@@ -78,7 +79,7 @@ const Profile = () => {
       // isDisplay: hasAPIPermission("", "feature.vehicle"),
     }]
 
-  const ProfileLinks2 = [
+  const MoreData = [
     {
       name: "About Satya Sadhna",
       onPress: () => { navigation.navigate("ChangePassword") },
@@ -146,7 +147,6 @@ const Profile = () => {
                     <Text style={styles.letter}>{StartingLetter?.toLocaleUpperCase()}</Text>
                   </ImageBackground>
                 </View>
-                {/* }  */}
               </View>
 
               <View style={{ margin: 5, marginLeft: 14 }}>
@@ -165,18 +165,39 @@ const Profile = () => {
           </View>
         </TouchableOpacity>
 
-        <View>
-          <Text style={[styles.Heading_u2, { marginBottom: 28 }]}>More</Text>
+        <View style={styles.container}>
+          <Text style={[styles.Heading_u2, { marginBottom: 28 }]}>Accounts</Text>
           <View>
-            {ProfileLinksx.map((item, index) => {
+            {AccountData.map((item, index) => {
               return (
-                <View style={{ display: '', flexDirection: 'row', justifyContent: 'flex-start' }} key={index}>
+                <View style={{ display: '', flexDirection: 'row',
+                 justifyContent: 'flex-start' }} key={index}>
+                  <View>
+                    <Image style={{ width: 24, height: 24, }}
+                      source={item.IconImage}
+                    />
+                  </View>
+                  <Text style={[styles.Heading_u3,
+                     { marginTop: 2 }]}>{item.name}</Text>
+                  <AntDesign name="right" size={15}
+                   color="black" />
+                </View>
+              )
+            })}
+             <Text style={[styles.Heading_u2,
+               { marginBottom: 28 }]}>More</Text>
+             {MoreData.map((item, index) => {
+              return (
+                <View style={{ display: '', 
+                flexDirection: 'row',
+                 justifyContent: 'flex-start' }} key={index}>
                   <View>
                     <Image style={{ width: 24, height: 24, }}
                       source={item.IconImage}
                     />
                   </View>
                   <Text style={[styles.Heading_u3, { marginTop: 2 }]}>{item.name}</Text>
+                  <AntDesign name="right" size={15} color="black" />
                 </View>
               )
             })}
@@ -213,6 +234,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontStyle: 'normal',
     fontWeight: '400',
+    //width:'100%'
   },
   Heading_u2: {
     color: '#0A0240',
@@ -229,6 +251,11 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '400',
     lineHeight: 20,
+  },
+  container:{
+    width:'100%',
+    flex:1,
+    
   },
 
 
