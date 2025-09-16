@@ -214,7 +214,8 @@ const Home = () => {
             flex: 0.23,
           }}
             onPress={() => {
-              navigation.navigate("Quotes")
+              
+              navigation.navigate("QuotesScreen")
             }}
           >
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(168, 168, 255, 0.19)', borderRadius: 13, }}>

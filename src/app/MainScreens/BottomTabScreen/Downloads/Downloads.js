@@ -13,24 +13,25 @@ import * as MediaLibrary from 'expo-media-library';
 
 
 
+
+
+import MusicIcon from '../../assets/SVGS/MusicPlayer/MusicIcon';
+
 import { useFocusEffect } from '@react-navigation/native';
 import Slider from '@react-native-community/slider';
+import UnMuteIcon from '../../assets/SVGS/MusicPlayer/Player/UnMuteIcon';
+import MuteIcon from '../../assets/SVGS/MusicPlayer/Player/MuteIcon';
+import PauseIcon from '../../assets/SVGS/MusicPlayer/Player/Pause';
+import PlayIcon from '../../assets/SVGS/MusicPlayer/Player/PlayIcon';
 
-
-import MuteIcon from '../../../../assets/SVGS/MusicPlayer/Player/MuteIcon';
-import UnMuteIcon from '../../../../assets/SVGS/MusicPlayer/Player/UnMuteIcon';
-import PauseIcon from '../../../../assets/SVGS/MusicPlayer/Player/Pause';
-import PlayIcon from '../../../../assets/SVGS//MusicPlayer/Player/PlayIcon';
-
+import { SatyaSadhnaDownload } from '../AppContant';
 
 import { useToast } from 'react-native-toast-notifications';
-import { useAudio } from '../../../../contextAPI/AudioContext';
+import { useAudio } from '../../context/AudioProvider';
 
-import CustomStatusBar from '../../../../components/UI/CustomStatusBar/CustomStatusBar';
-import Metrics from '../../../../utills/ResposivesUtils/Metrics';
-import GlobalStyles from '../../../../components/UIConfig/GlobalStyles';
-import MusicIcon from '../../../../assets/SVGS/MusicPlayer/MusicIcon';
-
+import CustomStatusBar from '../../Components/UI/StatusBar/CustomStatusBar';
+import Metrics from '../../utils/ResposivesUtils/Metrics';
+import GlobalStyles from '../../Components/UI/GlobalStyles';
 
 const DownloadFliesList = () => {
     const { playTrack, togglePlayPause, currentTrack, isPlaying, currentTime, totalDuration, isMuted, toggleMute,path,stopTrack } = useAudio();
@@ -40,7 +41,7 @@ const DownloadFliesList = () => {
     const [isVideoLoaded, setIsVideoLoaded] = useState(false);
     const videoRef = useRef(null);
     const toast = useToast();
-const SatyaSadhnaDownload="SatyaSadhnaDownloadFilesRohekk"
+
     const fetchDownloads = async () => {
         try {
             const files = await AsyncStorage.getItem(SatyaSadhnaDownload);
@@ -141,7 +142,7 @@ const SatyaSadhnaDownload="SatyaSadhnaDownloadFilesRohekk"
                         <View>
                             {isPlaying ? (
                                 <Image
-                                    source={require('../../../../assets/MusicPlaying.gif')}
+                                    source={require('../../assets/MusicPlaying.gif')}
                                     style={{ width: 40, height: 40, alignSelf: 'center' }}
                                 />
                             ) : (
@@ -251,7 +252,7 @@ const SatyaSadhnaDownload="SatyaSadhnaDownloadFilesRohekk"
                                 {item.fileType === 'audio' ? (
                                     currentTrack && currentTrack.fileType === 'audio' &&
                                     item.id === currentTrack?.id && isPlaying ? (
-                                        <Image source={require('../../../../assets/MusicPlaying.gif')} style={{ width: 25, height: 25 }} />
+                                        <Image source={require('../../assets/MusicPlaying.gif')} style={{ width: 25, height: 25 }} />
                                     ) : (
                                         <MusicIcon />
                                     )
