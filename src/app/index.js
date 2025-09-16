@@ -27,10 +27,12 @@ import CourseRegistration4 from './MainScreens/FormPages/CourseRegistration4'
 import Donation from './MainScreens/Donation'
 import Profile from './MainScreens/BottomTabScreen/Profile/Profile'
 import FullProfile from './MainScreens/BottomTabScreen/Profile/FullProfile'
-import MyFamilyMembers from './MainScreens/BottomTabScreen/Profile/MyFamilyMembers'
-import MyVehicles from './MainScreens/BottomTabScreen/Profile/MyVehicles'
-import ChangePassword from './MainScreens/BottomTabScreen/Profile/ChangePassword'
-
+import ProfilePassword from './MainScreens/BottomTabScreen/Profile/ProfilePassword'
+import Registrationforcourse from './MainScreens/BottomTabScreen/Profile/Registrationforcourse'
+import About_SatyaSadhana from './MainScreens/BottomTabScreen/Profile/About_SatyaSadhana'
+import About_Guruji from './MainScreens/BottomTabScreen/Profile/About_Guruji'
+import PrivacyPolicy from './MainScreens/BottomTabScreen/Profile/PrivacyPolicy'
+import DeleteAccountPolicy from './MainScreens/BottomTabScreen/Profile/DeleteAccountPolicy'
 const Stack = createNativeStackNavigator()
 
 const RootStack = () => {
@@ -209,22 +211,20 @@ const RootStack = () => {
   component={FullProfile}
                     options={customHeaderOptions} />
                      <Stack.Screen name="ProfilePassword" 
-  component={MyFamilyMembers}
+  component={ProfilePassword}
                     options={customHeaderOptions} />
-                    <Stack.Screen name="Registration for course" 
-  component={MyVehicles}
+                    <Stack.Screen name="Registrationforcourse" 
+  component={Registrationforcourse}
                     options={customHeaderOptions} />
-                     <Stack.Screen name="About_SatyaSadhana" 
-  component={ChangePassword}
+              <Stack.Screen name="About_SatyaSadhana" component={About_SatyaSadhana}
+                    options={customHeaderOptions}
+                  />
+                  <Stack.Screen name="About_Guruji" component={About_Guruji}
+                    options={customHeaderOptions}
+                  />
+                  <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy}
                     options={customHeaderOptions} />
-                    <Stack.Screen name="About_Guruji" 
-  component={ChangePassword}
-                    options={customHeaderOptions} />
-                    <Stack.Screen name="Privacy Policy" 
-  component={ChangePassword}
-                    options={customHeaderOptions} />
-                       <Stack.Screen name="DeleteAccountPolicy" 
-  component={ChangePassword}
+                  <Stack.Screen name="DeleteAccountPolicy" component={DeleteAccountPolicy}
                     options={customHeaderOptions} />
 
 

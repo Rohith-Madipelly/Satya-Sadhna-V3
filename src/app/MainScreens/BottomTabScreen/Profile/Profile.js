@@ -68,13 +68,13 @@ const Profile = () => {
     },
     {
       name: "Password",
-      onPress: () => { navigation.navigate("MyFamilyMembers") },
+      onPress: () => { navigation.navigate("ProfilePassword") },
       IconImage: require("../../../../assets/Image/ProfileLogos/lock-outline.png")
       // isDisplay: hasAPIPermission("", "feature.familymember"),
     },
     {
       name: "Register for course",
-      onPress: () => { navigation.navigate("MyVehicles") },
+      onPress: () => { navigation.navigate("Registrationforcourse") },
       IconImage: require("../../../../assets/Image/ProfileLogos/eidt.png"),
       // isDisplay: hasAPIPermission("", "feature.vehicle"),
     }]
@@ -82,25 +82,25 @@ const Profile = () => {
   const MoreData = [
     {
       name: "About Satya Sadhna",
-      onPress: () => { navigation.navigate("ChangePassword") },
+      onPress: () => { navigation.navigate("About_SatyaSadhana") },
       IconImage: require("../../../../assets/Image/ProfileLogos/alert-circle-outline.png"),
       isDisplay: true
     },
     {
       name: "Know About Guruji",
-      onPress: () => { navigation.navigate("ChangePassword") },
+      onPress: () => { navigation.navigate("About_Guruji") },
       IconImage: require("../../../../assets/Image/ProfileLogos/alert-circle-outline.png"),
       isDisplay: true
     },
     {
       name: "Privacy Policy",
-      onPress: () => { navigation.navigate("ChangePassword") },
+      onPress: () => { navigation.navigate("PrivacyPolicy") },
       IconImage: require("../../../../assets/Image/ProfileLogos/account-lock-outline.png"),
       isDisplay: true
     },
     {
       name: "Delete Account Policy",
-      onPress: () => { navigation.navigate("ChangePassword") },
+      onPress: () => { navigation.navigate("DeleteAccountPolicy") },
       IconImage: require("../../../../assets/Image/ProfileLogos/trash.png"),
       isDisplay: true
     },
@@ -203,7 +203,7 @@ const Profile = () => {
           <MaterialIcons name="copyright" size={15} />
           <Text
             style={{
-              fontWeight: '600',
+              fontWeight: 'bold',
               marginLeft: 5,
               fontSize: 15,
             }}
