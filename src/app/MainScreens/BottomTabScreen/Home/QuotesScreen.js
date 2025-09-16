@@ -25,7 +25,7 @@ const QuotesScreen = () => {
         { quote: "Any definition of a successful life must include service to others." },
     ];
 
-
+//hello
     const [refreshing, setRefreshing] = useState(false);
     const [isloading, setIsLoading] = useState(true)
     const [QuotionsData, setQuotionsData] = useState([])
