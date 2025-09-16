@@ -1,7 +1,7 @@
 
 import { Alert } from 'react-native';
 import AsyncStorage_Calls from './AsyncStorage_Calls';
-import { setToken } from '../redux/actions/loginAction';
+import { setToken } from '../redux/actions/AuthActions';
 
 
 
