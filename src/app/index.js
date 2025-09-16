@@ -33,6 +33,8 @@ import About_SatyaSadhana from './MainScreens/BottomTabScreen/Profile/About_Saty
 import About_Guruji from './MainScreens/BottomTabScreen/Profile/About_Guruji'
 import PrivacyPolicy from './MainScreens/BottomTabScreen/Profile/PrivacyPolicy'
 import DeleteAccountPolicy from './MainScreens/BottomTabScreen/Profile/DeleteAccountPolicy'
+import QuotesScreen from './MainScreens/BottomTabScreen/Home/QuotesScreen'
+import VideoScreen from './MainScreens/VideoScreen'
 const Stack = createNativeStackNavigator()
 
 const RootStack = () => {
@@ -183,7 +185,7 @@ const RootStack = () => {
                             component={Donation}
                             options={customHeaderOptions}
                         />
-                        <Stack.Screen name='Quotes'
+                        <Stack.Screen name='QuotesScreen'
                         component={QuotesScreen}
                         options={customHeaderOptions} />
                         {/* <Stack.Screen name="CourseRegistration2"
@@ -192,7 +194,7 @@ const RootStack = () => {
                   />
   
                   <Stack.Screen name="CourseRegistration4"
-                    component={CourseRegistration4}
+                    component={CourseRegistration4} 
                     options={customHeaderOptions}
                   /> */}
 

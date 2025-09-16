@@ -15,36 +15,10 @@ import { ServerError } from '../../../../utills/ServerError'
 
 
 const QuotesScreen = () => {
-    const QuotesData = [
-        { quote: "Today is a new day, whatever happened yesterday, good or bad doesn't matter." },
-        { quote: "If you can win over your mind, you can win over the whole world." },
-        { quote: "Any definition of a successful life must include service to others." },
-        { quote: "Wish healing to those who have given you pain, this is how you heal yourself and the other." },
-        { quote: "If you want peace then calm your desires." },
-        { quote: "The self-observation of CHANGES in the BODY will lead to equanimity in all EXTERNAL CHANGES." },
-        { quote: "Any definition of a successful life must include service to others." },
-    ];
-
-//hello
     const [refreshing, setRefreshing] = useState(false);
     const [isloading, setIsLoading] = useState(true)
     const [QuotionsData, setQuotionsData] = useState([])
-
-    
-    let tokenn = useSelector((state) => state.token);
-
-    try {
-        if (tokenn != null) {
-            tokenn = tokenn.replaceAll('"', '');
-        }
-    }
-    catch (err) {
-        console.log("Error in token quotes", err)
-        if (err.response.status === 500) {
-            console.log("Internal Server Error", err.message)
-        }
-    }
-
+  let tokenn = useSelector((state) => state.login.token);
 
     const onRefresh = useCallback(() => {
         getAllQuotes()

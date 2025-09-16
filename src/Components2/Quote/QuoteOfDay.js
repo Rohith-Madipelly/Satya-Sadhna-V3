@@ -31,7 +31,7 @@ const QuoteOfDay = ({ Quote, isQuoteOfDay, bgColor, disabled = true }) => {
                     minHeight: 120,
                     backgroundColor: bgColor ? bgColor : 'rgba(168, 168, 255, 0.30)',
                     padding: 10, marginHorizontal: 10, borderRadius: 13
-                }} onPress={() => { navigation.navigate("Quotes") }}>
+                }} onPress={() => { navigation.navigate("QuotesScreen") }}>
                 <ImageBackground
                     style={{ position: 'relative', display: 'flex', flexDirection: 'row', width: '100%', height: '100%' }}
                     // contentFit="fixed"

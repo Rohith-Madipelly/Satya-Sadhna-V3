@@ -49,18 +49,6 @@ const VideoScreen = ({ route }) => {
   const videoRef = useRef(null);
 
 
-  //selectedVideo?.videoUrl some time i may be a empty show i want to hide it the component
-
-  // const player = useVideoPlayer(`${BASE_URL}/${selectedVideo?.videoUrl}`, player => {
-  //   player.loop = true;
-  //   // player.play();
-  // });
-
-  // const { isPlaying } = useEvent(player, 'playingChange', { isPlaying: player.playing });
-
-
-
-
   const player = useVideoPlayer(
     videoUrl ? `${BASE_URL}/${videoUrl}` : null,
     player => {

@@ -11,7 +11,7 @@ import Pause from '../../../assets/SVGS/MusicPlayer/Player/Pause';
 
 const FloatingPlayer = ({ style }) => {
   const navigation = useNavigation();
-  const { currentTrack, isPlaying, togglePlayPause,stopTrack } = useAudio();
+  const { currentTrack, isPlaying, togglePlayPause, stopTrack } = useAudio();
 
   // console.log("currentTrack",currentTrack)
   // Don't render if no track is loaded
@@ -62,13 +62,11 @@ const FloatingPlayer = ({ style }) => {
       <TouchableOpacity onPress={togglePlayPause} style={styles.playButton}>
         {isPlaying ? <Pause /> : <PauseIcon />}
       </TouchableOpacity>
-
-
-              <TouchableOpacity style={styles.playButton}
-              onPress={stopTrack}
-              >
-          <Feather name="square" size={20} color="white" />
-        </TouchableOpacity>
+      <TouchableOpacity style={styles.playButton}
+        onPress={stopTrack}
+      >
+        <Feather name="square" size={20} color="white" />
+      </TouchableOpacity>
     </View>
   );
 };

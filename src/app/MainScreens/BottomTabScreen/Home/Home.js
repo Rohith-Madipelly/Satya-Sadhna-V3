@@ -214,7 +214,7 @@ const Home = () => {
             flex: 0.23,
           }}
             onPress={() => {
-              
+
               navigation.navigate("QuotesScreen")
             }}
           >
@@ -295,16 +295,16 @@ const Home = () => {
 
         <QuoteOfDay Quote={Quote || "If you want peace then calm your desires"} isQuoteOfDay={true} disabled={false} />
         {/* <Snap_Carousel2 BannerData2={meditationTracks} CarouselName={'Meditation Tracks'} /> */}
-           <Snap_Carousel2 BannerData2={pravachan} CarouselName={'Pravachan / Event Videos'} />
+        <Snap_Carousel2 BannerData2={pravachan} CarouselName={'Pravachan / Event Videos'} />
 
 
-                       <Snap_Carousel5 BannerDataBajana={bhanaja} />
+        <Snap_Carousel5 BannerDataBajana={bhanaja} />
 
-            <Snap_Carousel2 BannerData2={upComingEvents} CarouselName={'Upcoming Events'} /> 
+        <Snap_Carousel2 BannerData2={upComingEvents} CarouselName={'Upcoming Events'} />
 
 
-                  <View style={{ height: 100 }}>
-            </View>
+        <View style={{ height: 100 }}>
+        </View>
 
       </ScrollView>
     </View>
