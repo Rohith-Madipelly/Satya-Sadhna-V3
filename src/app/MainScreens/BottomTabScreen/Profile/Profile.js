@@ -74,7 +74,7 @@ const Profile = () => {
     },
     {
       name: "Register for course",
-      onPress: () => { navigation.navigate("Registrationforcourse") },
+      onPress: () => { navigation.navigate("FormScreen") },
       IconImage: require("../../../../assets/Image/ProfileLogos/eidt.png"),
       // isDisplay: hasAPIPermission("", "feature.vehicle"),
     }]
@@ -206,6 +206,7 @@ const Profile = () => {
               fontWeight: 'bold',
               marginLeft: 5,
               fontSize: 15,
+              color:"black"
             }}
           >
             Analogue IT Solutions
