@@ -22,6 +22,8 @@ export const shadowBase = {
 };
 
 export default StyleSheet.create({
+        CustomStatusBar: '#030370E8',
+    CustomStatusBarMainColor: 'white',
 
     androidSafeArea: {
         flex: 1,

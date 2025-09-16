@@ -18,6 +18,8 @@ import { useToast } from 'react-native-toast-notifications';
 import { GET_ALL_BHAJANAS, GET_ALL_PRAVACHANS, GET_ALL_UPCOMING_EVENTS, HomePageData } from '../../../../network/API_Calls';
 import QuoteOfDay from '../../../../Components2/Quote/QuoteOfDay';
 import MusicList from '../../../../Components2/Music/MusicList';
+import Snap_Carousel2 from '../../../../Components2/Snap_Carousel2';
+import Snap_Carousel5 from '../../../../Components2/Snap_Carousel5';
 
 const Home = () => {
   let isConnected = useSelector((state) => state.ApiDataRedux.isConnected);
@@ -292,11 +294,17 @@ const Home = () => {
 
         <QuoteOfDay Quote={Quote || "If you want peace then calm your desires"} isQuoteOfDay={true} disabled={false} />
         {/* <Snap_Carousel2 BannerData2={meditationTracks} CarouselName={'Meditation Tracks'} /> */}
+           <Snap_Carousel2 BannerData2={pravachan} CarouselName={'Pravachan / Event Videos'} />
 
 
+                       <Snap_Carousel5 BannerDataBajana={bhanaja} />
+
+            <Snap_Carousel2 BannerData2={upComingEvents} CarouselName={'Upcoming Events'} /> 
 
 
-        <Text>Home</Text>
+                  <View style={{ height: 100 }}>
+            </View>
+
       </ScrollView>
     </View>
   )

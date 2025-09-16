@@ -33,6 +33,7 @@ import About_SatyaSadhana from './MainScreens/BottomTabScreen/Profile/About_Saty
 import About_Guruji from './MainScreens/BottomTabScreen/Profile/About_Guruji'
 import PrivacyPolicy from './MainScreens/BottomTabScreen/Profile/PrivacyPolicy'
 import DeleteAccountPolicy from './MainScreens/BottomTabScreen/Profile/DeleteAccountPolicy'
+import VideoScreen from './MainScreens/VideoScreen'
 const Stack = createNativeStackNavigator()
 
 const RootStack = () => {
@@ -193,7 +194,9 @@ const RootStack = () => {
                     options={customHeaderOptions}
                   /> */}
 
-
+                  <Stack.Screen name="VideoScreen" component={VideoScreen}
+                    options={customHeaderOptions}
+                  />
 
                         <Stack.Screen name="TracksAudios" component={TracksAudios}
                             options={customHeaderOptions} />

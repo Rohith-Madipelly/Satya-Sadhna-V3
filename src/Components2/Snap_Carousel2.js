@@ -6,8 +6,9 @@ import Carousel from 'react-native-reanimated-carousel';
 import { Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
-import { BASE_URL, GUEST_URL } from '../Enviornment';
-import LoadingImage from '../Components/ImageConatiners/LoadingImage';
+import { BASE_URL, } from '../Enviornment';
+import LoadingImage from '../components/UI/ImageConatiners/LoadingImage';
+
 
 
 const Snap_Carousel2 = ({ BannerData2, CarouselName }) => {
@@ -29,7 +30,7 @@ const Snap_Carousel2 = ({ BannerData2, CarouselName }) => {
             }
             else if (item.type == "Video") {
                 // console.log("video")
-                navigation.navigate('VideoScreen', { id: `${item.id}`, selectedVideoData: item, totalVideoData: BannerData2, title:"Pravachan / Event Videos" })
+                navigation.navigate('VideoScreen', { id: `${item.id}`, selectedVideoData: item, totalVideoData: BannerData2, title: "Pravachan / Event Videos" })
             }
         }
 
@@ -72,7 +73,7 @@ const Snap_Carousel2 = ({ BannerData2, CarouselName }) => {
                 <Text style={[styles.Heading_U3, {}]}>{CarouselName}</Text>
             </View>
 
-            {!BannerData2.length == 0 ? <View style={{ marginTop: 10, flexDirection: 'row', alignSelf: 'center' }}>
+            {!BannerData2?.length == 0 ? <View style={{ marginTop: 10, flexDirection: 'row', alignSelf: 'center' }}>
 
                 <TouchableOpacity onPress={goToPrev} style={{ width: 35, height: height * 0.20, justifyContent: 'center', alignItems: 'center' }}>
                     <MaterialCommunityIcons name="arrow-left-drop-circle" size={30} color="black" />

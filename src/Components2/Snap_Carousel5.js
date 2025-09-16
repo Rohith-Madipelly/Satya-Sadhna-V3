@@ -7,7 +7,8 @@ import { Entypo } from "@expo/vector-icons";
 import Spinner from 'react-native-loading-spinner-overlay';
 import { useNavigation } from '@react-navigation/native';
 import { GUEST_URL } from '../Enviornment';
-import LoadingImage from '../Components/ImageConatiners/LoadingImage';
+import LoadingImage from '../components/UI/ImageConatiners/LoadingImage';
+
 
 
 const Snap_Carousel5 = ({ BannerDataBajana }) => {
@@ -58,8 +59,8 @@ const Snap_Carousel5 = ({ BannerDataBajana }) => {
  
 
 
-              {BannerDataBajana.map(item => (
-                <View key={item.id} style={{ width: 170, paddingHorizontal: 12, marginRight: 0 }}>
+              {BannerDataBajana?.map((item,index) => (
+                <View  style={{ width: 170, paddingHorizontal: 12, marginRight: 0 }} key={index}>
                   <TouchableOpacity onPress={() => {
                      navigation.navigate('VideoScreen', { id: `${item.id}`, selectedVideoData: item, totalVideoData: BannerDataBajana, title:"Pravachan / Event Videos" })
                     // navigation.navigate('VideoScreen', { id: `${item.id}` });

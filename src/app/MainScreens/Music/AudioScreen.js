@@ -1,4 +1,4 @@
-import { Dimensions, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, Dimensions, Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Feather, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useAudio } from '../../../contextAPI/AudioContext';
@@ -11,7 +11,9 @@ import UnMuteIcon from '../../../assets/SVGS/MusicPlayer/UnMuteIcon';
 import MuteIcon from '../../../assets/SVGS/MusicPlayer/MuteIcon';
 import { useToast } from 'react-native-toast-notifications';
 import { useNavigation } from '@react-navigation/native';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as FileSystem from 'expo-file-system';
+import * as MediaLibrary from 'expo-media-library';
 
 const { width } = Dimensions.get('window');
 const AudioScreen = () => {
@@ -27,6 +29,49 @@ const AudioScreen = () => {
   const [positionx, setPositionx] = useState(0)
 
   const toast = useToast()
+
+  const [downloadLoading, setDownloadLoading] = useState(false)
+  const SatyaSadhnaDownload = "SatyaSadhnaDownloadFilesRohekk"
+
+  const navigation = useNavigation()
+
+  const downloadAudio = async (audioUrl, fileName, id) => {
+    try {
+      setDownloadLoading(true);
+      const storedFiles = await AsyncStorage.getItem(SatyaSadhnaDownload);
+      const downloadedFiles = storedFiles ? JSON.parse(storedFiles) : [];
+      const isAlreadyDownloaded = downloadedFiles.some((file) => file.id === id);
+      if (isAlreadyDownloaded) {
+        toast.show('This file has already been downloaded', { type: 'warning' });
+        return;
+      }
+
+      const { status } = await MediaLibrary.requestPermissionsAsync();
+      if (status !== 'granted') {
+        toast.show('Permission denied for media library access', { type: 'danger' });
+        return;
+      }
+
+      const fileUri = FileSystem.documentDirectory + fileName;
+      const { uri } = await FileSystem.downloadAsync(audioUrl, fileUri);
+      const newDownload = { id, name: fileName, musicURL: uri, fileType: 'audio' };
+      const updatedFiles = [...downloadedFiles, newDownload];
+      await AsyncStorage.setItem(SatyaSadhnaDownload, JSON.stringify(updatedFiles));
+      Alert.alert(
+        'Download complete',
+        'The file has been downloaded successfully.',
+        [
+          { text: 'Go to downloads', onPress: () => navigation.navigate('Downloads') },
+          { text: 'OK', onPress: () => { } },
+        ]
+      );
+    } catch (error) {
+      console.error('Error downloading file:', error);
+      toast.show('Failed to download file', { type: 'danger' });
+    } finally {
+      setDownloadLoading(false);
+    }
+  };
   return (
     <SafeAreaView style={[styles.container, { paddingTop: insets.top, backgroundColor: '#041744ff' }]}>
       {/* Album Art */}
@@ -133,7 +178,10 @@ const AudioScreen = () => {
           {isLooping ? <Feather name="repeat" size={20} color="white" /> : <Feather name="repeat" size={20} color="gray" />}
 
         </TouchableOpacity>
-        <TouchableOpacity style={styles.smallButton} onPress={() => { toast.show("Not yet done") }}>
+        <TouchableOpacity style={styles.smallButton} onPress={() => {
+          downloadAudio(currentTrack.url, `${currentTrack.title}.mp3`, currentTrack.id)
+          // toast.show("Not yet done")
+        }}>
           {/* <Feather name="download" size={24} color="#ccc" /> */}
           <MaterialIcons name="file-download" size={24} color="#ccc" />
           {/* <MaterialIcons name="file-download-done" size={24}  color="#ccc"/> */}
