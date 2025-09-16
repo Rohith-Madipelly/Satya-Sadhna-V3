@@ -28,7 +28,6 @@ import Donation from './MainScreens/Donation'
 import Profile from './MainScreens/BottomTabScreen/Profile/Profile'
 import FullProfile from './MainScreens/BottomTabScreen/Profile/FullProfile'
 import ProfilePassword from './MainScreens/BottomTabScreen/Profile/ProfilePassword'
-import Registrationforcourse from './MainScreens/BottomTabScreen/Profile/Registrationforcourse'
 import About_SatyaSadhana from './MainScreens/BottomTabScreen/Profile/About_SatyaSadhana'
 import About_Guruji from './MainScreens/BottomTabScreen/Profile/About_Guruji'
 import PrivacyPolicy from './MainScreens/BottomTabScreen/Profile/PrivacyPolicy'
@@ -147,12 +146,6 @@ const RootStack = () => {
                 {userStates ? <>
                     {/* Authenticated user screens */}
                     <Stack.Group onReady={onLayoutRootView}>
-
-                        {/* <Stack.Screen name="Deb" component={DeveloperScreenTest1}/> */}
-
-
-
-
                         <Stack.Screen name="BottomTabScreen" component={BottomTabScreen}
                             options={{
                                 headerShown: false,
@@ -168,7 +161,6 @@ const RootStack = () => {
                             component={CourseRegistration2}
                             options={customHeaderOptions}
                         />
-
                         <Stack.Screen name="CourseRegistration3"
                             component={CourseRegistration3}
                             options={customHeaderOptions}
@@ -186,21 +178,8 @@ const RootStack = () => {
                             options={customHeaderOptions}
                         />
                         <Stack.Screen name='QuotesScreen'
-                        component={QuotesScreen}
-                        options={customHeaderOptions} />
-                        {/* <Stack.Screen name="CourseRegistration2"
-                    component={CourseRegistration2}
-                    options={customHeaderOptions}
-                  />
-  
-                  <Stack.Screen name="CourseRegistration4"
-                    component={CourseRegistration4} 
-                    options={customHeaderOptions}
-                  /> */}
-
-                  <Stack.Screen name="VideoScreen" component={VideoScreen}
-                    options={customHeaderOptions}
-                  />
+                            component={QuotesScreen}
+                            options={customHeaderOptions} />
 
                         <Stack.Screen name="TracksAudios" component={TracksAudios}
                             options={customHeaderOptions} />
@@ -214,15 +193,23 @@ const RootStack = () => {
                                 animation: 'fade_from_bottom', // 👈 Add this
                             }}
                         />
-                        <Stack.Screen name="FullProfile"
-                            component={FullProfile}
-                            options={customHeaderOptions} />
-                        <Stack.Screen name="ProfilePassword"
-                            component={ProfilePassword}
-                            options={customHeaderOptions} />
-                        <Stack.Screen name="Registrationforcourse"
-                            component={Registrationforcourse}
-                            options={customHeaderOptions} />
+
+
+                        <Stack.Screen name="VideoScreen" component={VideoScreen}
+                            options={customHeaderOptions}
+                        />
+
+
+                        <Stack.Screen name="FullProfile" component={FullProfile}
+                            options={customHeaderOptions}
+                        />
+
+                        <Stack.Screen name="ProfilePassword" component={ProfilePassword}
+                            options={customHeaderOptions}
+                        />
+
+
+
                         <Stack.Screen name="About_SatyaSadhana" component={About_SatyaSadhana}
                             options={customHeaderOptions}
                         />

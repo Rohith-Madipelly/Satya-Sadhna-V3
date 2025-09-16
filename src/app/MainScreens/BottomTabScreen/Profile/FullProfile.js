@@ -12,6 +12,7 @@ import NetInfo from '@react-native-community/netinfo';
 import CustomTextInput from '../../../../components/UI/Inputs/CustomTextInput';
 
 import { BASE_URL } from '../../../../Enviornment';
+import CustomStatusBar from '../../../../components/UI/CustomStatusBar/CustomStatusBar';
 
 
 const Profile = () => {
@@ -32,7 +33,7 @@ const Profile = () => {
 
   const navigation = useNavigation();
 
- 
+
   let tokenn = useSelector((state) => state.login.token);
 
 
@@ -140,8 +141,8 @@ const Profile = () => {
         }
         else if (error.response.status === 401) {
           console.log("sdc")
-          console.log("User Not Found.",error.response.data.message)
- 
+          console.log("User Not Found.", error.response.data.message)
+
         }
         else if (error.response.status === 500) {
           console.log("Internal Server Error", error.message)
@@ -317,13 +318,12 @@ const Profile = () => {
       />
     }>
 
-
+      <CustomStatusBar barStyle="dark-content" backgroundColor="white" />
       <View style={{
         marginTop: 0,
         width: windoWidth,
         height: windowHeight,
-        paddingTop:50,
-        // backgroundColor:'red'
+        paddingTop: 50,
       }}>
         <Spinner
           visible={spinnerBool}
@@ -339,7 +339,7 @@ const Profile = () => {
           justifyContent: 'space-between',
           zIndex: 1,
           padding: 10,
-      
+
         }}>
 
           {/* <TouchableOpacity onPress={() => { navigation.goBack(); }}>
@@ -374,7 +374,7 @@ const Profile = () => {
           paddingLeft: 25,
           paddingTop: 20,
           backgroundColor: 'white',
-          height:665,
+          height: 665,
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
         }}>
@@ -386,8 +386,8 @@ const Profile = () => {
             <ImageBackground
               style={{ width: '100%', position: 'relative', paddingTop: 25, marginTop: 1, display: 'flex', alignItems: 'center', height: '90%' }}
               contentFit="fixed"
-              // blurRadius={0.2}
-              // source={require("../../../assets/image/Rectangle 33.png")}
+            // blurRadius={0.2}
+            // source={require("../../../assets/image/Rectangle 33.png")}
             >
 
               <View style={{ width: '100%', marginLeft: 20 }}>
@@ -434,7 +434,7 @@ const Profile = () => {
               resizeMode="cover"
             />
           </View></TouchableOpacity> : */}
-           {/* <TouchableOpacity onPress={() => { }}><View style={styles.outerCircle}>
+        {/* <TouchableOpacity onPress={() => { }}><View style={styles.outerCircle}>
             <ImageBackground
               style={styles.innerCircle}
               source={require("../../../../assets/profile2.jpg")}
