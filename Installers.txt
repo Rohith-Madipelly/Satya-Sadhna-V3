@@ -67,7 +67,7 @@ npx expo install expo-notifications expo-device expo-constants
 
 npx expo install expo-updates
 
-
+npx expo install expo-constants
 
 
 npm i react-native-select-dropdown

@@ -3,20 +3,17 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { LivePageData } from '../../../../network/API_Calls';
 import YoutubePlayer from "react-native-youtube-iframe";
-
-
 import { useNavigation } from '@react-navigation/native';
-
-// import { getIdFromUrl } from '../../utils/getIdFromUrl';
 import CustomButton from '../../../../componentsOld/ButtonC1';
 import NetInfo from '@react-native-community/netinfo';
 
 
 import NoInternetImage from '../../../../assets/SVGS/UIScrees/NoInternetImage';
-
-import Spinner from 'react-native-loading-spinner-overlay';
 import Metrics from '../../../../utills/ResposivesUtils/Metrics';
 import CustomStatusBar from '../../../../components/UI/CustomStatusBar/CustomStatusBar';
+
+
+
 const LiveScreen = () => {
   const [spinnerBool, setSpinnerbool] = useState(false)
     let tokenn = useSelector((state) => state.login.token);
@@ -36,31 +33,8 @@ const LiveScreen = () => {
   const [livePage, setLivePage] = useState()
   const [VideoID, setVideoID] = useState()
 
-  const [relatedPosts, setRelatedPosts] = useState()
-
-
   const navigation = useNavigation();
   const [playing, setPlaying] = useState(false);
-
-  // >>>>>>>>>>>>>>>>>
-  const wait = (timeout) => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-  }
-
-  const [refreshing, setRefreshing] = useState(false);
-
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    if (isConnected) {
-      HomeData()
-    }
-
-  }, []);
-
-
-  // >>>>>>>>>>>>>>>>>>
-
-
 
 
 
@@ -185,9 +159,7 @@ const LiveScreen = () => {
       // }
     >
 
-      <CustomStatusBar barStyle="dark-content" 
-      // backgroundColor={GlobalStyles.CustomStatusBarMainColor} 
-      />
+  <CustomStatusBar barStyle="dark-content" backgroundColor="white" />
 
       {!livePage ? (
         <View style={{ backgroundColor: 'black', height: 202, justifyContent: 'center', alignItems: 'center', margin: 5, marginTop: 10 }}>

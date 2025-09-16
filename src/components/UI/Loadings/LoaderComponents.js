@@ -1,7 +1,10 @@
 import Spinner from 'react-native-loading-spinner-overlay';
+// spinnerBool
+
+
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-
+import LoadingAnimation from './LoadingAnimation';
 
 
 const LoaderComponents = ({ visible, color, animation }) => {
@@ -22,5 +25,5 @@ const LoaderComponents = ({ visible, color, animation }) => {
 }
 
 export default LoaderComponents
- 
+
 const styles = StyleSheet.create({})
