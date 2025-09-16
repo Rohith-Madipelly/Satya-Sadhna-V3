@@ -6,7 +6,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import { useNavigation } from '@react-navigation/native';
 
 
-// import { ToasterSender } from '../../../utils/Toasters/Toaster';
+
 
 import NetInfo from '@react-native-community/netinfo';
 import CustomTextInput from '../../../../components/UI/Inputs/CustomTextInput';
