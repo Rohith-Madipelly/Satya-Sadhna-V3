@@ -6,13 +6,13 @@ import NoInternetScreen from '../../../OtherScreens/NoInternetScreen';
 
 import { GlobalStyles } from '../../../../components/UIConfig/GlobalStyles'
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import Metrics from '../../../../utills/ResposivesUtils/Metrics';
 import { Entypo } from '@expo/vector-icons';
 import FormDataIcons from '../../../../assets/SVGS/Home/FormDataIcons';
 import Donation from '../../../../assets/SVGS/Home/Donation';
 import QuoteIconColorHome from '../../../../assets/SVGS/Home/QuoteIconColorHome';
 import TracksIcons from '../../../../assets/SVGS/Home/TracksIcons';
 import LoadingImage from '../../../../components/UI/ImageConatiners/LoadingImage';
+import Metrics from '../../../../utills/ResposivesUtils/Metrics';
 
 import { useToast } from 'react-native-toast-notifications';
 import { GET_ALL_BHAJANAS, GET_ALL_PRAVACHANS, GET_ALL_UPCOMING_EVENTS, HomePageData } from '../../../../network/API_Calls';
