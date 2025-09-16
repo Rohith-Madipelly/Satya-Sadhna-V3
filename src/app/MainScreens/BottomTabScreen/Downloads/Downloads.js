@@ -1,4 +1,4 @@
-import React, { useCallback,  useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, Platform, Alert, StyleSheet, Dimensions } from 'react-native';
 import { Image } from 'expo-image';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
@@ -29,12 +29,14 @@ import { useAudio } from '../../../../contextAPI/AudioContext';
 import CustomStatusBar from '../../../../components/UI/CustomStatusBar/CustomStatusBar';
 import Metrics from '../../../../utills/ResposivesUtils/Metrics';
 import { SatyaSadhnaDownload } from '../../../../Enviornment';
+import PauseIcon3 from '../../../../assets/SVGS/MusicPlayer/Player/PauseIcon3';
+import { MusicPlayerTimeFormat } from '../../../../utills/TimeFormats';
 
 
 
 
 const DownloadFliesList = () => {
-    const { playTrack, togglePlayPause, currentTrack, isPlaying, currentTime, totalDuration, isMuted, toggleMute,path,stopTrack } = useAudio();
+    const { playTrack, togglePlayPause, currentTrack, isPlaying, currentTime, totalDuration, isMuted, toggleMute, path, stopTrack, position, duration } = useAudio();
     const [downloadedFiles, setDownloadedFiles] = useState([]);
     const [videoData, setVideoData] = useState(null);
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -54,17 +56,17 @@ const DownloadFliesList = () => {
     };
 
 
-      const player = useVideoPlayer(
+    const player = useVideoPlayer(
         videoData ? `${videoData.fileURL}` : null,
         player => {
-          player.loop = true;
-          // player.play();
+            player.loop = true;
+            // player.play();
         }
-      );
-    
-      const { isPlayingx } = useEvent(player, 'playingChange', { isPlaying: player?.playing });
-    
-    
+    );
+
+    const { isPlayingx } = useEvent(player, 'playingChange', { isPlaying: player?.playing });
+
+
 
     const DeleteAlert = (item) => {
         console.log(item)
@@ -73,10 +75,11 @@ const DownloadFliesList = () => {
             'Are you sure you want to delete this file?',
             [
                 { text: 'Cancel', style: 'cancel' },
-                { text: 'OK', onPress: () => 
-                    // console.log("Hello heooo")
-                    deleteAudio(item)
-                 },
+                {
+                    text: 'OK', onPress: () =>
+                        // console.log("Hello heooo")
+                        deleteAudio(item)
+                },
             ],
             { cancelable: false }
         );
@@ -130,15 +133,18 @@ const DownloadFliesList = () => {
         }
     };
 
+
+
     return (
         <View style={{ flex: 1, backgroundColor: 'white' }}>
             <CustomStatusBar barStyle="dark-content" backgroundColor="white" />
-            <View style={{ 
-                // paddingHorizontal: 18
+            <View style={{
+                // paddingHorizontal: 18 && currentTrack.fileType == 'audio'
 
-             }}>
-                {currentTrack && currentTrack.fileType === 'audio' ? (
-                    <View style={{ backgroundColor: '#EEEEFF', padding: 10, borderRadius: 15,marginHorizontal:18 }}>
+            }}>
+                {console.log("currentTrack", currentTrack)}
+                {!videoData && currentTrack ? (
+                    <View style={{ backgroundColor: '#EEEEFF', padding: 10, borderRadius: 15, marginHorizontal: 18 }}>
                         <View>
                             {isPlaying ? (
                                 <Image
@@ -166,15 +172,15 @@ const DownloadFliesList = () => {
                             onSlidingComplete={handleSliderChange}
                         />
                         <View style={styles.timeContainer}>
-                            <Text style={styles.timeText}>{formatTime(currentTime)}</Text>
-                            <Text style={styles.timeText}>{formatTime(totalDuration)}</Text>
+                            <Text style={styles.timeText}>{MusicPlayerTimeFormat(position)}</Text>
+                            <Text style={styles.timeText}>{MusicPlayerTimeFormat(duration)}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
                             <TouchableOpacity style={styles.button} onPress={toggleMute}>
                                 {isMuted ? <MuteIcon /> : <UnMuteIcon />}
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.button} onPress={togglePlayPause}>
-                                {isPlaying ? <PauseIcon /> : <PlayIcon />}
+                                {isPlaying ? <PauseIcon3 /> : <PlayIcon />}
                             </TouchableOpacity>
                             <View style={{ width: 40, height: 40 }} />
                         </View>
@@ -182,31 +188,11 @@ const DownloadFliesList = () => {
                 ) : null}
                 {videoData && (
                     <View style={{}}>
-                            <VideoView
-                                    style={styles.video}
-                                    player={player}
-                                    allowsFullscreen
-                                  // allowsPictureInPicture
-                                  />
-                        {/* <Video
-                            ref={videoRef}
-                            source={{ uri: videoData.fileURL }}
+                        <VideoView
                             style={styles.video}
-                            useNativeControls
-                            resizeMode="contain"
-                            onPlaybackStatusUpdate={(status) => {
-                                console.log('Video onPlaybackStatusUpdate:', status);
-                                if (status.isLoaded) {
-                                    setIsVideoLoaded(true);
-                                }
-                                setIsVideoPlaying(status.isPlaying);
-                            }}
-                        /> */}
-                        {/* {!isVideoLoaded && (
-                            <View style={[styles.video, { position: 'absolute', top: 0, backgroundColor: 'black', justifyContent: 'center', alignItems: 'center' }]}>
-                                <Text style={{ color: 'white' }}>Loading...</Text>
-                            </View>
-                        )} */}
+                            player={player}
+                            allowsFullscreen
+                        />
                     </View>
                 )}
             </View>
@@ -222,26 +208,15 @@ const DownloadFliesList = () => {
 
                                     stopTrack()
                                     setVideoData(item);
-                                    //    playTrack({
-                                    //     id: item.id,
-                                    //     title: item.name,
-                                    //     audioUrl: item.musicURL,
-                                    //     fileType: 'audio',
-                                    //     // downloaded:true,
-                                        
-                                    // });
-                                    // setCurrentTrack(null);
-                                    // if (isPlaying) {
-                                    //     togglePlayPause();
-                                    // }
+
                                 } else {
+                                    console.log("item.musicURL", item.musicURL)
                                     playTrack({
                                         id: item.id,
                                         title: item.name,
-                                        audioUrl: item.musicURL,
+                                        url: item.musicURL,
                                         fileType: 'audio',
                                         // downloaded:true,
-                                        
                                     });
                                     setVideoData(null);
                                 }
@@ -251,8 +226,8 @@ const DownloadFliesList = () => {
                             <View style={{ width: 'auto', height: 'auto', marginVertical: 4, marginRight: 10 }}>
                                 {item.fileType === 'audio' ? (
                                     currentTrack && currentTrack.fileType === 'audio' &&
-                                    item.id === currentTrack?.id && isPlaying ? (
-                                        <Image                    source={require('../../../../assets/MusicPlaying.gif')} style={{ width: 25, height: 25 }} />
+                                        item.id === currentTrack?.id && isPlaying ? (
+                                        <Image source={require('../../../../assets/MusicPlaying.gif')} style={{ width: 25, height: 25 }} />
                                     ) : (
                                         <MusicIcon />
                                     )

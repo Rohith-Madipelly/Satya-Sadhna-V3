@@ -61,7 +61,7 @@ const AudioScreen = () => {
         'Download complete',
         'The file has been downloaded successfully.',
         [
-          { text: 'Go to downloads', onPress: () => navigation.navigate('Downloads') },
+          { text: 'Go to downloads', onPress: () => navigation.navigate('BottomTabScreen', { screen: 'Downloads' }) },
           { text: 'OK', onPress: () => { } },
         ]
       );

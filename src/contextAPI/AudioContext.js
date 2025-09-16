@@ -101,13 +101,15 @@ export const AudioProvider = ({ children }) => {
 
       isPlayerInitialized.current = true;
       setIsPlayerReady(true);
-      
+      const extraProps = { fileType: "audio" };
       // Get initial track if any
       try {
         const activeIndex = await TrackPlayer.getActiveTrackIndex();
         if (activeIndex !== undefined && activeIndex !== null) {
           const track = await TrackPlayer.getTrack(activeIndex);
-          setCurrentTrack(track);
+          // track={id:"de",name:"",....}+{fileType:'audio'}
+
+          setCurrentTrack(...track,...extraProps);
         }
       } catch (error) {
         // No active track, which is fine
@@ -195,6 +197,7 @@ export const AudioProvider = ({ children }) => {
 
   // --- Player controls ---
   const playTrack = async (track) => {
+      // const fileUri = decodeURI(track.audioUrl || track.url); // support both keys
     if (!isPlayerReady) {
       console.warn('⚠️ Player not ready');
       return;

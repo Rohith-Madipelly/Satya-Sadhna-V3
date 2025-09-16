@@ -36,6 +36,7 @@ npm i react-native-shimmer-placeholder
 
 
 npm install react-native-screens@latest
+npx expo install react-native-fs
 
 
 

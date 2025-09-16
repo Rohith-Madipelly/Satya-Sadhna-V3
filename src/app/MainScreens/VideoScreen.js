@@ -4,7 +4,7 @@ import { Alert, Dimensions, SafeAreaView, ScrollView, StyleSheet, Text, Touchabl
 import { useState, useRef, useEffect, } from "react";
 
 import Spinner from 'react-native-loading-spinner-overlay';
-import { BASE_URL } from '../../Enviornment.js';
+import { BASE_URL, SatyaSadhnaDownload } from '../../Enviornment.js';
 
 import { useVideoPlayer, VideoView } from 'expo-video';
 import { useEvent } from 'expo';
@@ -24,8 +24,9 @@ import * as MediaLibrary from 'expo-media-library';
 import { Image } from 'expo-image';
 import Metrics from '../../utills/ResposivesUtils/Metrics.js';
 import CustomStatusBar from '../../components/UI/CustomStatusBar/CustomStatusBar.js';
+import LoaderComponents from '../../components/UI/Loadings/LoaderComponents.js';
 const VideoScreen = ({ route }) => {
-  const SatyaSadhnaDownload = "SatyaSadhnaDownloadFilesRohekk"
+
 
   const navigation = useNavigation()
   const { id, selectedVideoData, totalVideoData, title = "Video" } = route.params
@@ -108,87 +109,70 @@ const VideoScreen = ({ route }) => {
   const [downloadedFiles, setDownloadedFiles] = useState([]);
   const [downloadLoading, setDownloadLoading] = useState(false);
 
-  const downloadFile = async (audioUrl, fileName, id) => {
+const downloadFile = async (audioUrl, fileName, id) => {
+  try {
+    const data = await AsyncStorage.getItem(SatyaSadhnaDownload);
+    const downloadedFiles = data ? JSON.parse(data) : [];
 
-    try {
-      // Check if the file is already downloaded
-      const files = await AsyncStorage.getItem(SatyaSadhnaDownload, (error, data) => {
-        var datax = JSON.parse(data)
-        setDownloadedFiles(datax ? datax : []);
+    const isAlreadyDownloaded = downloadedFiles.some(file => file.id === id);
+    if (isAlreadyDownloaded) {
+      Alert.alert('Already downloaded', 'This file has already been downloaded.');
+      return;
+    }
 
-        const isAlreadyDownloaded = datax.some(file => file.id === id);
-        if (isAlreadyDownloaded) {
-          Alert.alert('Already downloaded', 'This file has already been downloaded.');
-          return;
-        } else {
-          console.log("DOne Half eway")
-          downloadAudio2(audioUrl, fileName, id)
-        }
-      })
-    }
-    catch (e) {
-      console.log("Error in downloadAudio", e)
-    }
+    // Proceed to download
+    console.log("Starting download...");
+    await downloadAudio2(audioUrl, fileName, id);
+  } catch (e) {
+    console.log("Error in downloadFile:", e);
   }
+};
 
-
-  const downloadAudio2 = async (fileUrl, fileName, id) => {
-
-    try {
-      const { status } = await MediaLibrary.requestPermissionsAsync();
-      if (status !== 'granted') {
-        Alert.alert('Permission denied', 'Cannot download without media library access.');
-        return;
-      }
-
-      setDownloadLoading(true);
-      const fileUri = FileSystem.documentDirectory + fileName;
-      const { uri } = await FileSystem.downloadAsync(fileUrl, fileUri);
-
-      // Add the new file to the downloaded files list
-      const newDownload = {
-        id: id,
-        name: fileName,
-        fileURL: uri,
-        fileType: "video", // "audio" or "video"
-      };
-      console.log("hello on wauy22")
-
-      const filesx = await AsyncStorage.getItem(SatyaSadhnaDownload, (e, data) => {
-        console.log("e", e, "data filesx", data)
-        if (data && data != []) {
-          console.log("1")
-          var datax = JSON.parse(data)
-          const updatedFiles = [...datax, newDownload];
-          AsyncStorage.setItem(SatyaSadhnaDownload, JSON.stringify(updatedFiles));
-        }
-        else if (data == []) {
-          console.log("2")
-          const updatedFiles = [newDownload];
-          AsyncStorage.setItem(SatyaSadhnaDownload, JSON.stringify(updatedFiles));
-        }
-        else {
-          console.log("3")
-          console.log("not >>>> downloadedFiles && downloadedFiles.length > 0")
-          const updatedFiles = [newDownload];
-          AsyncStorage.setItem(SatyaSadhnaDownload, JSON.stringify(updatedFiles));
-        }
-      });
-
-      // Alert.alert('Download complete', `The ${fileType} file has been downloaded successfully.`);
-
-      Alert.alert('Download complete', `The video file has been downloaded successfully.`,
-        [
-          { text: 'go to downloads', onPress: () => navigation.navigate('Downloads') },
-          { text: 'OK', onPress: () => { } }
-        ]);
-    } catch (error) {
-      console.error(`Error downloading ${fileType} file:`, error);
-    } finally {
-      setDownloadLoading(false);
+const downloadAudio2 = async (fileUrl, fileName, id) => {
+  try {
+    const { status } = await MediaLibrary.requestPermissionsAsync();
+    if (status !== 'granted') {
+      Alert.alert('Permission denied', 'Cannot download without media library access.');
+      return;
     }
-  };
 
+    setDownloadLoading(true);
+
+    const fileUri = FileSystem.documentDirectory + fileName;
+    const { uri } = await FileSystem.downloadAsync(fileUrl, fileUri);
+
+    const newDownload = {
+      id,
+      name: fileName,
+      fileURL: uri,
+      fileType: "video", // Change this if it's audio
+    };
+
+    // Retrieve current list
+    const data = await AsyncStorage.getItem(SatyaSadhnaDownload);
+    const downloadedFiles = data ? JSON.parse(data) : [];
+
+    // Add new file
+    const updatedFiles = [...downloadedFiles, newDownload];
+    await AsyncStorage.setItem(SatyaSadhnaDownload, JSON.stringify(updatedFiles));
+
+    Alert.alert(
+      'Download complete',
+      `The video file has been downloaded successfully.`,
+      [
+        { text: 'Go to downloads', onPress: () => {
+          navigation.navigate('BottomTabScreen', { screen: 'Downloads' });
+
+        }},
+        { text: 'OK', style: 'cancel' }
+      ]
+    );
+  } catch (error) {
+    console.error("Error downloading file:", error);
+  } finally {
+    setDownloadLoading(false);
+  }
+};
 
   return (
     <View style={{ flex: 1 }}>
@@ -199,6 +183,9 @@ const VideoScreen = ({ route }) => {
         animation={'fade'}
       />
 
+      <LoaderComponents
+        visible={downloadLoading}
+      />
 
       {videoUrl ? (
         <View style={[styles.video, { paddingBottom: 10 }]}>
@@ -245,15 +232,10 @@ const VideoScreen = ({ route }) => {
           </TouchableOpacity>
 
           <TouchableOpacity style={[styles.button, {}]} onPress={() => {
-            // console.log("whjvfjjhs ....", `${BASE_URL}/${DataPage.videoUrl}`)
-            // downloadFile(`${BASE_URL}/${DataPage.videoUrl}`, `${DataPage?.title}` + '.mp4', `${DataPage?._id}`)
             downloadFile(`${BASE_URL}/${selectedVideo.videoUrl}`, `${selectedVideo?.title}dd` + '.mp4', `${selectedVideo?._id}`)
           }}>
             <Feather name="arrow-down" size={20} color="white" />
           </TouchableOpacity>
-          {/* <View>
-
-          </View> */}
         </View>) : (
           <View >
             <Text style={{ textAlign: 'center', fontFamily: 'Gabarito-VariableFont', color: '#030370', fontSize: Metrics.rfv(14), marginTop: 10, fontWeight: 'bold' }}>Image only</Text>
@@ -288,24 +270,8 @@ const VideoScreen = ({ route }) => {
             </TouchableOpacity>
           )}
         </ScrollView>
-        {/* </View> */}
 
-
-
-        {/* <ScrollView
-            contentContainerStyle={{
-              marginTop: 10,
-              marginHorizontal: 17,
-            }}
-            horizontal
-          >
-            <View style={{ height: 200, width: 200, backgroundColor: 'pink' }}>
-              <Text>nbdvs</Text>
-            </View>
-          </ScrollView> */}
       </View>
-      {/* </ScrollView> */}
-      {/* </ScrollView> */}
     </View>
   )
 }
@@ -322,13 +288,6 @@ const styles = StyleSheet.create({
   paragraphy_U10: {
     fontSize: 12,
     fontWeight: '500'
-
-    //   color: #000;
-    // font-family: Jost;
-    // font-size: 10px;
-    // font-style: normal;
-    // font-weight: 300;
-    // line-height: 130%; /* 13px */
   },
 
   paragraphy_U11: {
