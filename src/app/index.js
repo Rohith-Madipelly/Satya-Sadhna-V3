@@ -33,6 +33,9 @@ import About_SatyaSadhana from './MainScreens/BottomTabScreen/Profile/About_Saty
 import About_Guruji from './MainScreens/BottomTabScreen/Profile/About_Guruji'
 import PrivacyPolicy from './MainScreens/BottomTabScreen/Profile/PrivacyPolicy'
 import DeleteAccountPolicy from './MainScreens/BottomTabScreen/Profile/DeleteAccountPolicy'
+import QuotesScreen from './MainScreens/BottomTabScreen/Home/QuotesScreen'
+
+
 const Stack = createNativeStackNavigator()
 
 const RootStack = () => {
@@ -183,6 +186,9 @@ const RootStack = () => {
                             component={Donation}
                             options={customHeaderOptions}
                         />
+                        <Stack.Screen name='Quotes'
+                        component={QuotesScreen}
+                        options={customHeaderOptions} />
                         {/* <Stack.Screen name="CourseRegistration2"
                     component={CourseRegistration2}
                     options={customHeaderOptions}
@@ -207,25 +213,25 @@ const RootStack = () => {
                                 animation: 'fade_from_bottom', // 👈 Add this
                             }}
                         />
-  <Stack.Screen name="FullProfile" 
-  component={FullProfile}
-                    options={customHeaderOptions} />
-                     <Stack.Screen name="ProfilePassword" 
-  component={ProfilePassword}
-                    options={customHeaderOptions} />
-                    <Stack.Screen name="Registrationforcourse" 
-  component={Registrationforcourse}
-                    options={customHeaderOptions} />
-              <Stack.Screen name="About_SatyaSadhana" component={About_SatyaSadhana}
-                    options={customHeaderOptions}
-                  />
-                  <Stack.Screen name="About_Guruji" component={About_Guruji}
-                    options={customHeaderOptions}
-                  />
-                  <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy}
-                    options={customHeaderOptions} />
-                  <Stack.Screen name="DeleteAccountPolicy" component={DeleteAccountPolicy}
-                    options={customHeaderOptions} />
+                        <Stack.Screen name="FullProfile"
+                            component={FullProfile}
+                            options={customHeaderOptions} />
+                        <Stack.Screen name="ProfilePassword"
+                            component={ProfilePassword}
+                            options={customHeaderOptions} />
+                        <Stack.Screen name="Registrationforcourse"
+                            component={Registrationforcourse}
+                            options={customHeaderOptions} />
+                        <Stack.Screen name="About_SatyaSadhana" component={About_SatyaSadhana}
+                            options={customHeaderOptions}
+                        />
+                        <Stack.Screen name="About_Guruji" component={About_Guruji}
+                            options={customHeaderOptions}
+                        />
+                        <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy}
+                            options={customHeaderOptions} />
+                        <Stack.Screen name="DeleteAccountPolicy" component={DeleteAccountPolicy}
+                            options={customHeaderOptions} />
 
 
                     </Stack.Group>

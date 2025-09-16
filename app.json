@@ -43,7 +43,8 @@
             "resizeMode": "cover"
           }
         }
-      ]
+      ],
+      "expo-video"
     ],
     "web": {
       "favicon": "./assets/favicon.png"
