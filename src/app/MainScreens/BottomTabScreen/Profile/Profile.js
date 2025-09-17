@@ -12,9 +12,11 @@ import { useNavigation } from '@react-navigation/native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { CustomAlerts_LogOut } from '../../../../utills/CustomReuseAlerts';
 import { logoutFunctions } from '../../../../utills/LogOut';
-
+import Constants from "expo-constants";
+import Footer from '../../../../components/UI/Footer';
 const Profile = () => {
   let tokenn = useSelector((state) => state.login.token);
+  const version = Constants.expoConfig.version ?? "2.2.0";
 
   const [refreshing, setRefreshing] = useState(false);
   const [spinnerbool, setSpinnerbool] = useState(false)
@@ -179,7 +181,7 @@ const Profile = () => {
         </View>
 
         {/* More Section */}
-        <View style={{ marginBottom: 28 }}>
+        <View style={{ marginBottom: 10 }}>
           <Text style={[styles.Heading_u2, { marginBottom: 20 }]}>More</Text>
           {MoreData.map((item, index) => (
             <TouchableOpacity
@@ -188,7 +190,7 @@ const Profile = () => {
               onPress={item.onPress}
             >
               <View style={styles.listLeft}>
-                {item.name == "Log out" ? <MaterialCommunityIcons name={'logout'} size={22} color={'black'} style={styles.icon}/> :item.name == "Delete Account Policy" ?<MaterialIcons name="policy" size={24} color="black" style={styles.icon}/> :<Image source={item.IconImage} style={styles.icon} />}
+                {item.name == "Log out" ? <MaterialCommunityIcons name={'logout'} size={22} color={'black'} style={styles.icon} /> : item.name == "Delete Account Policy" ? <MaterialIcons name="policy" size={24} color="black" style={styles.icon} /> : <Image source={item.IconImage} style={styles.icon} />}
                 <Text style={styles.Heading_u3}>{item.name}</Text>
               </View>
               <AntDesign name="right" size={16} color="black" />
@@ -197,7 +199,10 @@ const Profile = () => {
         </View>
 
         {/* Version Info */}
-        <View style={{ marginVertical: 10 }}>
+        <View style={{ marginVertical: 10,marginTop:0 }}>
+          <Footer />
+        </View>
+        {/* <View style={{ marginVertical: 10 }}>
           <Text style={{ color: '#001F2099', textAlign: 'center' }}>
             Version 2.2.0
           </Text>
@@ -224,7 +229,7 @@ const Profile = () => {
               Analogue IT Solutions
             </Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
       </ScrollView>
     </View>
   );

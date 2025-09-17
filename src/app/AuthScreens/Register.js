@@ -87,7 +87,7 @@ const Register = () => {
       if (error.response) {
         if (error.response.status === 401) {
           seterrorFormAPI({ passwordForm: `${error.response.data?.message || error.response.data?.error}` })
-        } 
+        }
         else if (error.response.status === 409) {
           seterrorFormAPI({ phone_numberForm: `${error.response.data?.message || error.response.data?.error}` })
         }
@@ -210,6 +210,7 @@ const Register = () => {
                         validate={handleBlur("username")}
                         outlined
                         returnKeyType="next"
+                        onSubmitEditing={() => inputRefs?.email.current?.focus()}
                         borderColor={`${(errors.username && touched.username) || (errorFormAPI && errorFormAPI.usernameForm) ? borderColorErrorInput : borderColorInput}`}
                         errorMessage={`${(errors.username && touched.username) ? `${errors.username}` : (errorFormAPI && errorFormAPI.usernameForm) ? `${errorFormAPI.usernameForm}` : ``}`}
                       />
@@ -296,7 +297,7 @@ const Register = () => {
                         onBlur={handleBlur("password")}
                         validate={handleBlur("password")}
                         outlined
-                        // returnKeyType="next"
+                        returnKeyType="done"
                         onSubmitEditing={() => { handleSubmit() }}
                         borderColor={`${(errors.password && touched.password) || (errorFormAPI && errorFormAPI.passwordForm) ? borderColorErrorInput : borderColorInput}`}
                         errorMessage={`${(errors.password && touched.password) ? `${errors.password}` : (errorFormAPI && errorFormAPI.passwordForm) ? `${errorFormAPI.passwordForm}` : ``}`}

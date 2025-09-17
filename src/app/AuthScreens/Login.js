@@ -47,10 +47,6 @@ const Login = () => {
     resetForm,
   } = useFormik({
     initialValues: {
-      // emailorPhoneNumber: "madipellyrohith@gmail.com",
-      // password: "Rohith@7",
-      // platform: Platform.OS || ""
-
       emailorPhoneNumber: "",
       password: "",
       platform: Platform.OS || ""
@@ -255,7 +251,8 @@ const Login = () => {
                         onBlur={handleBlur("password")}
                         validate={handleBlur("password")}
                         outlined
-                        returnKeyType="next"
+                        returnKeyType="done"
+                        onSubmitEditing={() => { handleSubmit() }}
                         borderColor={`${(errors.password && touched.password) || (errorFormAPI && errorFormAPI.passwordForm) ? borderColorErrorInput : borderColorInput}`}
                         errorMessage={`${(errors.password && touched.password) ? `${errors.password}` : (errorFormAPI && errorFormAPI.passwordForm) ? `${errorFormAPI.passwordForm}` : ``}`}
                       />

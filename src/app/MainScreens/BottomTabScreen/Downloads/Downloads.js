@@ -246,7 +246,7 @@ const DownloadFliesList = () => {
                         </TouchableOpacity>
                     )}
                     ListEmptyComponent={
-                        <View style={{ justifyContent: 'flex-end', alignItems: 'center', height: Metrics.height * 0.45 }}>
+                        <View style={{ justifyContent: 'flex-end', alignItems: 'center', height: Metrics.height * 0.35 }}>
                             <Text style={{ textAlign: 'center', fontFamily: 'Gabarito-VariableFont', color: '#030370', fontSize: Metrics.rfv(16) }}>
                                 No Downloads
                             </Text>

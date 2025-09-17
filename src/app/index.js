@@ -107,7 +107,9 @@ const RootStack = () => {
     // Load custom fonts
     const [fontsLoaded] = useFonts({
 
+        'Arvo': require("../assets/Fonts/Arvo-Regular.ttf"),
         'VIVALDII': require("../assets/Fonts/VIVALDII.ttf"),
+        'FiraCode': require("../assets/Fonts/FiraCode-VariableFont_wght.ttf"),
         'Gabarito-VariableFont': require('../assets/Fonts/Gabarito-VariableFont_wght.ttf'),
         'Outfit': require('../assets/Fonts/Outfit-VariableFont_wght.ttf'),
     })

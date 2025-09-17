@@ -14,11 +14,15 @@ import { BASE_URL } from '../../Enviornment';
 import Metrics from '../../utills/ResposivesUtils/Metrics';
 import MusicIcon from '../../assets/SVGS/MusicPlayer/MusicIcon';
 import DownloadIcon from '../../assets/SVGS/MusicPlayer/DownloadIcon';
+import SkeletonLoader2 from '../../components/UI/Loadings/SkeletonLoader2';
+import { useToast } from 'react-native-toast-notifications';
 
 const MusicList = ({ Data, ClickAction }) => {
     const navigation = useNavigation();
     const [loadingList, setLoadingList] = useState(true);
     const [visibleItems, setVisibleItems] = useState(3);
+    const toast=useToast()
+    console.log("Data",Data)
 
     const handleShowMore = () => {
         if (visibleItems === 3) {
@@ -33,7 +37,7 @@ const MusicList = ({ Data, ClickAction }) => {
     };
 
     useEffect(() => {
-        if (Data && Data.length <= 0) {
+        if (Data && Data?.length <= 0) {
             console.log("Empty");
             setTimeout(() => {
                 setLoadingList(false);
@@ -46,20 +50,12 @@ const MusicList = ({ Data, ClickAction }) => {
     const handleClickAction = (item, download) => {
 
         if (item.type === "Audio") {
-            // if (item.id === currentTrack?.id && isPlaying) {
-            //     togglePlayPause();
-            // } else {
-            //     // ClickAction(item, download);
-            //     playTrack({
-            //         id: item.id,
-            //         title: item.title,
-            //         audioUrl: `${BASE_URL}/${item.audioUrl}`,
-            //         thumbnail: `${BASE_URL}/${item.thumbnail}`,
-            //     });
-            // }
             navigation.navigate('AudioScreen', { id: item.id, download });
         } else {
-            ClickAction(item, download);
+            // ClickAction(item, download);
+            toast.hideAll()
+            toast.show("Not a audio")
+            
         }
     };
 
@@ -132,7 +128,9 @@ const MusicList = ({ Data, ClickAction }) => {
                             </View>
                         </View>
                     ))}
-                    {/* {loadingList ? (
+
+
+                    {loadingList ? (
                         <SkeletonLoader2
                             style={{
                                 width: '100%',
@@ -141,7 +139,7 @@ const MusicList = ({ Data, ClickAction }) => {
                                 marginBottom: 10,
                             }}
                         />
-                    ) : null} */}
+                    ) : null}
                     {!loadingList && Data && Data.length <= 0 && (
                         <View style={{
                             width: '100%',
@@ -168,7 +166,7 @@ const MusicList = ({ Data, ClickAction }) => {
                             </Text>
                         </Pressable>
                     )}
-                    {Data.length > 3 && (
+                    {Data?.length > 3 && (
                         <Pressable
                             onPress={handleShowMore}
                             style={{ justifyContent: 'center', alignItems: 'center' }}

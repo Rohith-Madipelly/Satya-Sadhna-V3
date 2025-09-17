@@ -90,12 +90,10 @@ const VerifyForgetOTP = ({ route }) => {
         if (error.response.status === 401) {
           seterrorFormAPI({ userOtp: `${error.response.data?.message || error.response.data?.error}` })
         }
-        else if (error.response.status === 409) {
-          seterrorFormAPI({ phone_numberForm: `${error.response.data?.message || error.response.data?.error}` })
+        else if (error.response.status === 403) {
+          seterrorFormAPI({ userOtp: `${error.response.data?.message || error.response.data?.error}` })
         }
-        else if (error.response.status === 408) {
-          seterrorFormAPI({ phone_numberForm: `${error.response.data?.message || error.response.data?.error}` })
-        }
+
         else {
           Alert.alert("Error", error.response.data?.error)
         }
@@ -255,7 +253,23 @@ const VerifyForgetOTP = ({ route }) => {
                         errorMessage={`${(errors.email && touched.email) ? `${errors.email}` : (errorFormAPI && errorFormAPI.emailForm) ? `${errorFormAPI.emailForm}` : ``}`}
                       /> */}
 
+                      <View style={{
+                        width: "90%",
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                      }}>
+                        {false ? <TouchableOpacity onPress={() => { navigation.navigate("Login"); seterrorFormAPI() }} style={{}}>
+                          <Text style={[{ color: 'white', fontWeight: 600, fontSize: 13 }]}>Back to login</Text></TouchableOpacity> : <View></View>}
 
+
+                        <TouchableOpacity onPress={() => {
+                          setClearOtp(true);
+                          setTimeout(() => setClearOtp(false), 500);
+                          seterrorFormAPI()
+                        }} style={{}} >
+                          <Text style={[{ color: 'white', fontWeight: 600, fontSize: 13 }]}>Clear</Text>
+                        </TouchableOpacity>
+                      </View>
                       <CustomOtpInput6
                         value={values.otp}
                         length={6}

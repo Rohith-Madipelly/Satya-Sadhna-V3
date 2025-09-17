@@ -1,5 +1,5 @@
 import { Text, StyleSheet, ImageBackground, View, ScrollView, Image, TouchableOpacity, Alert, Platform, Button, RefreshControl, TextInput, KeyboardAvoidingView } from 'react-native'
-import React, { Component, useCallback, useEffect, useState } from 'react'
+import React, { Component, useCallback, useEffect, useLayoutEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -60,7 +60,11 @@ const About_Guruji = () => {
 
 
 
-
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: 'About Guruji' // 👈 You can change this dynamically
+    });
+  }, [navigation]);
 
 
 

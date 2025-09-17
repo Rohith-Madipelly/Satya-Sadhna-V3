@@ -1,5 +1,5 @@
 import { Text, StyleSheet, ImageBackground, View, ScrollView, Image, TouchableOpacity, Alert, Platform, Button, RefreshControl, TextInput, KeyboardAvoidingView } from 'react-native'
-import React, { Component, useCallback, useEffect, useState } from 'react'
+import React, { Component, useCallback, useEffect, useLayoutEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from '@react-navigation/native';
@@ -10,12 +10,6 @@ import { FontAwesome, Octicons } from '@expo/vector-icons';
 import CustomStatusBar from '../../../../components/UI/CustomStatusBar/CustomStatusBar';
 
 const SatyaSadhana = () => {
-    const [spinnerBool, setSpinnerbool] = useState(false)
-    const [data, setData] = useState("")
-    const [AppLink, setAppLink] = useState("")
-    // const [data, setData] = useState("")
-    const dispatch = useDispatch();
-    let tokenn = useSelector((state) => state.token);
     const [isConnected, setIsConnected] = useState(true);
 
     useEffect(() => {
@@ -28,35 +22,11 @@ const SatyaSadhana = () => {
     }, []);
 
 
-    // to set the Token Error
-    try {
-        if (tokenn != null) {
-            tokenn = tokenn.replaceAll('"', '');
-        }
-    }
-    catch (err) {
-        console.log("Error in token quotes", err)
-    }
-
-    useEffect(() => {
-        // ProfileNameKosam()
-    }, [])
-
-
-    // >>>>>>>>>>>>>>>>>
-    const [refreshing, setRefreshing] = useState(false);
-    const wait = (timeout) => {
-        return new Promise(resolve => setTimeout(resolve, timeout));
-    }
-    const onRefresh = useCallback(() => {
-        setRefreshing(true);
-
-
-    }, []);
-    // >>>>>>>>>>>>>>>>>>
-
-
-
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: 'About Satya Sadhna' // 👈 You can change this dynamically
+    });
+  }, [navigation]);
 
 
 
@@ -110,10 +80,7 @@ const SatyaSadhana = () => {
         // <ScrollView>
         <View style={{ height: '100%' }}>
 
-                 <CustomStatusBar
-                //   barStyle="dark-content"
-                  barStyle="light"
-                  backgroundColor="rgba(20, 0, 255, 0.75)" />
+            <CustomStatusBar barStyle="dark-content" backgroundColor="white" />
 
 
             <View style={{ position: 'absolute', top: 0, bottom: 0, right: 0, left: 0 }}>
@@ -122,13 +89,13 @@ const SatyaSadhana = () => {
                 </LinearGradient>
             </View>
             <View style={{ position: 'relative', top: '10%', backgroundColor: 'pink', height: '100%', borderRadius: 30, overflow: 'scroll', backgroundColor: 'white' }}>
-            <Text style={{ fontWeight: 900, fontSize: 23, margin:20,color:'black' }}>About</Text>
-                
+                <Text style={{ fontWeight: 900, fontSize: 23, margin: 20, color: 'black' }}>About</Text>
+
                 <ScrollView>
-                    <View style={{ margin: 15, marginTop: 5}}>
+                    <View style={{ margin: 15, marginTop: 5 }}>
                         <View>
-                            <Text style={{ marginBottom: 10, marginLeft: 10,color:'black' }}>
-                            <Text> </Text>Satya means truth and Sadhna means to be with truth of the mind and to experience this truth. Satya Sadhna is the process of experiencing the truth of the mind and the truth of oneself.
+                            <Text style={{ marginBottom: 10, marginLeft: 10, color: 'black' }}>
+                                <Text> </Text>Satya means truth and Sadhna means to be with truth of the mind and to experience this truth. Satya Sadhna is the process of experiencing the truth of the mind and the truth of oneself.
                                 When the mind starts experiencing the truth of one self – its starts to understand the reality of the world within us. It starts living in the present moment with equanimity.
                                 With the practice of Satya Sadhna Meditation we bring happiness, peace and balance in our lives. We don’t get affected by the situations and circumstances around us for e.g we don’t loose our balance in every unpleasant situation on the contrary we face it with bravery. And when we have a favourable situation we enjoy it remaining in equanimity.
                                 Satya Sadhna gives us happiness and peace. The knowledge gained by practicing Satya Sadhna is the knowledge of the sub conscious mind and it goes on improving the condition of our sub conscious and leads us to enlightenment.
@@ -138,15 +105,15 @@ const SatyaSadhana = () => {
 
 
                         <Text>
-                            <Text style={{ fontWeight: 900, fontSize: 15, marginBottom: 10,color:'black' }}>Nirbhay </Text>
-                            <Text style={{ marginBottom: 10, marginLeft: 10, color:'black'}}>
+                            <Text style={{ fontWeight: 900, fontSize: 15, marginBottom: 10, color: 'black' }}>Nirbhay </Text>
+                            <Text style={{ marginBottom: 10, marginLeft: 10, color: 'black' }}>
                                 means to carry out all activities with a calm and poised mind without any expectation of the result.
                             </Text>
                         </Text>
 
                         <Text style={{ marginVertical: 10 }}>
-                            <Text style={{ fontWeight: 900, fontSize: 15, marginBottom: 10,color:'black'}}>Nirvair </Text>
-                            <Text style={{ marginBottom: 10, marginLeft: 10 ,color:'black'}}>
+                            <Text style={{ fontWeight: 900, fontSize: 15, marginBottom: 10, color: 'black' }}>Nirvair </Text>
+                            <Text style={{ marginBottom: 10, marginLeft: 10, color: 'black' }}>
 
                                 expectation of the result.
                                 Nirvair means to have love and compassion towards all beings.
@@ -155,103 +122,103 @@ const SatyaSadhana = () => {
                         </Text>
 
                         <Text style={{ marginBottom: 5 }}>
-                            <Text style={{ fontWeight: 900, fontSize: 15, marginBottom: 10 ,color:'black'}}>Nirlep </Text>
-                            <Text style={{ marginBottom: 10, marginLeft: 10,color:'black'}}>
+                            <Text style={{ fontWeight: 900, fontSize: 15, marginBottom: 10, color: 'black' }}>Nirlep </Text>
+                            <Text style={{ marginBottom: 10, marginLeft: 10, color: 'black' }}>
                                 means to be free from any layers or bondages.
                             </Text>
                         </Text>
 
 
-              
 
-                        <View style={{display:'flex',gap:5}}>
-                            <View><Text style={{color:'black'}}><Text> </Text>Apart from gaining inner peace and happiness Satya Sadhna helps in improving our physical health and virtues. With Satya Sadhna meditation we stop condemning and criticizing people and we develop gratitude and happiness. A person becomes more aware, independent, peaceful and free from delusion. The life of a person becomes more tranquil with the practice of Satya Sadhna.</Text></View>
-                            <View><Text style={{color:'black'}}><Text> </Text>With daily and continuous practice of Satya Sadhna meditation the mind is filled with gratitude and the mind becomes serene and peaceful. The alertness and compassion of the mind increases and the meditator tries to help others and spread happiness.</Text></View>
-                            <View><Text style={{color:'black'}}><Text> </Text>Psychologists have observed that those who practice meditation on a daily basis have better control over their emotions and are not effected by stress and anxiety. Practice of Satya Sadhna helps in producing the happiness hormone serotonin and makes the mind calm and serene, increases our level of tolerance and concentration. Satya Sadhna also produces the hormones dopamine and endorphins which helps us in maintaining equanimity and balance on our emotions.</Text></View>
-                            <View><Text style={{color:'black'}}><Text> </Text>Satya Sadhna meditation is not associated with any religion or sect. Any person irrespective of his caste, creed, originality can practice Satya Sadhna.</Text></View>
+
+                        <View style={{ display: 'flex', gap: 5 }}>
+                            <View><Text style={{ color: 'black' }}><Text> </Text>Apart from gaining inner peace and happiness Satya Sadhna helps in improving our physical health and virtues. With Satya Sadhna meditation we stop condemning and criticizing people and we develop gratitude and happiness. A person becomes more aware, independent, peaceful and free from delusion. The life of a person becomes more tranquil with the practice of Satya Sadhna.</Text></View>
+                            <View><Text style={{ color: 'black' }}><Text> </Text>With daily and continuous practice of Satya Sadhna meditation the mind is filled with gratitude and the mind becomes serene and peaceful. The alertness and compassion of the mind increases and the meditator tries to help others and spread happiness.</Text></View>
+                            <View><Text style={{ color: 'black' }}><Text> </Text>Psychologists have observed that those who practice meditation on a daily basis have better control over their emotions and are not effected by stress and anxiety. Practice of Satya Sadhna helps in producing the happiness hormone serotonin and makes the mind calm and serene, increases our level of tolerance and concentration. Satya Sadhna also produces the hormones dopamine and endorphins which helps us in maintaining equanimity and balance on our emotions.</Text></View>
+                            <View><Text style={{ color: 'black' }}><Text> </Text>Satya Sadhna meditation is not associated with any religion or sect. Any person irrespective of his caste, creed, originality can practice Satya Sadhna.</Text></View>
                         </View>
 
 
 
-                        <Text style={{ fontWeight: 900, fontSize: 15, marginBottom: 10, marginTop: 10,color:'' }}>Who teaches Satya Sadhna?</Text>
-                        <View style={{ display: 'flex', gap: 5}}>
+                        <Text style={{ fontWeight: 900, fontSize: 15, marginBottom: 10, marginTop: 10, color: '' }}>Who teaches Satya Sadhna?</Text>
+                        <View style={{ display: 'flex', gap: 5 }}>
                             <View>
-                                <Text style={{color:'black'}}><Text> </Text><Text> </Text>Satya Sadhna is a blessing for humanity. It is an age-old practice which can be learnt under the guidance and direction of a GURU.  At present SHRI PUJYA SHRI JIN CHANDRA SURIJI MAHARAJSAHAB preaches and inspires everyone to move ahead on the path of SATYA SADHNA.</Text>
+                                <Text style={{ color: 'black' }}><Text> </Text><Text> </Text>Satya Sadhna is a blessing for humanity. It is an age-old practice which can be learnt under the guidance and direction of a GURU.  At present SHRI PUJYA SHRI JIN CHANDRA SURIJI MAHARAJSAHAB preaches and inspires everyone to move ahead on the path of SATYA SADHNA.</Text>
                             </View>
 
                             <View>
-                                <Text style={{color:'black'}}><Text> </Text><Text> </Text>PARAM PUJYA GURUDEV SHRI PUJYAJI SHRI JIN CHANDRA SURIJI MAHARAJSAHAB is the present Acharya of KHATTERGACCH in the lineage of the 24thTirthankar of Jain religion Lord Mahavir. The head of the KHATTERGACCH is known as SHRI PUJYA JI who continues to teach this technique of SATYA SADHNA generation after generation. In this tradition were born FOUR DADA GURUDEVS in between the 10th and 15th century there names were Shri Jin DuttSuriji, Manidhari Shri Jin Chandra Suriji, Shri Jin Kushal Suriji and Shri Jin Chandra Suriji. Shri Jin DuttSuriji named his successor as Manidhari Shri Jin Chandra Surji and from there on this tradition has been established where every 4th Acharya is named SHRI JIN CHANDRA SURIJI. The present Acharya SHRI JIN CHANDRA SURIJI is also a follower of this 1000 year old tradition.</Text>
+                                <Text style={{ color: 'black' }}><Text> </Text><Text> </Text>PARAM PUJYA GURUDEV SHRI PUJYAJI SHRI JIN CHANDRA SURIJI MAHARAJSAHAB is the present Acharya of KHATTERGACCH in the lineage of the 24thTirthankar of Jain religion Lord Mahavir. The head of the KHATTERGACCH is known as SHRI PUJYA JI who continues to teach this technique of SATYA SADHNA generation after generation. In this tradition were born FOUR DADA GURUDEVS in between the 10th and 15th century there names were Shri Jin DuttSuriji, Manidhari Shri Jin Chandra Suriji, Shri Jin Kushal Suriji and Shri Jin Chandra Suriji. Shri Jin DuttSuriji named his successor as Manidhari Shri Jin Chandra Surji and from there on this tradition has been established where every 4th Acharya is named SHRI JIN CHANDRA SURIJI. The present Acharya SHRI JIN CHANDRA SURIJI is also a follower of this 1000 year old tradition.</Text>
                             </View>
 
                             <View>
-                                <Text style={{color:'black'}}><Text> </Text><Text> </Text>ACHARYAJI himself along with his appointed teachers preach and spread Satya Sadhna not over in India but all across the globe.</Text>
+                                <Text style={{ color: 'black' }}><Text> </Text><Text> </Text>ACHARYAJI himself along with his appointed teachers preach and spread Satya Sadhna not over in India but all across the globe.</Text>
                             </View>
                         </View>
 
-                       <View>
-  <Text style={{
-    fontWeight: 'bold', // Instead of numeric 900
-    fontSize: 15,
-    marginBottom: 10,
-    marginTop: 10,
-    color: 'black'
-  }}>
-    Guidelines for SATYA SADHNA meditation course
-  </Text>
+                        <View>
+                            <Text style={{
+                                fontWeight: 'bold', // Instead of numeric 900
+                                fontSize: 15,
+                                marginBottom: 10,
+                                marginTop: 10,
+                                color: 'black'
+                            }}>
+                                Guidelines for SATYA SADHNA meditation course
+                            </Text>
 
-  <View style={{ marginLeft: 5 }}>
-    {Guidelines.map((item, index) => (
-      <View style={{ flexDirection: 'row', alignItems: 'flex-start', marginVertical: 4 }} key={index}>
-        <Octicons name="dot-fill" size={15} color="black" style={{ marginTop: 3 }} />
-        <Text style={{ marginLeft: 8, color: 'black', flex: 1 }}>{item.Guidelines}</Text>
-      </View>
-    ))}
-  </View>
-</View>
-
-
-
-                        <View style={{ marginTop: 50}}>
-
-
-                            <Text style={{ fontWeight: 900,color:'black' }}>Satya Sadhna Meditation is taught in 4 steps:-</Text>
-                            <View style={{ marginLeft: 10}}>
-                                <Text style={{ marginVertical: 10,color:'black'}}>1)	Sadhachar- Following the five precepts Of Truth, Non-violence, Non –stealing, Non-possession, Celibacy.</Text>
-                                <Text style={{ marginVertical: 10,color:'black'}}>2)	Swas Darshan- To observe the incoming and outgoing breath at the moustache area.</Text>
-                                <Text style={{ marginVertical: 10,color:'black'}}>3)	Satya Darshan- To observe the sensation, to observe the change in sensations all over the body and maintain equilibrium and equanimity.</Text>
-                                <Text style={{ marginVertical: 10,color:'black'}}>4)	Maitri Sadhna –To spread the love, peace, happiness, goodness that we have gathered in the 10 days to all beings of the world.</Text>
+                            <View style={{ marginLeft: 5 }}>
+                                {Guidelines.map((item, index) => (
+                                    <View style={{ flexDirection: 'row', alignItems: 'flex-start', marginVertical: 4 }} key={index}>
+                                        <Octicons name="dot-fill" size={15} color="black" style={{ marginTop: 3 }} />
+                                        <Text style={{ marginLeft: 8, color: 'black', flex: 1 }}>{item.Guidelines}</Text>
+                                    </View>
+                                ))}
                             </View>
                         </View>
 
 
 
+                        <View style={{ marginTop: 50 }}>
 
-                       {P5Data.map((item, index) => (
-  <View style={{ marginVertical: 12 }} key={index}>
-    <Text
-      style={{
-        fontWeight: 'bold',
-        textDecorationLine: 'underline',
-        fontSize: 16,
-        color: 'black',
-        marginBottom: 6,
-        
-      }}
-    >
-      {item.Heading}
-    </Text>
-    <Text style={{ marginLeft: 5, fontSize: 15, lineHeight: 22, color: 'black' }}>
-      {item.RelatedData}
-    </Text>
-  </View>
-))}
+
+                            <Text style={{ fontWeight: 900, color: 'black' }}>Satya Sadhna Meditation is taught in 4 steps:-</Text>
+                            <View style={{ marginLeft: 10 }}>
+                                <Text style={{ marginVertical: 10, color: 'black' }}>1)	Sadhachar- Following the five precepts Of Truth, Non-violence, Non –stealing, Non-possession, Celibacy.</Text>
+                                <Text style={{ marginVertical: 10, color: 'black' }}>2)	Swas Darshan- To observe the incoming and outgoing breath at the moustache area.</Text>
+                                <Text style={{ marginVertical: 10, color: 'black' }}>3)	Satya Darshan- To observe the sensation, to observe the change in sensations all over the body and maintain equilibrium and equanimity.</Text>
+                                <Text style={{ marginVertical: 10, color: 'black' }}>4)	Maitri Sadhna –To spread the love, peace, happiness, goodness that we have gathered in the 10 days to all beings of the world.</Text>
+                            </View>
+                        </View>
 
 
 
 
+                        {P5Data.map((item, index) => (
+                            <View style={{ marginVertical: 12 }} key={index}>
+                                <Text
+                                    style={{
+                                        fontWeight: 'bold',
+                                        textDecorationLine: 'underline',
+                                        fontSize: 16,
+                                        color: 'black',
+                                        marginBottom: 6,
+
+                                    }}
+                                >
+                                    {item.Heading}
+                                </Text>
+                                <Text style={{ marginLeft: 5, fontSize: 15, lineHeight: 22, color: 'black' }}>
+                                    {item.RelatedData}
+                                </Text>
+                            </View>
+                        ))}
 
 
-                        <Text style={{color:'black'}}>
+
+
+
+
+                        <Text style={{ color: 'black' }}>
                             We are at:
                             www.satyasadhna.com, or Satya Sadhna Application  or
                             Satya Sadhna Facebook Page.Twitter, Instagram .
@@ -259,7 +226,7 @@ const SatyaSadhana = () => {
                         </Text>
 
 
-                       <View style={{height:40,}}>
+                        <View style={{ height: 40, }}>
                         </View>
                     </View>
                     <View style={{ height: 100 }}>

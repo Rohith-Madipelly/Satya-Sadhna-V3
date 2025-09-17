@@ -288,12 +288,21 @@ const Home = () => {
         </View>
 
 
+        {/* {isData && meditationTracks ? <MusicList Data={meditationTracks} ClickAction={(item, download) => {
+          console.log("Helo", item);
+          // NavigationTo(item, download)
+        }} /> : ""} */}
+
         {isData && meditationTracks ? <MusicList Data={meditationTracks} ClickAction={(item, download) => {
           console.log("Helo", item);
           // NavigationTo(item, download)
         }} /> : ""}
 
-        <QuoteOfDay Quote={Quote || "If you want peace then calm your desires"} isQuoteOfDay={true} disabled={false} />
+        {!meditationTracks ? <View style={{ height: 15 }}>
+
+        </View> : ""}
+
+        <QuoteOfDay Quote={Quote || "......."} isQuoteOfDay={true} disabled={false} />
         {/* <Snap_Carousel2 BannerData2={meditationTracks} CarouselName={'Meditation Tracks'} /> */}
         <Snap_Carousel2 BannerData2={pravachan} CarouselName={'Pravachan / Event Videos'} />
 

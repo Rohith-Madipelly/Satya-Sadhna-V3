@@ -236,7 +236,7 @@ const Forgetpassword = () => {
                           }}
                           textStyling={[{ color: "#283E71" }]}
                           isLoading={spinnerbool}
-                          style={{}}><Entypo name="login" size={20} color="#283E71" /> Get otp</CustomButton1>
+                          style={{}}>Get otp</CustomButton1>
                       </View>
                     </View>
                   </SafeAreaView>

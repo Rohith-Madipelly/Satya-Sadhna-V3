@@ -1,5 +1,5 @@
 import { Text, StyleSheet, ImageBackground, View, ScrollView, Image, TouchableOpacity, Alert, Platform, Button, RefreshControl, TextInput, KeyboardAvoidingView } from 'react-native'
-import React, { Component, useCallback, useEffect, useState } from 'react'
+import React, { Component, useCallback, useEffect, useLayoutEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -36,7 +36,12 @@ const PrivacyPolicy = () => {
     };
   }, []);
 
-
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: 'Privacy Policy' // 👈 You can change this dynamically
+    });
+  }, [navigation]);
+  
   // to set the Token Error
   try {
     if (tokenn != null) {
