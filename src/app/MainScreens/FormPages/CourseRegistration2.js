@@ -121,16 +121,15 @@ const CourseRegistration2 = ({ route }) => {
             <TouchableOpacity
               style={[styles.courseContainer, { borderWidth: selectedCourse == item.courseName ? 1 : 0, borderColor: 'rgba(3, 3, 112, 1)', }]}
               onPress={() => {
+                console.log("category Type >", item.courseName, Type)
+
                 setSelectCategoryData(item)
                 setSelectCategory(item.courseName)
-                console.log("category Type >", category, Type)
-                // navigation.navigate("CourseRegistration3",{selectedCourseData:selectedCourseData,category:category,Type:Type,Courses:selectedCourse})
-
               }}
             >
               <ImageBackground
                 style={styles.imageBackground}
-              source={require('../../../assets/Image/Home/Vector2.png')}
+                source={require('../../../assets/Image/Home/Vector2.png')}
               >
                 <Text style={styles.courseName}>
                   <Text style={styles.bold}>Course name: </Text>
@@ -162,13 +161,17 @@ const CourseRegistration2 = ({ route }) => {
         />
       </View>
 
+
+
       {selectedCourse && <View style={{
         flex: 0.3, justifyContent: 'center', alignItems: 'center', position: 'absolute', bottom: 0,
         height: Metrics.rfv(100),
         width: '100%'
       }}>
         <CustomButton1
-          width={'100%'}
+          bgColor={'rgba(3, 3, 112, 1)'}
+          textStyling={[{ color: "white" }]}
+          boxWidth={'80%'}
           onPress={() => {
             navigation.navigate("CourseRegistration3", { selectedCourseData: selectedCourseData, category: category, Type: Type, Courses: selectedCourse })
           }}

@@ -16,7 +16,7 @@ const CustomButton1 = ({ onPress, leftIcon, RightIcon, children, bgColor, styleb
                     pressed && styles.pressed]} onPress={onPress}
             disabled={isSubmitting}>
             <View style={{ marginRight: 10 }}>{leftIcon}</View>
-            {!isLoading ? <Text style={[styles.text, textStyling]}>{children}</Text> : <ActivityIndicator visible={isLoading} style={textStyling}/>}
+            {!isLoading ? <Text style={[styles.text, textStyling]}>{children}</Text> : <ActivityIndicator visible={isLoading} style={textStyling} />}
             {/* <Spinner visible={isLoading} color={"white"} animation={'fade'} />
             } */}
             <View style={{ marginLeft: 10 }}>{RightIcon}</View>
