@@ -117,13 +117,13 @@ const FormData = Yup.object().shape({
     personName: Yup.string(),
     personRelation: Yup.string(),
 
-    courseDone: Yup.string().oneOf(["yes", "no"], "Invalid course done yes or no"),
+    courseDone: Yup.string().oneOf(["Yes", "No"], "Invalid course done yes or no"),
 
     // relation: Yup.string(),
 
        relation: Yup.string()
         .when(['courseDone'], ([courseDone], schema) => {
-            if (courseDone === "yes")
+            if (courseDone === "Yes")
                 return schema
                     .required('Family person`s relation is required')
             return

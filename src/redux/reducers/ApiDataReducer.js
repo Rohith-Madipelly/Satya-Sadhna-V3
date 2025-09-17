@@ -1,23 +1,13 @@
 const initialState = {
   profileData: "",
   isConnected: true,
-  flatData: "",
-  blockData: "",
-  buildingData: "",
-  role: "",
+  form: false,
 };
 
 
 
 const ApiDataReducer = (state = initialState, action) => {
   switch (action.type) {
-
-    case "SET_ROLE": {
-      return {
-        ...state,
-        role: action.data
-      };
-    }
     case "SET_PROFILE_DATA":
       return {
         ...state,
@@ -28,24 +18,13 @@ const ApiDataReducer = (state = initialState, action) => {
         ...state,
         isConnected: action.isConnected
       };
-
-    case "SELECT_FLAT_DATA":
+    case "SHOW_FORM":
       return {
         ...state,
-        flatData: action.data
+        form: action.form
       };
 
-    case "SELECT_BLOCK_DATA":
-      return {
-        ...state,
-        blockData: action.data
-      };
 
-    case "SELECT_BUILDING_DATA":
-      return {
-        ...state,
-        buildingData: action.data
-      };
     default:
       return state;
   }

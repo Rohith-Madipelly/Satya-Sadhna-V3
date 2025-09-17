@@ -1,36 +1,38 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
-import { PRIMARY_COLOR } from '../../UIConfig/AppContants'
+import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native'
+import Spinner from 'react-native-loading-spinner-overlay'
 
-const CustomFormButton = ({ onPress, leftIcon, children, bgColor, styleData }) => {
+
+const CustomButton1 = ({ onPress, leftIcon, RightIcon, children, bgColor, stylebtn, boxWidth, isSubmitting, textStyling, btnContainerprops, isLoading = false }) => {
 
     return (
         <Pressable
 
-            style={({ pressed }) => [styles.button, styleData, pressed && styles.pressed]} onPress={onPress} >
-            {/* <Ionicons style={styles.icon} name={icon} size={18} color={Colors.white} /> */}
+            style={(
+                { pressed }) => [
+                    styles.button,
+                    { backgroundColor: bgColor ? bgColor : "white" },
+                    btnContainerprops,
+                    stylebtn, { width: boxWidth },
+                    pressed && styles.pressed]} onPress={onPress}
+            disabled={isSubmitting}>
             <View style={{ marginRight: 10 }}>{leftIcon}</View>
-            <Text style={styles.text}>{children}</Text>
+            {!isLoading ? <Text style={[styles.text, textStyling]}>{children}</Text> : <ActivityIndicator visible={isLoading} style={textStyling}/>}
+            {/* <Spinner visible={isLoading} color={"white"} animation={'fade'} />
+            } */}
+            <View style={{ marginLeft: 10 }}>{RightIcon}</View>
         </Pressable>
     )
 }
 
-export default CustomFormButton
+export default CustomButton1
 
 const styles = StyleSheet.create({
     button: {
-
         flexDirection: 'row',
-        justifyContent: 'space-evenly',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        // borderWidth:1,
-        // borderColor: Colors.primary500,
-        backgroundColor: PRIMARY_COLOR,
-        borderRadius: 20,
-        // paddingHorizontal:12,
-        paddingVertical: 15,
-        margin: 10,
-        width: '78%'
+        borderRadius: 10,
+        height: 45
     },
     pressed: {
         opacity: 0.7
@@ -39,9 +41,10 @@ const styles = StyleSheet.create({
         marginRight: 6
     },
     text: {
-        color: "white",
+        color: 'white',
         fontSize: 16,
-        fontWeight: '400'
+        fontWeight: 700,
+        textTransform: 'none',
     }
 })
 

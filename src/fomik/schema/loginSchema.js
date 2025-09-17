@@ -1,7 +1,9 @@
 import * as Yup from "yup";
 const loginSchema = Yup.object().shape({
-  // email: Yup.string().email().required("Email is a Required Field "),
-  // emailorPhoneNumber: Yup.string().email("Invalid email format").phone.required("Email or Phone Number is a Required Field "),
+
+
+
+
   emailorPhoneNumber: Yup.string()
   .test('is-email-or-phone', 'Invalid email or phone number format', value => {
     // Check if the input is a valid email or a valid phone number
@@ -10,10 +12,7 @@ const loginSchema = Yup.object().shape({
       .isValidSync(value) || /^[0-9]{10}$/.test(value);
   })
   .required("Email or phone number is a required field"),
-
-
- 
-
+  
   password: Yup.string()
   .min(8, "Password length is short")
   .max(225, "Password length is too Long")

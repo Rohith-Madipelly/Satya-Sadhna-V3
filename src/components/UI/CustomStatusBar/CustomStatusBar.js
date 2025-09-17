@@ -13,6 +13,10 @@ export default CustomStatusBar
 const styles = StyleSheet.create({})
 
 
+// StatusBarStyle
+// Acceptable values are: 'auto' | 'inverted' | 'light' | 'dark'
+
+
 
 // FocusAwareStatusBar
 // npx expo install react-native-safe-area-context

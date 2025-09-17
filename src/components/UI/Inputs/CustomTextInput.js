@@ -56,7 +56,7 @@ const CustomTextInput = ({
     //     },[onBlur])
     return (
         <View style={[{ padding: 0, width: boxWidth }, style, styles.boxHeight]}>
-            {label ? <Text style={[styles.label, labelStyle]}>{label} {asterisksymbol ? <Text style={{ color: '#C30909' }}>*</Text> : ""}</Text> : ""}
+            {label ? <Text style={[styles.label, labelStyle]}>{label} {asterisksymbol ? <Text style={{ color: '#C30909' }}> *</Text> : ""}</Text> : ""}
 
 
             <View style={[styles.container, containerBorder, containerStyle, { borderColor: borderColor }, { backgroundColor: backgroundColor }]}>

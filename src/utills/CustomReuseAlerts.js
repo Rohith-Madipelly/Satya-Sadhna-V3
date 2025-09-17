@@ -48,5 +48,25 @@ export const ServerError = ( Alert_Title = APP_NAME,Alert_Msg, onOkCallBack) => 
 }
 
 
+export const CustomAlerts_LogOut = ( Alert_Title = "Do you want to logout ?",Alert_Msg, onOkCallBack) => {
+    Alert.alert(Alert_Title, Alert_Msg, [
+        {
+            text: 'cancel',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+        },
+        {
+            text: 'Log out',
+             onPress: () => {
+                if (onOkCallBack) {
+                    onOkCallBack();  // Safely call the callback if provided
+                } else {
+                    console.log('OK Pressed');
+                }
+            }
+        },
+    ]);
+}
+
 
 

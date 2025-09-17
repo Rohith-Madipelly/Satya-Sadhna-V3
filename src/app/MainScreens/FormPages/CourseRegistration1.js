@@ -26,7 +26,7 @@ const CourseRegistration1 = () => {
   const categoryData_0 = [
     // { title: 'Select Category', value: 'N/A' },
     { title: 'For New Students', value: 'For New Students' },
-    { title: 'For old students', value: 'For Old Students' },
+    { title: 'For Old Students', value: 'For Old Students' },
     { title: 'For Children/Teens', value: 'For Children/Teens' },
     { title: 'For Executives', value: 'For Executives' },
   ];
@@ -100,7 +100,7 @@ const CourseRegistration1 = () => {
 
 
 
-        {isSelectedCategory == "For old students" && <View
+        {isSelectedCategory == "For Old Students" && <View
           style={{ marginTop: Metrics.rfv(20) }}
         >
           <View style={{ paddingHorizontal: 18, flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -116,12 +116,12 @@ const CourseRegistration1 = () => {
               <TouchableOpacity
                 style={[styles.courseContainer, { flexDirection: 'row' }]}
                 onPress={() => {
-                  setSelectSubCategory(item.title)
+                  setSelectSubCategory(item.value)
                 }}
                 key={index}
               >
                 <View style={{ width: '17%', minHeight: 50, alignItems: 'center', justifyContent: 'center' }}>
-                  {selectSubCategory == item.title ? <View style={{
+                  {selectSubCategory == item.value ? <View style={{
                     width: 30, height: 30, borderRadius: 15,
                     backgroundColor: '#030370',
                     justifyContent: 'center', alignItems: 'center'
@@ -139,7 +139,7 @@ const CourseRegistration1 = () => {
                 </View>
 
                 <View style={{ width: '80%', minHeight: 50, justifyContent: 'center' }}>
-                  <Text style={{ color: selectSubCategory == item.title ? "#030370" : "#8B8BA9" }}>{item.title}</Text>
+                  <Text style={{ color: selectSubCategory == item.value ? "#030370" : "#8B8BA9" }}>{item.title}</Text>
                 </View>
               </TouchableOpacity>
             )}
@@ -147,38 +147,20 @@ const CourseRegistration1 = () => {
         </View>}
       </View>
       <View style={{ flex: 0.3, justifyContent: 'center', alignItems: 'center' }}>
-
-        {/* {isSelectedCategory && <CustomFormButton
-          onPress={() => {
-            if (isSelectedCategory == "For old students") {
-              if (selectSubCategory) {
-                navigation.navigate("CourseRegistration2", { category: isSelectedCategory, Type: selectSubCategory })
-              }
-              else {
-                Alert.alert("Please the type")
-              }
-            } else {
-              navigation.navigate("CourseRegistration2", { category: isSelectedCategory, Type: "" })
-            }
-          }}
-        >
-          Next
-        </CustomFormButton>} */}
-
-
-
         {isSelectedCategory && <CustomButton1
           boxWidth={'70%'}
           // onPress={() => { console.log("Button PRess") }}
           onPress={() => {
-            if (isSelectedCategory == "For old students") {
+            if (isSelectedCategory == "For Old Students") {
               if (selectSubCategory) {
                 navigation.navigate("CourseRegistration2", { category: isSelectedCategory, Type: selectSubCategory })
+                // console.log("isSelectedCategory",isSelectedCategory,"??",selectSubCategory)
               }
               else {
                 Alert.alert(undefined, "Please the type")
               }
             } else {
+                // console.log("isSelectedCategory",isSelectedCategory,"??",selectSubCategory)
               navigation.navigate("CourseRegistration2", { category: isSelectedCategory, Type: "" })
             }
           }}

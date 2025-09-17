@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     },
     dropdownButtonArrowStyle: {
         fontSize: 14,
-        color: 'white',
+        color: 'black',
 
     },
     dropdownItemStyle: {

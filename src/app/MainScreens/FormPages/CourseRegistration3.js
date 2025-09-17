@@ -167,7 +167,7 @@ const CourseRegistration3 = ({ route }) => {
   // Scroll to first field with a Yup error after submit
   useEffect(() => {
     if (submitCount > 0 && Object.keys(errors).length > 0) {
-      scrollToFirstError(errors);
+      // scrollToFirstError(errors);
     }
   }, [isSubmitting]);
   // }, [submitCount, errors]);
@@ -177,7 +177,6 @@ const CourseRegistration3 = ({ route }) => {
     const ref = inputRefs[errorField];
 
     if (ref && ref.current) {
-      console.log(ref)
       if (errorField == "stay_option") {
         ref.current?.openDropdown();
       } else {
@@ -303,7 +302,7 @@ const CourseRegistration3 = ({ route }) => {
       const docFitnessCertificate = {
         medicineName: `${FitnessCertificate === 'Yes' ? medicineName : "N/A"}`,
         medicineDose: `${FitnessCertificate === 'Yes' ? medicineDose : "N/A"}`,
-        regularMedicine: regularMedicine,
+        // regularMedicine: regularMedicine, //Not reguired
       }
 
       const courseId = `${selectedCourseData._id}`
@@ -884,7 +883,7 @@ const CourseRegistration3 = ({ route }) => {
               />
 
 
-              {values.courseDone === "yes" && (<CustomTextInput
+              {values.courseDone == "Yes" && (<CustomTextInput
                 boxWidth={'85%'}
                 label={"Family person's relation"}
                 bgColor={'white'}
@@ -1349,7 +1348,7 @@ const CourseRegistration3 = ({ route }) => {
                       label={'Last course date'}
                       name='Last course date'
                       date='date'
-                      value={values.dateLastCourse || new Date()}
+                      value={values.dateLastCourse}
                       labelStyle={{ color: '#4C5664' }}
                       InputStyle={{ color: '#4C5664' }}
                       rightIcon={<MaterialIcons name="date-range" size={20} color="black" />}

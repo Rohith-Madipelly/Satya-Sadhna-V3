@@ -1,7 +1,11 @@
 import { StyleSheet, Platform } from 'react-native'
 
 
+const STYLE_1 = "VIVALDII"
+const STYLE_2 = "Gabarito"
+
 export default StyleSheet.create({
+
     TEXTSTYLE_BLACK: {
         color: "black"
     },
@@ -9,6 +13,33 @@ export default StyleSheet.create({
     TEXTSTYLE_WHITE: {
         color: "white"
     },
+
+    STYLE_1_A22: {
+        fontSize: 22,
+        fontFamily: STYLE_1
+    },
+
+    STYLE_1_A30: {
+        fontSize: 30,
+        fontFamily: STYLE_1
+    },
+
+
+    STYLE_2_A20: {
+        fontSize: 20,
+        fontFamily: STYLE_2
+    },
+
+    STYLE_2_A30: {
+        fontSize: 30,
+        fontFamily: STYLE_2
+    },
+
+
+
+
+
+
 
     TEXTSTYLE_HEADING_H1: {
         fontSize: 26,

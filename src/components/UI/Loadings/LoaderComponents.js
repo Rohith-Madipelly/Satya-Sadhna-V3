@@ -15,11 +15,11 @@ const LoaderComponents = ({ visible, color, animation }) => {
       animation={'fade'}
     // textContent="Loading ...."
     // textStyle={{color:'red'}}
-    // customIndicator={
-    //   <View>
-    //     <LoadingAnimation/>
-    //   </View>
-    // }
+    customIndicator={
+      <View>
+        {/* <LoadingAnimation/> */}
+      </View>
+    }
     />
   )
 }

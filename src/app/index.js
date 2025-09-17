@@ -34,6 +34,12 @@ import PrivacyPolicy from './MainScreens/BottomTabScreen/Profile/PrivacyPolicy'
 import DeleteAccountPolicy from './MainScreens/BottomTabScreen/Profile/DeleteAccountPolicy'
 import QuotesScreen from './MainScreens/BottomTabScreen/Home/QuotesScreen'
 import VideoScreen from './MainScreens/VideoScreen'
+import NetInfo from '@react-native-community/netinfo';
+import { InternetAction } from '../redux/actions/ProfileActions'
+import Register from './AuthScreens/Register'
+import Forgetpassword from './AuthScreens/Forgetpassword'
+import VerifyForgetOTP from './AuthScreens/VerifyForgetOTP'
+import ForgetSetpassword from './AuthScreens/ForgetSetpassword'
 const Stack = createNativeStackNavigator()
 
 const RootStack = () => {
@@ -48,14 +54,21 @@ const RootStack = () => {
     }, [isLoggedIn])
 
 
-
+    useEffect(() => {
+        const unsubscribe = NetInfo.addEventListener(state => {
+            dispatch(InternetAction(state.isConnected))
+        });
+        return () => {
+            unsubscribe();
+        };
+    }, []);
 
     // App initialization
     useEffect(() => {
         async function prepare() {
             try {
                 // Prevent splash screen from auto-hiding
-                await SplashScreen.preventAutoHideAsync()
+                // await SplashScreen.preventAutoHideAsync()
 
                 // Verify token
                 await verifyToken()
@@ -93,7 +106,8 @@ const RootStack = () => {
 
     // Load custom fonts
     const [fontsLoaded] = useFonts({
-        // 'VIVALDII': require('../assets/Fonts/VIVALDII_2.ttf'),
+
+        'VIVALDII': require("../assets/Fonts/VIVALDII.ttf"),
         'Gabarito-VariableFont': require('../assets/Fonts/Gabarito-VariableFont_wght.ttf'),
         'Outfit': require('../assets/Fonts/Outfit-VariableFont_wght.ttf'),
     })
@@ -232,6 +246,26 @@ const RootStack = () => {
                         }} />
 
 
+                        <Stack.Screen name="Register" component={Register} options={{
+                            headerShown: false,
+                            animation: 'slide_from_right', // 👈 Add this
+                        }} />
+
+                        <Stack.Screen name="Forgetpassword" component={Forgetpassword} options={{
+                            headerShown: false,
+                            animation: 'slide_from_right', // 👈 Add this
+                        }} />
+
+
+                        <Stack.Screen name="VerifyForgetOTP" component={VerifyForgetOTP} options={{
+                            headerShown: false,
+                            animation: 'slide_from_right', // 👈 Add this
+                        }} />
+
+                        <Stack.Screen name="ForgetSetpassword" component={ForgetSetpassword} options={{
+                            headerShown: false,
+                            animation: 'slide_from_right', // 👈 Add this
+                        }} />
 
 
                     </Stack.Group>

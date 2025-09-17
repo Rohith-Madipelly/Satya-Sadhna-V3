@@ -13,18 +13,22 @@ import { Entypo } from '@expo/vector-icons'
 import CustomButton1 from '../../components/UI/CustomButtons/CustomButton1'
 import TextStyles from '../../components/UIConfig/TextStyles'
 import { useToast } from 'react-native-toast-notifications'
-import { UserLoginApi } from '../../network/API_Calls'
-import AsyncStorage_Calls from '../../utills/AsyncStorage_Calls'
-import { setToken } from '../../redux/actions/AuthActions'
+import { ForgotApiPassRest, UserForgotOTPApi } from '../../network/API_Calls'
 import { useDispatch, useSelector } from 'react-redux'
 import HandleErrors from '../../utills/HandleErrors'
-import { LoginPageYupSchema } from '../../FormikYupSchema/LoginPageYupSchema'
 import { useNavigation } from '@react-navigation/native'
+import { ForgetPageYupSchema } from '../../FormikYupSchema/ForgetPageYupSchema'
+import { ForgetSetPageYupSchema } from '../../FormikYupSchema/ForgetSetPageYupSchema'
 
 
 
 
-const Login = () => {
+
+const ForgetSetpassword = ({ route }) => {
+  const { params } = route;
+  const paramsEmail = params?.email || 'madipellyrohith@gmail.com';
+
+
   const [spinnerbool, setSpinnerbool] = useState(false)
   const [errorFormAPI, seterrorFormAPI] = useState("")
   const [show, setShow] = useState("")
@@ -47,20 +51,17 @@ const Login = () => {
     resetForm,
   } = useFormik({
     initialValues: {
-      // emailorPhoneNumber: "madipellyrohith@gmail.com",
-      // password: "Rohith@7",
-      // platform: Platform.OS || ""
-
-      emailorPhoneNumber: "",
+      email: paramsEmail ? paramsEmail : "",
       password: "",
-      platform: Platform.OS || ""
+      password_confirmation: ""
     },
     onSubmit: values => {
       {
+        console.log("mhgjhvgj")
         submitHandler(values)
       }
     },
-    validationSchema: LoginPageYupSchema,
+    validationSchema: ForgetSetPageYupSchema,
     validate: values => {
       const errors = {};
       return errors;
@@ -70,38 +71,26 @@ const Login = () => {
 
   const submitHandler = async (values) => {
     setSpinnerbool(true)
-
-
-    let loginFormData;
-    if (/^\d+$/.test(values.emailorPhoneNumber)) {
-      loginFormData = { phone_number: values.emailorPhoneNumber };
-    } else {
-      loginFormData = { email: values.emailorPhoneNumber };
-    }
-    loginFormData.password = values.password;
-
     try {
-      const res = await UserLoginApi(loginFormData)
+      const res = await ForgotApiPassRest(values)
       if (res.data) {
-        const token = res.data.token
-        toast.show(res.data.message)
+        console.log("res", res.data)
 
-        await AsyncStorage_Calls.setAsyncValue("Token", JSON.stringify(token), function (res, status) {
-          if (status) {
-            setTimeout(() => {
-              dispatch(setToken(token));
-            }, 500);
-          }
-        })
+        toast.show("Password updated successfully!")
+        navigation.navigate("Login", { email: values.email })
+
+        setTimeout(() => {
+          resetForm()
+        }, 200);
       }
-
     } catch (error) {
-      console.log("error Login API", error.response.data)
+      console.log("error Login API", error.response.data, "????", error.response.status)
       if (error.response) {
         if (error.response.status === 401) {
           seterrorFormAPI({ passwordForm: `${error.response.data?.message || error.response.data?.error}` })
-        } else if (error.response.status === 404) {
-          seterrorFormAPI({ emailorPhoneNumberForm: `${error.response.data?.message || error.response.data?.error}` })
+        }
+        else if (error.response.status === 404) {
+          seterrorFormAPI({ emailForm: `${error.response.data?.message || error.response.data?.error}` })
         }
         else {
           Alert.alert("Error", error.response.data?.error)
@@ -117,7 +106,8 @@ const Login = () => {
   }
 
   const inputRefs = {
-    emailorPhoneNumber: useRef(null),
+    password_confirmation: useRef(null),
+    email: useRef(null),
     password: useRef(null),
   };
 
@@ -178,7 +168,7 @@ const Login = () => {
                     <View style={{ flex: 0.4, alignItems: 'center', justifyContent: 'center' }}>
                       <View style={[{ width: Metrics.rfv(100), height: Metrics.rfv(100), justifyContent: 'center', alignItems: 'center', backgroundColor: 'white', borderRadius: Metrics.rfv(60) }]}>
                         <Image
-                          style={[{ width: Metrics.rfv(125), height: Metrics.rfv(125), elevation: 3 },]}
+                          style={[{ width: Metrics.rfv(125), height: Metrics.rfv(125), elevation: 3 }]}
                           source={require("../../../assets/icon.png")}
                           contentFit="cover"
                           transition={1000}
@@ -190,9 +180,9 @@ const Login = () => {
                     <View style={{
                       flex: 0.5,
                       paddingHorizontal: LEFT_AND_RIGHT_PADDING,
-                      alignItems: 'center'
+                      alignItems: 'center',
                     }}>
-                      <Text style={[TextStyles.STYLE_2_A20, { color: "white", marginBottom: 15 }]}>Login</Text>
+                      <Text style={[TextStyles.STYLE_2_A20, { color: "white", marginBottom: 15 }]}>Set Password</Text>
 
 
 
@@ -200,36 +190,8 @@ const Login = () => {
 
                       <CustomTextInput
                         boxWidth={'90%'}
-                        label={"Email / Phone number"}
-                        placeholder={'Enter email or phone number'}
-                        bgColor={'white'}
-                        // bgColor={'transparent'}
-                        containerStyle={{ borderRadius: 10 }}
-                        asterisksymbol={true}
-                        inputRef={inputRefs?.emailorPhoneNumber}
-                        labelStyle={{ color: 'white' }}
-                        InputStyle={{ color: 'black' }}
-                        placeholderTextColor={'#4C5664'}
-                        name='age'
-                        value={values?.emailorPhoneNumber}
-                        onChangeText={(e) => {
-                          handleChange("emailorPhoneNumber")(e);
-                          seterrorFormAPI();
-                        }}
-                        onBlur={handleBlur("emailorPhoneNumber")}
-                        validate={handleBlur("emailorPhoneNumber")}
-                        keyboardType="email-address"
-                        outlined
-                        returnKeyType="next"
-                        onSubmitEditing={() => inputRefs?.password.current?.focus()}
-                        borderColor={`${(errors.emailorPhoneNumber && touched.emailorPhoneNumber) || (errorFormAPI && errorFormAPI.emailorPhoneNumberForm) ? borderColorErrorInput : borderColorInput}`}
-                        errorMessage={`${(errors.emailorPhoneNumber && touched.emailorPhoneNumber) ? `${errors.emailorPhoneNumber}` : (errorFormAPI && errorFormAPI.emailorPhoneNumberForm) ? `${errorFormAPI.emailorPhoneNumberForm}` : ``}`}
-                      />
-
-                      <CustomTextInput
-                        boxWidth={'90%'}
-                        label={'Password'}
-                        placeholder={'Please enter your password'}
+                        label={'New Password'}
+                        placeholder={'Please enter your new password'}
                         bgColor={'white'}
                         // bgColor={'transparent'}
                         asterisksymbol={true}
@@ -262,17 +224,54 @@ const Login = () => {
 
 
 
+                      <CustomTextInput
+                        boxWidth={'90%'}
+                        label={'Re-Enter New Password'}
+                        placeholder={'Please Re-enter your password'}
+                        bgColor={'white'}
+                        // bgColor={'transparent'}
+                        asterisksymbol={true}
+                        inputRef={inputRefs?.password_confirmation}
+                        labelStyle={{ color: 'white' }}
+                        InputStyle={{ color: 'black' }}
+                        placeholderTextColor={'#4C5664'}
+                        name='age'
+                        value={values?.password_confirmation}
+                        secure={!show?.password_confirmation}
+                        containerStyle={{ borderRadius: 10 }}
+                        rightIcon={<Pressable onPress={() => setShow({ ...setShow, password_confirmation: !show?.password_confirmation })}>
+                          {!show?.password_confirmation ? (
+                            <Entypo name="eye-with-line" size={20} color="black" />) : (
+                            <Entypo name="eye" size={20} color="black" />)
+                          }
+                        </Pressable>
+                        }
+                        onChangeText={(e) => {
+                          handleChange("password_confirmation")(e);
+                          seterrorFormAPI();
+                        }}
+                        onBlur={handleBlur("password_confirmation")}
+                        validate={handleBlur("password_confirmation")}
+                        outlined
+                        returnKeyType="next"
+                        borderColor={`${(errors.password_confirmation && touched.password_confirmation) || (errorFormAPI && errorFormAPI.password_confirmationForm) ? borderColorErrorInput : borderColorInput}`}
+                        errorMessage={`${(errors.password_confirmation && touched.password_confirmation) ? `${errors.password_confirmation}` : (errorFormAPI && errorFormAPI.password_confirmationForm) ? `${errorFormAPI.password_confirmationForm}` : ``}`}
+                      />
+
+
+
                       <View style={{
                         width: "90%",
                         flexDirection: 'row',
                         justifyContent: 'space-between',
                       }}>
-                        {true ? <TouchableOpacity onPress={() => { navigation.navigate("Register"); seterrorFormAPI() }} style={{}}>
-                          <Text style={[{ color: 'white', fontWeight: 600 }]}>New User? Sign Up </Text></TouchableOpacity> : <View></View>}
+                        {true ? <TouchableOpacity onPress={() => { navigation.navigate("Login"); seterrorFormAPI() }} style={{}}>
+                          <Text style={[{ color: 'white', fontWeight: 600 }]}>Back to login</Text></TouchableOpacity> : <View></View>}
 
 
-                        <TouchableOpacity onPress={() => { navigation.navigate("Forgetpassword"); seterrorFormAPI() }} style={{}}>
-                          <Text style={[{ color: 'white', fontWeight: 600, fontSize: 13 }]}>Forget Password?</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={() => { navigation.navigate("Forget Password"); seterrorFormAPI() }} style={{}} disabled>
+                          {/* <Text style={[{ color: 'white', fontWeight: 600, fontSize: 13 }]}>Forget Password?</Text> */}
+                        </TouchableOpacity>
                       </View>
 
 
@@ -288,7 +287,7 @@ const Login = () => {
                           }}
                           textStyling={[{ color: "#283E71" }]}
                           isLoading={spinnerbool}
-                          style={{}}><Entypo name="login" size={20} color="#283E71" /> Log in</CustomButton1>
+                          style={{}}>Save</CustomButton1>
                       </View>
                     </View>
                   </SafeAreaView>
@@ -306,6 +305,6 @@ const Login = () => {
   )
 }
 
-export default Login
+export default ForgetSetpassword
 
 const styles = StyleSheet.create({})

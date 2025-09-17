@@ -2,7 +2,7 @@ import { Alert, RefreshControl, ScrollView, StyleSheet, Text, TouchableOpacity, 
 import React, { useCallback, useEffect, useState } from 'react'
 import CustomStatusBar from '../../../../components/UI/CustomStatusBar/CustomStatusBar'
 import LoaderComponents from '../../../../components/UI/Loadings/LoaderComponents';
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { CustomLinking } from '../../../../utills/CustomLinking';
 import { SERVICE_PROVIDER_WEBSITE } from '../../../../Enviornment';
 import { Image, ImageBackground } from 'expo-image';
@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { UserGetProfileDetails } from '../../../../network/API_Calls';
 import { useNavigation } from '@react-navigation/native';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { CustomAlerts_LogOut } from '../../../../utills/CustomReuseAlerts';
+import { logoutFunctions } from '../../../../utills/LogOut';
 
 const Profile = () => {
   let tokenn = useSelector((state) => state.login.token);
@@ -59,6 +61,16 @@ const Profile = () => {
   }, [])
 
 
+  const LogOutAlert = async () => {
+    CustomAlerts_LogOut(
+      undefined, undefined,
+      () => {
+        logoutFunctions(dispatch)
+      }
+    )
+  }
+
+
   const AccountData = [
     {
       name: "Profile",
@@ -106,116 +118,116 @@ const Profile = () => {
     },
     {
       name: "Log out",
-      onPress: () => { navigation.navigate("ChangePassword") },
+      onPress: () => { LogOutAlert() },
       IconImage: require("../../../../assets/Image/ProfileLogos/trash.png"),
       isDisplay: true
     },
   ]
- return (
-  <View style={{ flex: 1, backgroundColor: 'white' }}>
-    <CustomStatusBar barStyle="dark-content" backgroundColor="white" />
-    <LoaderComponents visible={spinnerbool} />
+  return (
+    <View style={{ flex: 1, backgroundColor: 'white' }}>
+      <CustomStatusBar barStyle="dark-content" backgroundColor="white" />
+      <LoaderComponents visible={spinnerbool} />
 
-    <ScrollView
-      style={{ flex: 1 }}
-      contentContainerStyle={{ padding: 16 }}
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }
-    >
-      {/* Profile Header */}
-      <TouchableOpacity
-        activeOpacity={0.6}
-        onPress={() => navigation.navigate("FullProfile")}
-        style={{ marginBottom: 20 }}
+      <ScrollView
+        style={{ flex: 1 }}
+        contentContainerStyle={{ padding: 16 }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       >
-        <View style={styles.profileRow}>
-          <View style={styles.profileLeft}>
-            <View style={styles.outerCircle}>
-              <ImageBackground
-                style={styles.innerCircle}
-                source={require("../../../../assets/Image/profile.png")}
-              >
-                <Text style={styles.letter}>{StartingLetter?.toUpperCase()}</Text>
-              </ImageBackground>
-            </View>
-            <View style={{ marginLeft: 14 }}>
-              <Text style={styles.Heading_u3}>{UserName}</Text>
-              <Text style={{ color: '#666' }}>Show profile</Text>
-            </View>
-          </View>
-          <AntDesign name="right" size={18} color="black" />
-        </View>
-      </TouchableOpacity>
-
-      {/* Accounts Section */}
-      <View style={{ marginBottom: 28 }}>
-        <Text style={[styles.Heading_u2, { marginBottom: 20 }]}>Accounts</Text>
-        {AccountData.map((item, index) => (
-          <TouchableOpacity
-            key={index}
-            style={styles.listRow}
-            onPress={item.onPress}
-          >
-            <View style={styles.listLeft}>
-              <Image source={item.IconImage} style={styles.icon} />
-              <Text style={styles.Heading_u3}>{item.name}</Text>
-            </View>
-            <AntDesign name="right" size={16} color="black" />
-          </TouchableOpacity>
-        ))}
-      </View>
-
-      {/* More Section */}
-      <View style={{ marginBottom: 28 }}>
-        <Text style={[styles.Heading_u2, { marginBottom: 20 }]}>More</Text>
-        {MoreData.map((item, index) => (
-          <TouchableOpacity
-            key={index}
-            style={styles.listRow}
-            onPress={item.onPress}
-          >
-            <View style={styles.listLeft}>
-              <Image source={item.IconImage} style={styles.icon} />
-              <Text style={styles.Heading_u3}>{item.name}</Text>
-            </View>
-            <AntDesign name="right" size={16} color="black" />
-          </TouchableOpacity>
-        ))}
-      </View>
-
-      {/* Version Info */}
-      <View style={{ marginVertical: 10 }}>
-        <Text style={{ color: '#001F2099', textAlign: 'center' }}>
-          Version 2.2.0
-        </Text>
+        {/* Profile Header */}
         <TouchableOpacity
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'row',
-            marginTop: 8,
-          }}
-          onPress={() => {
-            CustomLinking(SERVICE_PROVIDER_WEBSITE);
-          }}
+          activeOpacity={0.6}
+          onPress={() => navigation.navigate("FullProfile")}
+          style={{ marginBottom: 20 }}
         >
-          <MaterialIcons name="copyright" size={15} />
-          <Text
+          <View style={styles.profileRow}>
+            <View style={styles.profileLeft}>
+              <View style={styles.outerCircle}>
+                <ImageBackground
+                  style={styles.innerCircle}
+                  source={require("../../../../assets/Image/profile.png")}
+                >
+                  <Text style={styles.letter}>{StartingLetter?.toUpperCase()}</Text>
+                </ImageBackground>
+              </View>
+              <View style={{ marginLeft: 14 }}>
+                <Text style={styles.Heading_u3}>{UserName}</Text>
+                <Text style={{ color: '#666' }}>Show profile</Text>
+              </View>
+            </View>
+            <AntDesign name="right" size={18} color="black" />
+          </View>
+        </TouchableOpacity>
+
+        {/* Accounts Section */}
+        <View style={{ marginBottom: 28 }}>
+          <Text style={[styles.Heading_u2, { marginBottom: 20 }]}>Accounts</Text>
+          {AccountData.map((item, index) => (
+            <TouchableOpacity
+              key={index}
+              style={styles.listRow}
+              onPress={item.onPress}
+            >
+              <View style={styles.listLeft}>
+                <Image source={item.IconImage} style={styles.icon} />
+                <Text style={styles.Heading_u3}>{item.name}</Text>
+              </View>
+              <AntDesign name="right" size={16} color="black" />
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        {/* More Section */}
+        <View style={{ marginBottom: 28 }}>
+          <Text style={[styles.Heading_u2, { marginBottom: 20 }]}>More</Text>
+          {MoreData.map((item, index) => (
+            <TouchableOpacity
+              key={index}
+              style={styles.listRow}
+              onPress={item.onPress}
+            >
+              <View style={styles.listLeft}>
+                {item.name == "Log out" ? <MaterialCommunityIcons name={'logout'} size={22} color={'black'} style={styles.icon}/> :item.name == "Delete Account Policy" ?<MaterialIcons name="policy" size={24} color="black" style={styles.icon}/> :<Image source={item.IconImage} style={styles.icon} />}
+                <Text style={styles.Heading_u3}>{item.name}</Text>
+              </View>
+              <AntDesign name="right" size={16} color="black" />
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        {/* Version Info */}
+        <View style={{ marginVertical: 10 }}>
+          <Text style={{ color: '#001F2099', textAlign: 'center' }}>
+            Version 2.2.0
+          </Text>
+          <TouchableOpacity
             style={{
-              fontWeight: 'bold',
-              marginLeft: 5,
-              fontSize: 15,
-              color:"black"
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'row',
+              marginTop: 8,
+            }}
+            onPress={() => {
+              CustomLinking(SERVICE_PROVIDER_WEBSITE);
             }}
           >
-            Analogue IT Solutions
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
-  </View>
-);
+            <MaterialIcons name="copyright" size={15} />
+            <Text
+              style={{
+                fontWeight: 'bold',
+                marginLeft: 5,
+                fontSize: 15,
+                color: "black"
+              }}
+            >
+              Analogue IT Solutions
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </View>
+  );
 }
 export default Profile;
 const styles = StyleSheet.create({
@@ -243,10 +255,10 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     lineHeight: 20,
   },
-  container:{
-    width:'100%',
-    flex:1,
-    
+  container: {
+    width: '100%',
+    flex: 1,
+
   },
 
 
@@ -255,7 +267,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 75,
-    overflow: 'hidden', 
+    overflow: 'hidden',
   },
   innerCircle: {
     flex: 1,
@@ -267,31 +279,29 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   profileRow: {
-  flexDirection: 'row',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-},
-profileLeft: {
-  flexDirection: 'row',
-  alignItems: 'center',
-},
-listRow: {
-  flexDirection: 'row',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  paddingVertical: 12,
-  borderBottomWidth: 1,
-  borderBottomColor: '#eee',
-},
-listLeft: {
-  flexDirection: 'row',
-  alignItems: 'center',
-},
-icon: {
-  width: 24,
-  height: 24,
-  marginRight: 12,
-},
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  profileLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  listRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 12,
+  },
+  listLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  icon: {
+    width: 24,
+    height: 24,
+    marginRight: 12,
+  },
 
 
 });

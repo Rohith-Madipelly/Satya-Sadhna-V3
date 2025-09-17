@@ -118,63 +118,37 @@ export const LivePageData = async (token) => {
 };
 
 
-// User Login API Call 
-export const UserLoginApi = async (loginFormData,) => {
-  console.log(">>", loginFormData)
-  // const loginData = {
-  //   email: "madipel",
-  //   password: password
-  // };
+// User Login API Call  // DONE ?? VERI
+export const UserLoginApi = async (loginFormData) => {
+  console.log("dsjb",loginFormData)
   return await axios.post(`${GUEST_URL}/login`, loginFormData);
 };
 
 
 // User Registertion API Call 
-export const UserRegisterApi = async (username, email, phone_number, password) => {
-  const loginData = {
-    phone_number: phone_number,
-    email: email,
-    username: username,
-    password: password
-  };
+export const UserRegisterApi = async (loginData) => {
   return await axios.post(`${GUEST_URL}/register`, loginData);
 };
 
 
 // User Forgot OTP Send API Call 
-export const UserForgotOTPApi = async (email) => {
-  const loginData = {
-    email: email,
-  };
-  console.log(loginData)
-  return await axios.post(`${GUEST_URL}/otp`, loginData);
+export const UserForgotOTPApi = async (ReqData) => {
+  return await axios.post(`${GUEST_URL}/otp`, ReqData);
 };
 
 
 
 // User Forgot OTP verifyotp API Call 
-export const UserVerifyOtp = async (email, userOtp) => {
-
-  console.log("otp is ",)
-  const ReqData = {
-    email: email,
-    userOtp: userOtp
-  };
-
-  return await axios.post(`${GUEST_URL}/verifyotp`, ReqData);
+export const UserVerifyOtp = async (reqData) => {
+  console.log("reqData",reqData)
+  return await axios.post(`${GUEST_URL}/verifyotp`, reqData);
 };
 
 
 
 // User Forgot OTP verifyotp API Call 
-export const ForgotApiPassRest = async (email, password) => {
-  console.log(">>>>>>>>>>", email, password)
-  const ReqData = {
-    email: email,
-    password: password
-  };
-
-  return await axios.post(`${GUEST_URL}/forgotpassword`, ReqData);
+export const ForgotApiPassRest = async (reqData) => {
+  return await axios.post(`${GUEST_URL}/forgotpassword`, reqData);
 };
 
 

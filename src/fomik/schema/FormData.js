@@ -21,7 +21,7 @@ const FormData = Yup.object().shape({
         .matches(/^[a-zA-Z ]*$/, "Name must contain only letters and spaces"),
 
     // >>>>>>>>>
-    gender: Yup.string().required("Gender is a required field").oneOf(["Male", "Female"], "Invalid gender"),
+    gender: Yup.string().required("Gender is a required field").oneOf(["Male", "Female","Other"], "Invalid gender"),
 
     age: Yup.string()
         .trim()
@@ -117,13 +117,13 @@ const FormData = Yup.object().shape({
     personName: Yup.string(),
     personRelation: Yup.string(),
 
-    courseDone: Yup.string().oneOf(["yes", "no"], "Invalid course done yes or no"),
+    courseDone: Yup.string().oneOf(["Yes", "No"], "Invalid course done yes or no"),
 
     // relation: Yup.string(),
 
        relation: Yup.string()
         .when(['courseDone'], ([courseDone], schema) => {
-            if (courseDone === "yes")
+            if (courseDone === "Yes")
                 return schema
                     .required('Family person`s relation is required')
             return
@@ -133,6 +133,8 @@ const FormData = Yup.object().shape({
     designation: Yup.string(),
     companyName: Yup.string(),
     companyAddress: Yup.string(),
+
+
     inPastOne: Yup.string(),
     inPresentOne: Yup.string().required('Physical Ailment in present field is required'),
     inPastTwo: Yup.string(),

@@ -9,30 +9,19 @@ import Metrics from './src/utills/ResposivesUtils/Metrics';
 import { ToastProvider } from 'react-native-toast-notifications';
 
 export default function App() {
-  // Register the playback service
 
   return (
     <Provider store={store}>
 
       <AudioProvider>
         <ToastProvider
-          // renderType={{
-          //   custom_type: (toast) => (
-          //     <View style={{ padding: 15, backgroundColor: 'grey' }}>
-          //       <Text>{toast.message}</Text>
-          //     </View>
-          //   )
-          // }}
           placement="bottom"
           duration={5000}
           animationType='slide-in'
           animationDuration={250}
           successColor="green"
           dangerColor="red"
-          // dangerColor="red"
           warningColor="orange"
-          // normalColor="rgba(100, 116, 139, 1)"
-          // textStyle={{ fontSize: 20 }}
           offset={50} // offset for both top and bottom toasts
           offsetTop={1}
           offsetBottom={Metrics.rfv(70)}
