@@ -242,14 +242,14 @@ export const PrivacyPolicyAPI = async (token) => {
 
 
 //Profile PasswordChange
-export const ChangePasswordAPI = async (old_password, New_Password, tokenn) => {
-  const ReqData = {
-    oldPassword: old_password,
-    newPassword: New_Password,
+export const ChangePasswordAPI = async (values, tokenn) => {
+  console.log("tokenn",tokenn)
+  const reqData = {
+    oldPassword: "Rohith@7",
+    newPassword: values.password_confirmation,
   };
 
-  return await axios.post(`${GUEST_URL}/user/changepassword`
-    , ReqData, {
+  return await axios.post(`${GUEST_URL}/user/changepassword`, reqData, {
     headers: {
       'Authorization': `Bearer ${tokenn}`
     }

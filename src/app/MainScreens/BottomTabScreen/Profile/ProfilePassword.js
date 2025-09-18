@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, ImageBackground, Dimensions, TextInput, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, TouchableOpacity, Platform, ScrollView, RefreshControl, Button, Alert, Pressable } from 'react-native'
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { UserGetProfileDetails, UserUpdatedProfileDetails, UserUpdatedProfilePic, UserUpdatedProfilePic123 } from '../../../../network/API_Calls'
+import { ChangePasswordAPI, ForgotApiPassRest, UserGetProfileDetails, UserUpdatedProfileDetails, UserUpdatedProfilePic, UserUpdatedProfilePic123 } from '../../../../network/API_Calls'
 import Spinner from 'react-native-loading-spinner-overlay';
 import { useNavigation } from '@react-navigation/native';
 
@@ -24,6 +24,7 @@ import { logoutFunctions } from '../../../../utills/LogOut';
 import { useToast } from 'react-native-toast-notifications';
 import { useFormik } from 'formik';
 import { ForgetSetPageYupSchema } from '../../../../FormikYupSchema/ForgetSetPageYupSchema';
+import HandleErrors from '../../../../utills/HandleErrors';
 
 
 const ProfilePassword = ({ route }) => {
@@ -31,7 +32,7 @@ const ProfilePassword = ({ route }) => {
 
     const { params } = route;
     const paramsEmail = params?.email || 'madipellyrohith@gmail.com';
-
+    let tokenn = useSelector((state) => state.login.token);
 
     const [spinnerbool, setSpinnerbool] = useState(false)
     const [errorFormAPI, seterrorFormAPI] = useState("")
@@ -57,11 +58,11 @@ const ProfilePassword = ({ route }) => {
         initialValues: {
             email: paramsEmail ? paramsEmail : "",
             password: "",
-            password_confirmation: ""
+            password_confirmation: "",
+            oldPassword:""
         },
         onSubmit: values => {
             {
-                console.log("mhgjhvgj")
                 submitHandler(values)
             }
         },
@@ -70,21 +71,26 @@ const ProfilePassword = ({ route }) => {
             const errors = {};
             return errors;
         },
-
     });
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            title: 'Change Password' // 👈 You can change this dynamically
+        });
+    }, [navigation]);
+
+
 
     const submitHandler = async (values) => {
         setSpinnerbool(true)
         try {
-            const res = await ForgotApiPassRest(values)
+            const res = await ChangePasswordAPI(values, tokenn)
             if (res.data) {
                 console.log("res", res.data)
-
                 toast.show("Password updated successfully!")
-                navigation.navigate("Login", { email: values.email })
 
                 setTimeout(() => {
                     resetForm()
+                    navigation.goBack()
                 }, 200);
             }
         } catch (error) {
@@ -96,16 +102,13 @@ const ProfilePassword = ({ route }) => {
                 else if (error.response.status === 404) {
                     seterrorFormAPI({ emailForm: `${error.response.data?.message || error.response.data?.error}` })
                 }
-                else {
-                    Alert.alert("Error", error.response.data?.error)
-                }
             }
             else {
                 HandleErrors(error, navigation, dispatch)
             }
         } finally {
             setSpinnerbool(false)
-            setRefreshing(true)
+            setRefreshing(false)
         }
 
     }
@@ -114,6 +117,7 @@ const ProfilePassword = ({ route }) => {
         password_confirmation: useRef(null),
         email: useRef(null),
         password: useRef(null),
+        oldPassword: useRef(null),
     };
 
     const borderColorInput = "#ccc"
@@ -194,39 +198,74 @@ const ProfilePassword = ({ route }) => {
 
                     <View style={{ flex: 0.4, width: '100%', marginTop: 30, justifyContent: 'center', alignItems: 'center' }}>
 
-                         <CustomTextInput
-                        boxWidth={'90%'}
-                        label={'New Password'}
-                        placeholder={'Please enter your new password'}
-                        bgColor={'white'}
-                        // bgColor={'transparent'}
-                        asterisksymbol={true}
-                        inputRef={inputRefs?.password}
+                        <CustomTextInput
+                            boxWidth={'90%'}
+                            label={'Old Password'}
+                            placeholder={'Please enter your old password'}
+                            bgColor={'white'}
+                            // bgColor={'transparent'}
+                            asterisksymbol={true}
+                            inputRef={inputRefs?.oldPassword}
                             labelStyle={{ color: '#4C5664' }}
                             InputStyle={{ color: '#4C5664' }}
                             placeholderTextColor={'#4C5664'}
-                        name='age'
-                        value={values?.password}
-                        secure={!show?.password}
-                        containerStyle={{ borderRadius: 10 }}
-                        rightIcon={<Pressable onPress={() => setShow({ ...setShow, password: !show?.password })}>
-                          {!show?.password ? (
-                            <Entypo name="eye-with-line" size={20} color="black" />) : (
-                            <Entypo name="eye" size={20} color="black" />)
-                          }
-                        </Pressable>
-                        }
-                        onChangeText={(e) => {
-                          handleChange("password")(e);
-                          seterrorFormAPI();
-                        }}
-                        onBlur={handleBlur("password")}
-                        validate={handleBlur("password")}
-                        outlined
-                        returnKeyType="next"
-                        borderColor={`${(errors.password && touched.password) || (errorFormAPI && errorFormAPI.passwordForm) ? borderColorErrorInput : borderColorInput}`}
-                        errorMessage={`${(errors.password && touched.password) ? `${errors.password}` : (errorFormAPI && errorFormAPI.passwordForm) ? `${errorFormAPI.passwordForm}` : ``}`}
-                      />
+                            name='age'
+                            value={values?.oldPassword}
+                            secure={!show?.oldPassword}
+                            containerStyle={{ borderRadius: 10 }}
+                            rightIcon={<Pressable onPress={() => setShow({ ...setShow, oldPassword: !show?.oldPassword })}>
+                                {!show?.oldPassword ? (
+                                    <Entypo name="eye-with-line" size={20} color="black" />) : (
+                                    <Entypo name="eye" size={20} color="black" />)
+                                }
+                            </Pressable>
+                            }
+                            onChangeText={(e) => {
+                                handleChange("oldPassword")(e);
+                                seterrorFormAPI();
+                            }}
+                            onBlur={handleBlur("oldPassword")}
+                            validate={handleBlur("oldPassword")}
+                            outlined
+                            returnKeyType="next"
+                            borderColor={`${(errors.oldPassword && touched.oldPassword) || (errorFormAPI && errorFormAPI.oldPasswordForm) ? borderColorErrorInput : borderColorInput}`}
+                            errorMessage={`${(errors.oldPassword && touched.oldPassword) ? `${errors.oldPassword}` : (errorFormAPI && errorFormAPI.oldPasswordForm) ? `${errorFormAPI.oldPasswordForm}` : ``}`}
+                        />
+
+
+                        <CustomTextInput
+                            boxWidth={'90%'}
+                            label={'New Password'}
+                            placeholder={'Please enter your new password'}
+                            bgColor={'white'}
+                            // bgColor={'transparent'}
+                            asterisksymbol={true}
+                            inputRef={inputRefs?.password}
+                            labelStyle={{ color: '#4C5664' }}
+                            InputStyle={{ color: '#4C5664' }}
+                            placeholderTextColor={'#4C5664'}
+                            name='age'
+                            value={values?.password}
+                            secure={!show?.password}
+                            containerStyle={{ borderRadius: 10 }}
+                            rightIcon={<Pressable onPress={() => setShow({ ...setShow, password: !show?.password })}>
+                                {!show?.password ? (
+                                    <Entypo name="eye-with-line" size={20} color="black" />) : (
+                                    <Entypo name="eye" size={20} color="black" />)
+                                }
+                            </Pressable>
+                            }
+                            onChangeText={(e) => {
+                                handleChange("password")(e);
+                                seterrorFormAPI();
+                            }}
+                            onBlur={handleBlur("password")}
+                            validate={handleBlur("password")}
+                            outlined
+                            returnKeyType="next"
+                            borderColor={`${(errors.password && touched.password) || (errorFormAPI && errorFormAPI.passwordForm) ? borderColorErrorInput : borderColorInput}`}
+                            errorMessage={`${(errors.password && touched.password) ? `${errors.password}` : (errorFormAPI && errorFormAPI.passwordForm) ? `${errorFormAPI.passwordForm}` : ``}`}
+                        />
 
 
                         <CustomTextInput
@@ -270,7 +309,7 @@ const ProfilePassword = ({ route }) => {
                             boxWidth={'86%'}
 
                             onPress={() => {
-                                LogOutAlert()
+                                handleSubmit()
                             }}
                             bgColor={'rgba(3, 3, 112, 1)'}
                             textStyling={[{ color: "white" }]}
