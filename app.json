@@ -1,7 +1,6 @@
 {
   "expo": {
     "name": "Satya Sadhna",
-    "slug": "Satya_Sadhna",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -14,7 +13,6 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.testerpackage.Satya-Sadhna-App",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
@@ -25,8 +23,7 @@
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true,
-      "package": "com.testerpackage.Satya_Sadhna_App"
+      "edgeToEdgeEnabled": true
     },
     "plugins": [
       "expo-font",
@@ -51,7 +48,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "c84e3350-376a-4faf-bf1b-836fdd641281"
+        "projectId": "a0b43a8f-d116-470b-80f5-0c24ee923f55"
       }
     }
   }
