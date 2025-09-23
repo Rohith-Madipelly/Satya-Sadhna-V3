@@ -138,15 +138,15 @@ const CourseRegistration2 = ({ route }) => {
                 <View style={styles.courseDetails}>
                   <View>
                     <Text style={styles.bold}>From</Text>
-                    <Text>{item.from}</Text>
+                    <Text style={{color:'black'}}>{item.from}</Text>
                   </View>
                   <View>
                     <Text style={styles.bold}>Course duration</Text>
-                    <Text>{item.courseDuration}</Text>
+                    <Text style={{color:'black'}}>{item.courseDuration}</Text>
                   </View>
                   <View>
                     <Text style={styles.bold}>To</Text>
-                    <Text>{item.to}</Text>
+                    <Text style={{color:'black'}}>{item.to}</Text>
                   </View>
                 </View>
               </ImageBackground>
@@ -233,6 +233,7 @@ const styles = StyleSheet.create({
   },
   bold: {
     fontWeight: '700',
+    color:'black'
   },
   courseDetails: {
     flexDirection: 'row',

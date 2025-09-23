@@ -12,7 +12,7 @@ const Donation = ({ navigation }) => {
     <ScrollView style={styles.container}>
      <CustomStatusBar barStyle="dark-content" backgroundColor="white" />
       <View style={{ marginBottom: 10 }}>
-        <Text style={{ textAlign: 'justify', fontSize:Metrics.rfv(16), fontFamily: 'Gabarito-VariableFont' }}>
+        <Text style={{ textAlign: 'justify', fontSize:Metrics.rfv(16), fontFamily: 'Gabarito-VariableFont',color:'#8f8c8cff' }}>
           सत्य साधना केंद्र, नाल-बीकानेर व खेयादा-कोलकाता में सत्य साधना शिविरों के निःशुल्क संचालन, प्रबंधन और आवास, भोजन आदि
           मूलभूत सुविधाएँ आपकी सेवा और दान से संभव होती है | सत्य साधना जैसी
           महान विधि का लाभ पूरा विश्व ले सके इसके लिए आप भी योगदान दे सकते
