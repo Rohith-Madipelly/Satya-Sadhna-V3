@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Satya Sadhna",
-    "version": "1.0.0",
+    "version": "2.2.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -13,16 +13,24 @@
     },
     "ios": {
       "supportsTablet": true,
+      "bundleIdentifier": "vardhaman.satyasadhnaOne",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
+      "permissions": [
+        "FOREGROUND_SERVICE",
+        "WAKE_LOCK",
+        "INTERNET"
+      ],
+      "versionCode": 21,
       "softwareKeyboardLayoutMode": "pan",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
       },
+      "package": "vardhaman.satyasadhnaOne",
       "edgeToEdgeEnabled": true
     },
     "plugins": [
@@ -51,5 +59,6 @@
         "projectId": "a0b43a8f-d116-470b-80f5-0c24ee923f55"
       }
     }
-  }
+  },
+  "owner": "satya-sadhna-app"
 }

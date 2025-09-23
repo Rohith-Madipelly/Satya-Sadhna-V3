@@ -544,6 +544,7 @@ const CourseRegistration3 = ({ route }) => {
                 onBlur={handleBlur("gender")}
                 validate={handleBlur("gender")}
                 outlined
+                dropdownHeight={genderData.length <= 4 ? (genderData.length * 50) : 210}
                 borderColor={`${(errors.gender && touched.gender) || (errorFormAPI && errorFormAPI.genderForm) ? borderColorErrorInput : borderColorInput}`}
                 errorMessage={`${(errors.gender && touched.gender) ? `${errors.gender}` : (errorFormAPI && errorFormAPI.genderForm) ? `${errorFormAPI.genderForm}` : ``}`}
                 DropDownArrowColor="#4C5664"
@@ -622,6 +623,7 @@ const CourseRegistration3 = ({ route }) => {
                 onBlur={handleBlur("state")}
                 validate={handleBlur("state")}
                 outlined
+                dropdownHeight={stateData.length <= 4 ? (stateData.length * 50) : 210}
                 borderColor={`${(errors.state) || (errorFormAPI && errorFormAPI.stateForm) ? borderColorErrorInput : borderColorInput}`}
                 errorMessage={`${(errors.state) ? `${errors.state}` : (errorFormAPI && errorFormAPI.stateForm) ? `${errorFormAPI.stateForm}` : ``}`}
                 DropDownArrowColor="#4C5664"
@@ -730,6 +732,7 @@ const CourseRegistration3 = ({ route }) => {
                 onBlur={handleBlur("martialStatus")}
                 validate={handleBlur("martialStatus")}
                 outlined
+                dropdownHeight={martialStatusData.length <= 4 ? (martialStatusData.length * 50) : 210}
                 borderColor={`${(errors.martialStatus && touched.martialStatus) || (errorFormAPI && errorFormAPI.martialStatusForm) ? borderColorErrorInput : borderColorInput}`}
                 errorMessage={`${(errors.martialStatus && touched.martialStatus) ? `${errors.martialStatus}` : (errorFormAPI && errorFormAPI.martialStatusForm) ? `${errorFormAPI.martialStatusForm}` : ``}`}
                 DropDownArrowColor="#4C5664"
@@ -755,6 +758,7 @@ const CourseRegistration3 = ({ route }) => {
                 onBlur={handleBlur("language")}
                 validate={handleBlur("language")}
                 outlined
+                dropdownHeight={languageData.length <= 4 ? (languageData.length * 50) : 210}
                 borderColor={`${(errors.language && touched.language) || (errorFormAPI && errorFormAPI.languageForm) ? borderColorErrorInput : borderColorInput}`}
                 errorMessage={`${(errors.language && touched.language) ? `${errors.language}` : (errorFormAPI && errorFormAPI.languageForm) ? `${errorFormAPI.languageForm}` : ``}`}
                 DropDownArrowColor="#4C5664"
@@ -877,6 +881,7 @@ const CourseRegistration3 = ({ route }) => {
                 onBlur={handleBlur("courseDone")}
                 validate={handleBlur("courseDone")}
                 outlined
+                dropdownHeight={courseDoneDate.length <= 4 ? (courseDoneDate.length * 50) : 210}
                 borderColor={`${(errors.courseDone && touched.courseDone) || (errorFormAPI && errorFormAPI.courseDoneForm) ? borderColorErrorInput : borderColorInput}`}
                 errorMessage={`${(errors.courseDone && touched.courseDone) ? `${errors.courseDone}` : (errorFormAPI && errorFormAPI.courseDoneForm) ? `${errorFormAPI.courseDoneForm}` : ``}`}
                 DropDownArrowColor="#4C5664"
@@ -1047,6 +1052,7 @@ const CourseRegistration3 = ({ route }) => {
                   onBlur={handleBlur("inPastTwo")}
                   validate={handleBlur("inPastTwo")}
                   outlined
+                  dropdownHeight={inPastTwoData.length <= 4 ? (inPastTwoData.length * 50) : 210}
                   borderColor={`${(errors.inPastTwo && touched.inPastTwo) || (errorFormAPI && errorFormAPI.inPastTwoForm) ? borderColorErrorInput : borderColorInput}`}
                   errorMessage={`${(errors.inPastTwo && touched.inPastTwo) ? `${errors.inPastTwo}` : (errorFormAPI && errorFormAPI.inPastTwoForm) ? `${errorFormAPI.inPastTwoForm}` : ``}`}
                   DropDownArrowColor="#4C5664"
@@ -1072,6 +1078,7 @@ const CourseRegistration3 = ({ route }) => {
                   onBlur={handleBlur("inPresentTwo")}
                   validate={handleBlur("inPresentTwo")}
                   outlined
+                  dropdownHeight={inPresentTwoData.length <= 4 ? (inPresentTwoData.length * 50) : 210}
                   borderColor={`${(errors.inPresentTwo && touched.inPresentTwo) || (errorFormAPI && errorFormAPI.inPresentTwoForm) ? borderColorErrorInput : borderColorInput}`}
                   errorMessage={`${(errors.inPresentTwo && touched.inPresentTwo) ? `${errors.inPresentTwo}` : (errorFormAPI && errorFormAPI.inPresentTwoForm) ? `${errorFormAPI.inPresentTwoForm}` : ``}`}
                   DropDownArrowColor="#4C5664"
@@ -1099,6 +1106,7 @@ const CourseRegistration3 = ({ route }) => {
                   onBlur={handleBlur("FitnessCertificate")}
                   validate={handleBlur("FitnessCertificate")}
                   outlined
+                  dropdownHeight={FitnessCertificateData.length <= 4 ? (FitnessCertificateData.length * 50) : 210}
                   borderColor={`${(errors.FitnessCertificate && touched.FitnessCertificate) || (errorFormAPI && errorFormAPI.FitnessCertificateForm) ? borderColorErrorInput : borderColorInput}`}
                   errorMessage={`${(errors.FitnessCertificate && touched.FitnessCertificate) ? `${errors.FitnessCertificate}` : (errorFormAPI && errorFormAPI.FitnessCertificateForm) ? `${errorFormAPI.FitnessCertificateForm}` : ``}`}
                   DropDownArrowColor="#4C5664"
@@ -1175,6 +1183,7 @@ const CourseRegistration3 = ({ route }) => {
                   validate={handleBlur("regularMedicine")}
                   outlined
                   containerStyle={{ elevation: 10, marginTop: 30 }}
+                  dropdownHeight={regularMedicineData.length <= 4 ? (regularMedicineData.length * 50) : 210}
                   borderColor={`${(errors.regularMedicine && touched.regularMedicine) || (errorFormAPI && errorFormAPI.regularMedicineForm) ? borderColorErrorInput : borderColorInput}`}
                   errorMessage={`${(errors.regularMedicine && touched.regularMedicine) ? `${errors.regularMedicine}` : (errorFormAPI && errorFormAPI.regularMedicineForm) ? `${errorFormAPI.regularMedicineForm}` : ``}`}
                   DropDownArrowColor="#4C5664"
@@ -1201,6 +1210,8 @@ const CourseRegistration3 = ({ route }) => {
                   onBlur={handleBlur("referenceFrom")}
                   validate={handleBlur("referenceFrom")}
                   outlined
+                  containerStyle={{ elevation: 10, marginTop: 30 }}
+                  dropdownHeight={referenceFromData.length <= 4 ? (referenceFromData.length * 50) : 210}
                   borderColor={`${(errors.referenceFrom && touched.referenceFrom) || (errorFormAPI && errorFormAPI.referenceFromForm) ? borderColorErrorInput : borderColorInput}`}
                   errorMessage={`${(errors.referenceFrom && touched.referenceFrom) ? `${errors.referenceFrom}` : (errorFormAPI && errorFormAPI.referenceFromForm) ? `${errorFormAPI.referenceFromForm}` : ``}`}
                   DropDownArrowColor="#4C5664"
@@ -1455,6 +1466,7 @@ const CourseRegistration3 = ({ route }) => {
                     onBlur={handleBlur("courseDetails")}
                     validate={handleBlur("courseDetails")}
                     outlined
+                                      dropdownHeight={courseDetailsData.length <= 4 ? (courseDetailsData.length * 50) : 210}
                     borderColor={`${(errors.courseDetails && touched.courseDetails) || (errorFormAPI && errorFormAPI.courseDetailsForm) ? borderColorErrorInput : borderColorInput}`}
                     errorMessage={`${(errors.courseDetails && touched.courseDetails) ? `${errors.courseDetails}` : (errorFormAPI && errorFormAPI.courseDetailsForm) ? `${errorFormAPI.courseDetailsForm}` : ``}`}
                     DropDownArrowColor="#4C5664"
@@ -1502,16 +1514,19 @@ const CourseRegistration3 = ({ route }) => {
                       handleChange("practiseRegularly")(e.name)
                       seterrorFormAPI();
                     }}
-                    containerStyle={{ elevation: 10, marginTop: 30 }}
+                    containerStyle={{ elevation: 10, marginTop: 10 }}
                     onBlur={handleBlur("practiseRegularly")}
                     validate={handleBlur("practiseRegularly")}
                     outlined
+                    dropdownHeight={practiseRegularlyData.length <= 4 ? (practiseRegularlyData.length * 50) : 210}
                     borderColor={`${(errors.practiseRegularly && touched.practiseRegularly) || (errorFormAPI && errorFormAPI.practiseRegularlyForm) ? borderColorErrorInput : borderColorInput}`}
                     errorMessage={`${(errors.practiseRegularly && touched.practiseRegularly) ? `${errors.practiseRegularly}` : (errorFormAPI && errorFormAPI.practiseRegularlyForm) ? `${errorFormAPI.practiseRegularlyForm}` : ``}`}
                     DropDownArrowColor="#4C5664"
                   />
 
                   {/* {values.practiseRegularly === "yes" || values.practiseRegularly === "Courses" ? ( */}
+
+
                   <>
                     <CustomTextInput
                       boxWidth={'85%'}

@@ -102,7 +102,7 @@ const FormData = Yup.object().shape({
     lastAsstTeacher: Yup.string(),
     courseDetails: Yup.string().oneOf(["10-Days", "20-Days", "30-Days", "50-Days", "60-Days", "Self-Course", "Service", "Courses"], "Invalid input"),
     triedAnyPractise: Yup.string(),
-    practiseRegularly: Yup.string().oneOf(["yes", "no", "Courses"], "Invalid input"),
+    practiseRegularly: Yup.string().oneOf(["Yes", "No", "Courses"], "Invalid input"),
 
 
 
@@ -195,17 +195,17 @@ const FormData = Yup.object().shape({
     }),
 
     changeInYourSelf: Yup.string().when('practiseRegularly', ([practiseRegularly], schema) => {
-        if (practiseRegularly === "yes")
+        if (practiseRegularly === "Yes")
             return schema.required("Required field")
         return
     }),
     dailyHours: Yup.string().when('practiseRegularly', ([practiseRegularly], schema) => {
-        if (practiseRegularly === "yes")
+        if (practiseRegularly === "Yes")
             return schema.required("Required field")
         return
     }),
     reason: Yup.string().when('practiseRegularly', ([practiseRegularly], schema) => {
-        if (practiseRegularly === "yes")
+        if (practiseRegularly === "Yes")
             return schema.required("Required field")
         return
     }),

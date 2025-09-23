@@ -16,7 +16,7 @@ import CustomStatusBar from '../../../../components/UI/CustomStatusBar/CustomSta
 
 const LiveScreen = () => {
   const [spinnerBool, setSpinnerbool] = useState(false)
-    let tokenn = useSelector((state) => state.login.token);
+  let tokenn = useSelector((state) => state.login.token);
 
   const [isConnected, setIsConnected] = useState(true);
 
@@ -151,15 +151,15 @@ const LiveScreen = () => {
 
   return (
     <ScrollView
-      // refreshControl={
-      //   <RefreshControl
-      //     refreshing={refreshing}
-      //     onRefresh={onRefresh}
-      //   />
-      // }
+    // refreshControl={
+    //   <RefreshControl
+    //     refreshing={refreshing}
+    //     onRefresh={onRefresh}
+    //   />
+    // }
     >
 
-  <CustomStatusBar barStyle="dark-content" backgroundColor="white" />
+      <CustomStatusBar barStyle="dark-content" backgroundColor="white" />
 
       {!livePage ? (
         <View style={{ backgroundColor: 'black', height: 202, justifyContent: 'center', alignItems: 'center', margin: 5, marginTop: 10 }}>
@@ -181,7 +181,7 @@ const LiveScreen = () => {
             />
           </View>
 
-          <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center' ,flex:1}}>
+          <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center', flex: 1 }}>
             <View style={{ width: '50%' }}>
               <CustomButton
                 onPress={togglePlaying}
@@ -191,7 +191,7 @@ const LiveScreen = () => {
               </CustomButton>
             </View>
 
-            <Text style={{ width: "90%", fontSize: 20, fontWeight: '700' }}>{livePage.title}</Text>
+            <Text style={{ width: "90%", fontSize: 20, fontWeight: '700', color: 'black' }}>{livePage.title}</Text>
 
             <View style={{
               width: "90%",
@@ -200,7 +200,7 @@ const LiveScreen = () => {
             }}>
               <ScrollView>
                 <Text>
-                  <Text style={{ fontWeight: '600' }}>Description: </Text>
+                  <Text style={{ fontWeight: '600', color: 'black' }}>Description: </Text>
                   {livePage.description}
                 </Text>
               </ScrollView>

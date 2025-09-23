@@ -105,7 +105,7 @@ const CourseRegistration2 = ({ route }) => {
         onChangeText={handleSearch}
       />
 
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 0.95 }}>
 
         <View style={{ paddingHorizontal: 18, flexDirection: 'row', justifyContent: 'space-between' }}>
           <Text></Text>
@@ -164,10 +164,12 @@ const CourseRegistration2 = ({ route }) => {
 
 
       {selectedCourse && <View style={{
-        flex: 0.3, justifyContent: 'center', alignItems: 'center', position: 'absolute', bottom: 0,
-        height: Metrics.rfv(100),
+        flex: 0.4, justifyContent:'flex-start', alignItems: 'center', position: 'absolute', bottom: 0,
+        height: Metrics.rfp(15),
+        // backgroundColor:"pink",
         width: '100%'
       }}>
+        <View style={{backgroundColor:"white",padding:3,borderRadius:10}}>
         <CustomButton1
           bgColor={'rgba(3, 3, 112, 1)'}
           textStyling={[{ color: "white" }]}
@@ -178,6 +180,7 @@ const CourseRegistration2 = ({ route }) => {
         >
           Next
         </CustomButton1>
+        </View>
       </View>}
 
 

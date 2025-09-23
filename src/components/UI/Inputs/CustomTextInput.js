@@ -60,7 +60,7 @@ const CustomTextInput = ({
 
 
             <View style={[styles.container, containerBorder, containerStyle, { borderColor: borderColor }, { backgroundColor: backgroundColor }]}>
-                {leftIcon&&<View style={{ paddingRight: 7 }}>
+                {leftIcon && <View style={{ paddingRight: 7 }}>
                     {leftIcon}
                 </View>}
                 <TextInput
@@ -101,9 +101,9 @@ const CustomTextInput = ({
                     numberOfLines={numLines}
                     editable={editable}
                     // style={[{ flex: 4 }, InputStyle]}
-                    style={[InputStyle, styles.Inputstyling, { flex: 4, alignSelf: "center",fontWeight:Platform.OS=="ios"?300:400 }]}
+                    style={[InputStyle, styles.Inputstyling, { flex: 4, alignSelf: "center", fontWeight: Platform.OS == "ios" ? 300 : 400, color: "black" }]}
                 />
-                 {rightIcon&&<View style={{ paddingLeft: 5 }}>
+                {rightIcon && <View style={{ paddingLeft: 5 }}>
                     {rightIcon}
                 </View>}
             </View>
