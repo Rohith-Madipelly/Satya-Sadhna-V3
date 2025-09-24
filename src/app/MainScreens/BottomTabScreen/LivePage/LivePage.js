@@ -195,13 +195,14 @@ const LiveScreen = () => {
 
             <View style={{
               width: "90%",
-              height: 260, // Set fixed height for scrollable description
+              height: 260,
+               // Set fixed height for scrollable description
               // marginVertical: 10
             }}>
               <ScrollView>
-                <Text>
+                <Text style={{color:'black'}}>
                   <Text style={{ fontWeight: '600', color: 'black' }}>Description: </Text>
-                  {livePage.description}
+               {livePage.description}
                 </Text>
               </ScrollView>
             </View>

@@ -453,15 +453,15 @@ const CourseRegistration3 = ({ route }) => {
                 <View style={styles.courseDetails}>
                   <View>
                     <Text style={styles.bold}>From</Text>
-                    <Text>{selectedCourseData.from}</Text>
+                    <Text style={{color:'black'}}>{selectedCourseData.from}</Text>
                   </View>
                   <View>
                     <Text style={styles.bold}>Course duration</Text>
-                    <Text>{selectedCourseData.courseDuration}</Text>
+                    <Text style={{color:'black'}}>{selectedCourseData.courseDuration}</Text>
                   </View>
                   <View>
                     <Text style={styles.bold}>To</Text>
-                    <Text>{selectedCourseData.to}</Text>
+                    <Text style={{color:'black'}}>{selectedCourseData.to}</Text>
                   </View>
                 </View>
               </ImageBackground>
@@ -1391,7 +1391,7 @@ const CourseRegistration3 = ({ route }) => {
                       validate={handleBlur("dateLastCourse")}
                       outlined
                       backgroundColor={'white'}
-
+                       
                       minimumDate={new Date(1900, 10, 20)}
                       maximumDate={new Date()}
                       borderColor={`${(errors.dateLastCourse && touched.dateLastCourse) || (errorFormAPI && errorFormAPI.dateLastCourseForm) ? "red" : "#ccc"}`}
@@ -1687,6 +1687,7 @@ const styles = StyleSheet.create({
   },
   bold: {
     fontWeight: '700',
+    color:'black'
   },
   courseDetails: {
     flexDirection: 'row',
